@@ -15,12 +15,20 @@ var db = require('./config/db');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+//Route queries searches for db
+app.use((req, res, next) => {
+  if (req.query.dbId) {
+    req.url = '/query/dbId';
+  }
+  next();
+})
 
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+
 // routes
 require('./app/routes/routes')(app)
 

@@ -7,6 +7,13 @@ var authPath = require('../../config/auth0')
 module.exports = function(app) {
 
 	// signup GET and POST requests for /api/users
+	app.get('/query/dbId', function(req, res) {
+		User.findById(req.query.dbId)
+		.exec((err, user) => {
+			if (err) console.log(err);
+			res.status(201).send(user)
+		})
+	})
 
 	app.get('/api/users', function(req, res) {
 		User.find()
@@ -19,6 +26,7 @@ module.exports = function(app) {
 			res.status(201).send({users: users});
 		})
 	});
+
 
 	app.post('/signin', function(req, res) {
 		//Auth0 user ID

@@ -9,7 +9,6 @@ import Auth0Lock from '../../node_modules/auth0-lock';
 class Home extends React.Component {
 
   render () {
-    console.log(this.props.auth)
     return (
       <div>
         <Navigation auth={this.props.auth}/>
