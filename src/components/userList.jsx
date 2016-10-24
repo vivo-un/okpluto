@@ -3,18 +3,30 @@
 
 var React = require('react');
 //var UsersPage = require('./usersPage.jsx');
-var User = require('./user.jsx')
+var UserDisplay = require('./user.jsx')
 
-var UserList = (props) => (
-  <div className = "container">
-    <div className = "row">
-        {props.users.map(user =>
-          <User user={user}/>
-        )}
-    </div>
+class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  </div>
-
-)
+  render() {
+    if (this.props.users.length) {
+      return (
+        <div className = "container">
+          <div className = "row">
+            {this.props.users.map(person =>
+                <UserDisplay user={person}/>
+              )}
+          </div>
+      </div>
+      )
+    } else {
+      return (
+        <div>Loading</div>
+      )
+    }
+  }
+}
 
 module.exports = UserList;

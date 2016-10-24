@@ -8,8 +8,16 @@ module.exports = function(app) {
 
 	// signup GET and POST requests for /api/users
 
-	app.get('/signup', function(req, res) {
-		res.end('our signup page will display here'); // react-route will handle this once it's running.
+	app.get('/api/users', function(req, res) {
+		User.find()
+		.exec((err, users) => {
+			if (err) {
+				console.log(err);
+				res.status(404).send("Database error, no users found")
+			}
+			console.log(users)
+			res.status(201).send({users: users});
+		})
 	});
 
 	app.post('/signin', function(req, res) {
@@ -19,6 +27,7 @@ module.exports = function(app) {
 		var url = 'https://' + authPath.auth0.AUTH0_DOMAIN + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
+				console.log(response)
 			//Look for user in mongoDB
 			User.findOne({
 				'id': response.body.user_id
@@ -32,6 +41,9 @@ module.exports = function(app) {
 						for (var key in userData.user_metadata) {
 							userData[key] = userData.user_metadata[key];
 						}
+					}
+					if (userData.picture_large) {
+						userData.picture = userData.picture_large;
 					}
 					//Create user in mongoDB
 					new User ({
