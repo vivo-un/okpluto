@@ -2,7 +2,7 @@
 
 import Auth0Lock from 'auth0-lock';
 import { hashHistory } from 'react-router'
-
+const Logo = '/assets/logo.png';
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -25,7 +25,16 @@ export default class AuthService {
             valid: name.length >= 2
           }
         }
-      }]
+      }],
+
+      languageDictionary: {
+        title: "Ok Pluto"
+      },
+
+      theme: {
+        logo: Logo,
+        primaryColor: '#203D3B'
+      }
     }
 
     // Configure Auth0
