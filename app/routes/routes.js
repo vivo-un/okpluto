@@ -78,7 +78,6 @@ module.exports = function(app) {
 				}
 			}
 			user.save((err, updatedUser) => {
-				console.log(updatedUser)
 				res.status(200).send(updatedUser)
 			})
 		})
