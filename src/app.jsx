@@ -25,7 +25,8 @@ ReactDOM.render(
       <IndexRedirect to="/home" />
       <Route path="/home" component={Home} />
       <Route path="/users" component={UsersPage} onEnter={requireAuth} />
-      <Route path="/profile" component={Profile} onEnter={requireAuth}/>
+      <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
+      <Route path="/creation" component={Profile} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Home} />
     </Route>
   </Router>, $('#app')[0]

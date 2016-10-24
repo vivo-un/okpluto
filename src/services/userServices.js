@@ -13,5 +13,18 @@ module.exports =  {
         error: reject
       })
     });
+  },
+
+  //POST to API to get mongoDB user info
+  saveUser: function(idToken) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: '/signin',
+        type: 'POST',
+        data: {id: idToken},
+        success: resolve,
+        error: reject
+      })
+    })
   }
 }

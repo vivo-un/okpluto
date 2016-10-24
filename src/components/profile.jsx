@@ -9,6 +9,7 @@ class Profile extends React.Component {
 
   }
   render() {
+    console.log(this.props.route)
     return (
       <div className='container'>
         <div className='jumbotron'>

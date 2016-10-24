@@ -15,7 +15,7 @@ module.exports = function(app) {
 				console.log(err);
 				res.status(404).send("Database error, no users found")
 			}
-			console.log(users)
+			//console.log(users)
 			res.status(201).send({users: users});
 		})
 	});
@@ -27,7 +27,6 @@ module.exports = function(app) {
 		var url = 'https://' + authPath.auth0.AUTH0_DOMAIN + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
-				console.log(response)
 			//Look for user in mongoDB
 			User.findOne({
 				'id': response.body.user_id
@@ -53,10 +52,11 @@ module.exports = function(app) {
 						profilepic: userData.picture
 					}).save((err, user) => {
 						if (err) console.log(err)
-						res.status(200).send(user)
+						res.status(200).send({user: user, creation: true})
 					})
 				} else {
-					res.status(200).send(user)
+					user.creation = false;
+					res.status(200).send({user: user, creation: false})
 				}
 			})
 		})
