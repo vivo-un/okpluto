@@ -28,12 +28,15 @@ module.exports = function(app) {
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
 				console.log(response)
+			var creation = false;
 			//Look for user in mongoDB
 			User.findOne({
 				'id': response.body.user_id
 			}).exec((err, user) => {
 				//Add user if they don't exist
 				if (!user) {
+					//Needed for client to reroute and set up editing on profile page where user will complete their profile with dog info
+					creation = true;
 					//get user info supplied through login / signup from FB, Google and Auth0
 					var userData = response.body;
 					//For signups through Auth0 collect metadata
@@ -53,6 +56,7 @@ module.exports = function(app) {
 						profilepic: userData.picture
 					}).save((err, user) => {
 						if (err) console.log(err)
+						user.creation = creation;
 						res.status(200).send(user)
 					})
 				} else {

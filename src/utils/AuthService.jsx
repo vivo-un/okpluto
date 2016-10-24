@@ -2,6 +2,7 @@
 
 import Auth0Lock from 'auth0-lock';
 import { hashHistory } from 'react-router'
+import userServices from '../services/userServices.js'
 const Logo = '/assets/logo.png';
 
 export default class AuthService {
@@ -50,11 +51,16 @@ export default class AuthService {
     this.logout();
     // Saves the user token
     this.setToken(authResult.idToken)
-    console.log(authResult.idToken)
     //Redirect to users after login
     hashHistory.push('/users')
     //Save user in site DB, or create in site DB
-    this.saveUser()
+    var self = this;
+    console.log(userServices)
+    userServices.saveUser(authResult.idToken)
+    .then(user => {
+      // Set DB Id into local storage for later ajax calls to DB
+      self.setDBId(user._id)
+    })
   }
 
   login() {
@@ -92,17 +98,6 @@ export default class AuthService {
     localStorage.removeItem('id_tokenx537?');
     localStorage.removeItem('mongoUserId')
   }
-  //POST to API to get mongoDB user info
-  saveUser() {
-    var idToken = this.getToken();
-    $.ajax({
-      url: '/signin',
-      type: 'POST',
-      data: {id: idToken},
-      success: data => {
-      //set DB ID into localstorage
-        this.setDBId(data._id);
-      }
-    })
-  }
+
+
 }
