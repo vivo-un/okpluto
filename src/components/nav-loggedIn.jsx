@@ -13,12 +13,17 @@ class NavLoggedIn extends React.Component {
               <a className="navbar-brand" href="#">Ok Pluto</a>
             </div>
             <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
+              <ul className="nav navbar-nav">
                 <li>
                     <a onClick={() => hashHistory.push('/users')}>Show Users</a>
                 </li>
                 <li>
                     <a onClick={() => hashHistory.push('/profile')}>My Account</a>
+                </li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li>
+                  <a onClick={this.props.auth.logout.bind(this)}>Log Out</a>
                 </li>
               </ul>
             </div>

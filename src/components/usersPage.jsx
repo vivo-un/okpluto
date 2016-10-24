@@ -1,10 +1,12 @@
 "use strict";
 
-var React = require('react');
 var UserList = require('./userList.jsx');
 var User = require('./user.jsx');
 import userServices from '../services/userServices.js'
 import NavLoggedIn from './nav-loggedIn.jsx';
+import React, { PropTypes as T } from 'react';
+import AuthService from '../utils/AuthService.jsx';
+import Auth0Lock from '../../node_modules/auth0-lock';
 
 class UsersPage extends React.Component {
 
@@ -27,12 +29,17 @@ class UsersPage extends React.Component {
   render () {
     return (
       <div>
-        <NavLoggedIn />
+        <NavLoggedIn auth={this.props.auth}/>
         <UserList users={this.state.users} />
       </div>
     )
   }
 
 }
+
+UsersPage.propTypes = {
+  location: T.object,
+  auth: T.instanceOf(AuthService)
+};
 
 module.exports = UsersPage;
