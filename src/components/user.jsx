@@ -15,7 +15,7 @@ class User extends React.Component {
       <div className = "col-md-4 text-center">
         <figure className="figure profile">
           <div className="profile-image">
-            <img src={this.props.user.picLink} alt=""/>
+            <img src={this.props.user.profilepic} alt=""/>
           </div>
           <figcaption>
             <h3>{this.props.user.dogname}</h3>

@@ -3,79 +3,30 @@
 var React = require('react');
 var UserList = require('./userList.jsx');
 var User = require('./user.jsx');
+import userServices from '../services/userServices.js'
+
 class UsersPage extends React.Component {
 
   constructor(props) {
-    super()
+    super(props);
     this.state = {
-      usersData: [
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-        {
-          picLink:'http://66.media.tumblr.com/avatar_501c63221348_128.png',
-          dogname:'Coco',
-          loc:'San Francisco, CA',
-          dogBreed:'English Bulldog',
-          dogAge: 7,
-        },
-      ]
-    }
+      users: []
+    };
   }
 
-  // componentDidMount() {
-  //   var self = this;
-  //   $.ajax({
-  //     method: 'GET',
-  //     url:'', //<<<-- TBD
-  //     success: function (data) {
-  //       console.log(success);
-  //       self.setState({
-  //         usersData: data
-  //       })
-  //     },
-  //     error: function (err) {
-  //       console.error('error: ' + error);
-  //     }
-  //   })
-  // }
+  componentDidMount() {
+    var self = this;
+    userServices.getUsers()
+    .then((users) => {
+      self.setState({users: users})
+      console.log(this.state)
+    })
+  }
 
   render () {
     return (
       <div>
-        <UserList users={this.state.usersData} />
+        <UserList users={this.state.users} />
       </div>
     )
   }

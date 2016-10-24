@@ -101,6 +101,7 @@ export default class AuthService {
       success: data => {
       //set DB ID into localstorage
         this.setDBId(data._id);
+        console.log(data._id)
       }
     })
   }

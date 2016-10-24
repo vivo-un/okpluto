@@ -8,9 +8,11 @@ var User = require('./user.jsx')
 var UserList = (props) => (
   <div className = "container">
     <div className = "row">
-        {props.users.map(user =>
+      {if (props.users.length) {
+        props.users.map(user =>
           <User user={user}/>
-        )}
+        )
+      }}
     </div>
 
   </div>
