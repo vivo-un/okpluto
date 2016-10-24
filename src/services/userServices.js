@@ -26,5 +26,17 @@ module.exports =  {
         error: reject
       })
     })
+  },
+
+  findUser: function(dbId) {
+    dbId = dbId || localStorage.getItem('mongoUserId');
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `api/users?dbId=${dbId}`,
+        type: 'GET',
+        success: resolve,
+        error: reject
+      })
+    })
   }
 }
