@@ -2,17 +2,23 @@
 
 var React = require('react');
 var Navigation = require('./nav.jsx');
-import { findUser } from '../services/userServices.js'
+import { findUser, updateUser } from '../services/userServices.js'
 
 //EXAMPLE USAGE:
 // findUser()
   // .then(user => {
   //   console.log(user)
   // });
+
+//Property names in object passed to this function must match property names in mongo user schema
+  // updateUser({dogname: 'sparky', dogBreed: 'mix', dogAge: 7})
+  // .then(updateUser => {
+  //   console.log(updateUser)
+  // })
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-
   }
   render() {
     console.log(this.props.route)
