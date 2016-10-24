@@ -17,12 +17,6 @@ class Navigation extends React.Component {
                 <li>
                     <a href='#' onClick={this.props.auth.login.bind(this)}>Sign In</a>
                 </li>
-                <li>
-                    <a href='#' onClick={this.props.auth.login.bind(this)}>Sign Up</a>
-                </li>
-                <li>
-                    <a href='#' onClick={this.props.auth.logout.bind(this)}>Log Out</a>
-                </li>
               </ul>
             </div>
           </div>
