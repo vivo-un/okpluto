@@ -52,12 +52,10 @@ module.exports = function(app) {
 						profilepic: userData.picture
 					}).save((err, user) => {
 						if (err) console.log(err)
-							console.log(user)
 						res.status(200).send({user: user, creation: true})
 					})
 				} else {
 					user.creation = false;
-					console.log('accessed this user ', user)
 					res.status(200).send({user: user, creation: false})
 				}
 			})
