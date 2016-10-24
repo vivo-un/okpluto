@@ -18,9 +18,7 @@ app.use(bodyParser.json());
 //Route queries searches for db
 app.use((req, res, next) => {
   if (req.query.dbId) {
-    console.log(req.url)
     req.url = '/query/dbId';
-    console.log(req.url)
   }
   next();
 })

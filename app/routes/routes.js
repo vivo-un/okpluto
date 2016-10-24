@@ -11,13 +11,11 @@ module.exports = function(app) {
 		User.findById(req.query.dbId)
 		.exec((err, user) => {
 			if (err) console.log(err);
-			console.log(user);
 			res.status(201).send(user)
 		})
 	})
 
 	app.get('/api/users', function(req, res) {
-		console.log('coming to apit users')
 		User.find()
 		.exec((err, users) => {
 			if (err) {
