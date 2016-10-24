@@ -27,6 +27,7 @@ module.exports = function(app) {
 		var url = 'https://' + authPath.auth0.AUTH0_DOMAIN + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
+				console.log(response)
 			//Look for user in mongoDB
 			User.findOne({
 				'id': response.body.user_id
@@ -40,6 +41,9 @@ module.exports = function(app) {
 						for (var key in userData.user_metadata) {
 							userData[key] = userData.user_metadata[key];
 						}
+					}
+					if (userData.picture_large) {
+						userData.picture = userData.picture_large;
 					}
 					//Create user in mongoDB
 					new User ({

@@ -50,6 +50,7 @@ export default class AuthService {
     this.logout();
     // Saves the user token
     this.setToken(authResult.idToken)
+    console.log(authResult.idToken)
     //Redirect to users after login
     hashHistory.push('/users')
     //Save user in site DB, or create in site DB
@@ -101,7 +102,6 @@ export default class AuthService {
       success: data => {
       //set DB ID into localstorage
         this.setDBId(data._id);
-        console.log(data._id)
       }
     })
   }

@@ -18,7 +18,7 @@ class UsersPage extends React.Component {
     var self = this;
     userServices.getUsers()
     .then((users) => {
-      self.setState({users: users})
+      self.setState({users: users.users})
       console.log(this.state)
     })
   }
