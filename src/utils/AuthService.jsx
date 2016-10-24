@@ -35,7 +35,9 @@ export default class AuthService {
       theme: {
         logo: Logo,
         primaryColor: '#203D3B'
-      }
+      },
+
+      socialButtonStyle: 'small'
     }
 
     // Configure Auth0
