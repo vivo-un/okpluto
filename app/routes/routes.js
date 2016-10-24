@@ -81,5 +81,12 @@ module.exports = function(app) {
 				res.status(200).send(updatedUser)
 			})
 		})
+	});
+
+	app.delete('/api/users', (req, res) => {
+		User.findByIdAndRemove(req.body.dbId)
+		.exec((user) => {
+			res.status(200).send(userRemoved)
+		})
 	})
 };
