@@ -51,14 +51,13 @@ export default class AuthService {
     this.logout();
     // Saves the user token
     this.setToken(authResult.idToken)
-    //Redirect to users after login
-    hashHistory.push('/users')
     //Save user in site DB, or create in site DB
     var self = this;
     userServices.saveUser(authResult.idToken)
     .then(user => {
+    //Redirect to users or profile completion after login
+      user.creation ? hashHistory.push('/creation') : hashHistory.push('/users')
       // Set DB Id into local storage for later ajax calls to DB
-      console.log(user)
       self.setDBId(user.user._id)
     })
   }
