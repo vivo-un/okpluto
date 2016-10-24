@@ -7,15 +7,15 @@ var authPath = require('../../config/auth0')
 module.exports = function(app) {
 
 	// signup GET and POST requests for /api/users
-	app.get('/query/dbId', function(req, res) {
+	app.get('/query/dbId', (req, res) => {
 		User.findById(req.query.dbId)
 		.exec((err, user) => {
 			if (err) console.log(err);
 			res.status(201).send(user)
-		})
-	})
+		});
+	});
 
-	app.get('/api/users', function(req, res) {
+	app.get('/api/users', (req, res) => {
 		User.find()
 		.exec((err, users) => {
 			if (err) {
@@ -24,11 +24,11 @@ module.exports = function(app) {
 			}
 			//console.log(users)
 			res.status(201).send({users: users});
-		})
+		});
 	});
 
 
-	app.post('/signin', function(req, res) {
+	app.post('/signin', (req, res) => {
 		//Auth0 user ID
 		var id = req.body.id;
 		//POST path to retrieve user info from Auth0
@@ -66,6 +66,19 @@ module.exports = function(app) {
 					user.creation = false;
 					res.status(200).send({user: user, creation: false})
 				}
+			})
+		})
+	});
+
+	app.put('/api/users', (req, res) => {
+		User.findById(req.body.dbId, (err, user) => {
+			for (var key in req.body) {
+				if (key !== 'dbId') {
+					user[key] = req.body[key];
+				}
+			}
+			user.save((err, updatedUser) => {
+				res.status(200).send(updatedUser)
 			})
 		})
 	})

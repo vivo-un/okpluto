@@ -38,5 +38,18 @@ module.exports =  {
         error: reject
       })
     })
+  },
+
+  updateUser: function(newProps) {
+    newProps.dbId = localStorage.getItem('mongoUserId')
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/users',
+        type: 'PUT',
+        data: newProps,
+        success: resolve,
+        error: reject
+      })
+    })
   }
 }
