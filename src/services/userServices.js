@@ -17,7 +17,6 @@ module.exports =  {
 
   //POST to API to get mongoDB user info
   saveUser: function(idToken) {
-    //var idToken = this.getToken();
     return new Promise((resolve, reject) => {
       $.ajax({
         url: '/signin',
@@ -25,10 +24,6 @@ module.exports =  {
         data: {id: idToken},
         success: resolve,
         error: reject
-        // data => {
-        // //set DB ID into localstorage
-        //   this.setDBId(data._id);
-        // }
       })
     })
   }

@@ -55,11 +55,11 @@ export default class AuthService {
     hashHistory.push('/users')
     //Save user in site DB, or create in site DB
     var self = this;
-    console.log(userServices)
     userServices.saveUser(authResult.idToken)
     .then(user => {
       // Set DB Id into local storage for later ajax calls to DB
-      self.setDBId(user._id)
+      console.log(user)
+      self.setDBId(user.user._id)
     })
   }
 

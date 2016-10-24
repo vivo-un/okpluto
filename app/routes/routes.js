@@ -15,7 +15,7 @@ module.exports = function(app) {
 				console.log(err);
 				res.status(404).send("Database error, no users found")
 			}
-			console.log(users)
+			//console.log(users)
 			res.status(201).send({users: users});
 		})
 	});
@@ -27,16 +27,12 @@ module.exports = function(app) {
 		var url = 'https://' + authPath.auth0.AUTH0_DOMAIN + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
-				console.log(response)
-			var creation = false;
 			//Look for user in mongoDB
 			User.findOne({
 				'id': response.body.user_id
 			}).exec((err, user) => {
 				//Add user if they don't exist
 				if (!user) {
-					//Needed for client to reroute and set up editing on profile page where user will complete their profile with dog info
-					creation = true;
 					//get user info supplied through login / signup from FB, Google and Auth0
 					var userData = response.body;
 					//For signups through Auth0 collect metadata
@@ -56,11 +52,13 @@ module.exports = function(app) {
 						profilepic: userData.picture
 					}).save((err, user) => {
 						if (err) console.log(err)
-						user.creation = creation;
-						res.status(200).send(user)
+							console.log(user)
+						res.status(200).send({user: user, creation: true})
 					})
 				} else {
-					res.status(200).send(user)
+					user.creation = false;
+					console.log('accessed this user ', user)
+					res.status(200).send({user: user, creation: false})
 				}
 			})
 		})
