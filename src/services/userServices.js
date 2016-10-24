@@ -11,7 +11,7 @@ module.exports =  {
         type: 'GET',
         success: resolve,
         error: reject
-      })
+      });
     });
   },
 
@@ -24,8 +24,8 @@ module.exports =  {
         data: {id: idToken},
         success: resolve,
         error: reject
-      })
-    })
+      });
+    });
   },
 
   findUser: function(dbId) {
@@ -36,12 +36,12 @@ module.exports =  {
         type: 'GET',
         success: resolve,
         error: reject
-      })
-    })
+      });
+    });
   },
 
   updateUser: function(newProps) {
-    newProps.dbId = localStorage.getItem('mongoUserId')
+    newProps.dbId = localStorage.getItem('mongoUserId');
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'api/users',
@@ -49,7 +49,20 @@ module.exports =  {
         data: newProps,
         success: resolve,
         error: reject
+      });
+    });
+  },
+
+  deleteUser: function(dbId) {
+    dbId = dbId || localStorage.getItem('mongoUserId');
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/users',
+        type: 'DELETE',
+        data: {dbId: dbId},
+        success: resolve,
+        error: reject
       })
     })
   }
-}
+};

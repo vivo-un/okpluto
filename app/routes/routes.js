@@ -81,5 +81,10 @@ module.exports = function(app) {
 				res.status(200).send(updatedUser)
 			})
 		})
+	});
+
+	app.delete('/api/users', (req, res) => {
+		console.log(req.body)
+		res.status(200).send()
 	})
 };
