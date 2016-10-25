@@ -11,8 +11,10 @@ import UsersPage from './components/usersPage.jsx'
 import Container from './components/container.jsx'
 import Profile from './components/profile.jsx'
 import ProfileEdit from './components/profileEdit.jsx'
+import Loading from './components/loading.jsx'
 import MeetupCreation from './components/meetupCreation.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
 
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
 
@@ -34,7 +36,7 @@ ReactDOM.render(
       <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
       <Route path="/creation" component={ProfileEdit} onEnter={requireAuth} creation={true}/>
       <Route path="/meetup(/:targetUserId)" component={MeetupCreation} onEnter={requireAuth}/>
-      <Route path="access_token=:token" component={Home} />
+      <Route path="access_token=:token" component={Loading} />
     </Route>
   </Router>, $('#app')[0]
 );

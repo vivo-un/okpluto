@@ -4,6 +4,7 @@
 var React = require('react');
 //var UsersPage = require('./usersPage.jsx');
 var UserDisplay = require('./user.jsx')
+import Loading from './loading.jsx'
 
 class UserList extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class UserList extends React.Component {
       )
     } else {
       return (
-        <div>Loading</div>
+        <Loading />
       )
     }
   }
