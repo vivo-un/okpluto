@@ -8,7 +8,7 @@ import MyTheme from '../theme/theme.js';
 
 const ProfileEdit = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-    <div>
+    <div className="middle">
     <TextField
       hintText="First Name"
       floatingLabelText="First Name"
