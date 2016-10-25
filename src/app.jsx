@@ -21,6 +21,8 @@ const requireAuth = (nextState, replace) => {
   }
 }
 
+//const passProps = ()
+
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Container} auth={auth}>
@@ -29,7 +31,7 @@ ReactDOM.render(
       <Route path="/users" component={UsersPage} onEnter={requireAuth} />
       <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
       <Route path="/creation" component={ProfileEdit} onEnter={requireAuth} creation={true}/>
-      <Route path="/meetup" component={MeetupCreation} onEnter={requireAuth}/>
+      <Route path="/meetup(/:targetUserId)" component={MeetupCreation} onEnter={requireAuth}/>
       <Route path="access_token=:token" component={Home} />
     </Route>
   </Router>, $('#app')[0]
