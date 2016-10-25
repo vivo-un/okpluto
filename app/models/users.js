@@ -12,10 +12,9 @@ var userSchema = mongoose.Schema({
   firstname: String,
   lastname: String,
   profilepic: String,
-  loc: {
-    lat: Number,
-    lng: Number
-  },
+  loc: String,
+  lat: Number,
+  lng: Number,
   picLink: String,
   dogname: String,
   dogLikes: [String],
