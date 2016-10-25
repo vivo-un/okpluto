@@ -8,6 +8,8 @@ import MyTheme from '../theme/theme.js';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 
 const items = [
   <MenuItem value={1} primaryText="Dog Park" />,
