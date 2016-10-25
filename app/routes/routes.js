@@ -3,6 +3,11 @@
 var User = require('../models/users');
 var request = require('request')
 var authPath = require('../../config/auth0')
+var api = require('../../config/api.js');
+var Promise = require('bluebird');
+const GeoCoder = require('@google/maps').createClient({
+	key: api.API_KEY
+});
 
 module.exports = function(app) {
 
@@ -13,6 +18,22 @@ module.exports = function(app) {
 			if (err) console.log(err);
 			res.status(201).send(user)
 		});
+	});
+
+	app.get('/api/geocode', (req, res) => {
+    var getCoordinates = function(address) {
+    	return new Promise(function(resolve, reject) {
+    		GeoCoder.geocode({ address: address }, function(err, res) {
+    			if (err) reject(err);
+    			resolve(res.json.results[0].geometry.location);
+    		});
+    	});
+    };
+
+    getCoordinates(req.query.loc)
+      .then(function(results) {
+      	res.status(200).send(results);
+      });
 	});
 
 	app.get('/api/users', (req, res) => {
