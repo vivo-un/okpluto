@@ -23,6 +23,7 @@ class MeetupCreation extends React.Component {
 	constructor(props) {
     super(props)
     this.state = {value: null};
+    console.log(this.props.params)
   }
 
   handleChange(event, index, value) {
