@@ -1,5 +1,5 @@
 .jumbotron {
-  background: url('http://www.legendsdogtraining.com/uploads/1/2/3/5/12354816/911841_orig.jpg') no-repeat center center;
+  background: url('/assets/cover.jpg') no-repeat center center;
   background-size: cover;
   height: 600px;
 }
@@ -14,16 +14,80 @@ img {
   height: 140px;
 }
 
-.col-lg-4 {
+.col-md-4 {
   text-align: center;
 }
 
-.col-lg-4 > h2 {
+.col-md-4 > h2 {
   text-align: center;
   font-size: 30px;
   margin-top: 10px;
 }
 
+.col-md-3 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.col-md-3 > h3 {
+  text-align: center;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+.container > h1 {
+  color: #203d3b;
+  font-size: 9em;
+  font-weight: 600;
+  text-shadow: 1px 1px #c2c1bd;
+}
+
+.container > h2 {
+  font-size: 3em;
+  color: #c2c1bd;
+  text-shadow: 2px 2px #564D49;
+}
+
+.icons {
+  background-color: gainsboro;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #768f8d;
+}
+
+.icons > p {
+  font-size: 2em;
+}
+
+.team {
+  background-color: whitesmoke;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.section-heading {
+  height: 125px;
+  border-top: 1px solid #768f8d;
+  text-align: center;
+  vertical-align: middle;
+  background-color: gainsboro;
+}
+
+.section-heading.alt {
+  background-color: whitesmoke;
+}
+
+.section-heading > p {
+  font-size: 2.4em;
+  padding-top: 25px;
+  color: #561e07;
+}
+
+.main-image {
+  margin-bottom: 0px;
+}
 
 .well {
   width: 200px;
