@@ -24,7 +24,7 @@ class ProfileDisplay extends React.Component {
               <li>Dog Likes : {this.props.user.dogLikes}</li>
               <li>Dog Breed : { this.props.user.dogBreed}</li>
               <li>Dog Age : { this.props.user.dogAge}</li>
-              <button onClick={() => hashHistory.push('/creation')} status={this.props.status}>Edit your profile</button>
+              <button onClick={() => hashHistory.push('/creation')}>Edit your profile</button>
             </ul>
           </div>
       </div>
