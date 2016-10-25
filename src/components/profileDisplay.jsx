@@ -14,7 +14,7 @@ class ProfileDisplay extends React.Component {
   render() {
     if (this.props.user) {
       return (
-      <div className = "col-md-4 text-center">
+      <div className = "col-md-4 text-center profile">
           <div className = "container">
             <ul>
               <img src={this.props.user.profilepic}/>

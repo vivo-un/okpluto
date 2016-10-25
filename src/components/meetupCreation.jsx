@@ -2,7 +2,6 @@
 
 import React from 'react';
 // import { findUser } from '../services/userServices.js'
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
@@ -12,7 +11,6 @@ import TimePicker from 'material-ui/TimePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
-injectTapEventPlugin();
 
 const items = [
   <MenuItem value={1} primaryText="Dog Park" />,

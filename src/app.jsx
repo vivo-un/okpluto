@@ -12,6 +12,7 @@ import Container from './components/container.jsx'
 import Profile from './components/profile.jsx'
 import ProfileEdit from './components/profileEdit.jsx'
 import MeetupCreation from './components/meetupCreation.jsx'
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
 
@@ -22,6 +23,7 @@ const requireAuth = (nextState, replace) => {
 }
 
 //const passProps = ()
+injectTapEventPlugin();
 
 ReactDOM.render(
   <Router history={hashHistory}>
