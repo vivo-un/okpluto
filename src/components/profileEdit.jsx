@@ -6,7 +6,13 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import MyTheme from '../theme/theme.js';
 import { findUser, updateUser } from '../services/userServices.js';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+import RaisedButton from 'material-ui/RaisedButton';
+import { hashHistory } from 'react-router';
+
+const style = {
+  'position': 'fixed',
+  'margin-left':30
+}
 
 class ProfileEdit extends React.Component {
 
@@ -42,6 +48,14 @@ class ProfileEdit extends React.Component {
     let change = {};
     change[prop] = event.target.value
     this.setState(change);
+  }
+
+  handleSubmit() {
+    updateUser(this.state)
+    .then(function (user) {
+      console.log(user);
+      hashHistory.push('/profile')
+    })
   }
 
   render () {
@@ -90,6 +104,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.picLink}
             onChange = {this.handleChange.bind(this, 'picLink')}
           /><br />
+          <RaisedButton label="Submit" secondary={true} style={style} onTouchTap={this.handleSubmit.bind(this)}/>
         </div>
       </MuiThemeProvider>
     )
