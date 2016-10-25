@@ -4,6 +4,7 @@
 var React = require('react');
 //var UsersPage = require('./usersPage.jsx');
 var Profile = require('./profile.jsx')
+import { hashHistory } from 'react-router';
 
 class ProfileDisplay extends React.Component {
   constructor(props) {
@@ -11,11 +12,20 @@ class ProfileDisplay extends React.Component {
   }
 
   render() {
-    if (this.props.info) {
+    if (this.props.user) {
       return (
-        <div className = "container profileDisplay">
-          <div className = "row">
-            {this.props.info.firstname}
+      <div className = "col-md-4 text-center">
+          <div className = "container">
+            <ul>
+              <img src={this.props.user.profilepic}/>
+              <li>First Name : { this.props.user.firstname}</li>
+              <li>Last Name : { this.props.user.lastname}</li>
+              <li>Dog Name : { this.props.user.dogname}</li>
+              <li>Dog Likes : {this.props.user.dogLikes}</li>
+              <li>Dog Breed : { this.props.user.dogBreed}</li>
+              <li>Dog Age : { this.props.user.dogAge}</li>
+              <button onClick={() => hashHistory.push('/creation')} status={this.props.status}>Edit your profile</button>
+            </ul>
           </div>
       </div>
       )
