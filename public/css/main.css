@@ -131,7 +131,10 @@ img {
   color: #777;
 }
 
-.userList {
+.userList, .profile {
   margin-top: 100px;
 }
 
+.middle {
+  margin: 0 auto;
+}
