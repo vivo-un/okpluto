@@ -57,7 +57,8 @@ module.exports = function(app) {
 						id: userData.user_id,
 						firstname: userData.given_name,
 						lastname: userData.family_name,
-						profilepic: userData.picture
+						profilepic: userData.picture,
+						username: 'anonymous' + Math.floor(Math.random()*100000000)
 					}).save((err, user) => {
 						if (err) console.log(err)
 						res.status(200).send({user: user, creation: true})
