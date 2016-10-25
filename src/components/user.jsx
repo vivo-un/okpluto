@@ -12,7 +12,7 @@ class MeetupButton extends React.Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
-          <RaisedButton href='#/profile' label="Let's Meetup!" secondary={true}/>
+          <RaisedButton href='#/meetup' label="Let's Meetup!" secondary={true}/>
         </div>
       </MuiThemeProvider>
     )
