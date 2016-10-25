@@ -50,7 +50,8 @@ export default class AuthService {
 
   _doAuthentication(authResult){
     //clear local storage
-    this.logout();
+    localStorage.removeItem('id_tokenx537?');
+    localStorage.removeItem('mongoUserId');
     // Saves the user token
     this.setToken(authResult.idToken)
     //Save user in site DB, or create in site DB
