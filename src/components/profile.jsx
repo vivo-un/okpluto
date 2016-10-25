@@ -42,8 +42,9 @@ class Profile extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <NavLoggedIn auth={this.props.auth}/>
-        <ProfileDisplay user={this.state.info} status={this.state.complete}/>
+        <div>
+          <ProfileDisplay user={this.state.info} status={this.state.complete}/>
+        </div>
       </div>
     )
   }
