@@ -9,20 +9,39 @@ import { findUser, updateUser } from '../services/userServices.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 class ProfileEdit extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {}
-    }
+      firstname: "",
+      lastname: "",
+      loc: "",
+      dogname: "",
+      dogBreed: "",
+      dogAge: "",
+      picLink:""
+    };
   }
 
   componentDidMount() {
     var self = this;
     findUser()
       .then((user) => {
-        self.setState({'currentUser': user});
-        console.log(this.state.currentUser.firstname)
+        this.setState({"firstname": user.firstname});
+        this.setState({"lastname": user.lastname})
+        this.setState({"loc": user.loc});
+        this.setState({"dogname": user.dogname});
+        this.setState({"dogBreed": user.dogBreed});
+        this.setState({"dogAge": user.dogAge});
+        this.setState({"picLink": user.picLink});
+        console.log(this.state);
     })
+  }
+
+  handleChange(prop, event) {
+    let change = {};
+    change[prop] = event.target.value
+    this.setState(change);
   }
 
   render () {
@@ -32,31 +51,44 @@ class ProfileEdit extends React.Component {
           <TextField
             hintText="First Name"
             floatingLabelText="First Name"
-            defaultValue = {this.state.currentUser.firstname}
+            value = {this.state.firstname}
+            onChange = {this.handleChange.bind(this, 'firstname')}
           /><br />
           <TextField
             hintText="Last Name"
             floatingLabelText="Last Name"
+            value = {this.state.lastname}
+            onChange = {this.handleChange.bind(this, 'lastname')}
           /><br />
           <TextField
             hintText="Location"
             floatingLabelText="Location"
+            value = {this.state.loc}
+            onChange = {this.handleChange.bind(this, 'loc')}
           /><br />
           <TextField
             hintText="Dog Name"
             floatingLabelText="Dog Name"
+            value = {this.state.dogname}
+            onChange = {this.handleChange.bind(this, 'dogname')}
           /><br />
           <TextField
             hintText="Dog Breed"
             floatingLabelText="Dog Breed"
+            value = {this.state.dogBreed}
+            onChange = {this.handleChange.bind(this, 'dogBreed')}
           /><br />
           <TextField
             hintText="Dog Age"
             floatingLabelText="Dog Age"
+            value = {this.state.dogAge}
+            onChange = {this.handleChange.bind(this, 'dogAge')}
           /><br />
           <TextField
             hintText="Dog Profile Pic"
             floatingLabelText="Dog Profile Pic"
+            value = {this.state.picLink}
+            onChange = {this.handleChange.bind(this, 'picLink')}
           /><br />
         </div>
       </MuiThemeProvider>
