@@ -6,6 +6,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import MyTheme from '../theme/theme.js';
 import { findUser, updateUser } from '../services/userServices.js';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 class ProfileEdit extends React.Component {
   constructor(props) {
