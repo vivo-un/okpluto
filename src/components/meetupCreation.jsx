@@ -10,10 +10,10 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 
 const items = [
-  <MenuItem value={1} primaryText="Dog Park" />
-  <MenuItem value={2} primaryText="Beach" />
-  <MenuItem value={3} primaryText="Trails" />
-  <MenuItem value={4} primaryText="Park" />
+  <MenuItem value={1} primaryText="Dog Park" />,
+  <MenuItem value={2} primaryText="Beach" />,
+  <MenuItem value={3} primaryText="Trails" />,
+  <MenuItem value={4} primaryText="Park" />,
   <MenuItem value={5} primaryText="Something Else" />
 ];
 
@@ -23,7 +23,9 @@ class MeetupCreation extends React.Component {
     this.state = {value: null};
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange(event, index, value) {
+  	this.setState({value});
+  }
 
   render() {
     return (
@@ -48,8 +50,6 @@ class MeetupCreation extends React.Component {
 		      <TimePicker hintText="Pick a Time" />
 		    </div>
       </MuiThemeProvider>
-
-      <script></script>
     )
   }
 }
