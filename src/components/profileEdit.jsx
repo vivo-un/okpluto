@@ -10,7 +10,32 @@ const ProfileEdit = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
     <div>
     <TextField
-      hintText="Hint Text"
+      hintText="First Name"
+      floatingLabelText="First Name"
+    /><br />
+    <TextField
+      hintText="Last Name"
+      floatingLabelText="Last Name"
+    /><br />
+    <TextField
+      hintText="Location"
+      floatingLabelText="Location"
+    /><br />
+    <TextField
+      hintText="Dog Name"
+      floatingLabelText="Dog Name"
+    /><br />
+    <TextField
+      hintText="Dog Breed"
+      floatingLabelText="Dog Breed"
+    /><br />
+    <TextField
+      hintText="Dog Age"
+      floatingLabelText="Dog Age"
+    /><br />
+    <TextField
+      hintText="Dog Profile Pic"
+      floatingLabelText="Dog Profile Pic"
     /><br />
   </div>
   </MuiThemeProvider>
