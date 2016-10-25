@@ -11,6 +11,7 @@ import UsersPage from './components/usersPage.jsx'
 import Container from './components/container.jsx'
 import Profile from './components/profile.jsx'
 import ProfileEdit from './components/profileEdit.jsx'
+import MeetupCreation from './components/meetupCreation.jsx'
 
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
 
@@ -28,7 +29,10 @@ ReactDOM.render(
       <Route path="/users" component={UsersPage} onEnter={requireAuth} />
       <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
       <Route path="/creation" component={ProfileEdit} onEnter={requireAuth} creation={true}/>
+      <Route path="/meetup" component={MeetupCreation} onEnter={requireAuth}/>
       <Route path="access_token=:token" component={Home} />
     </Route>
   </Router>, $('#app')[0]
 );
+
+

@@ -1,7 +1,23 @@
 "use strict";
 
-var React = require('react');
-var UserList = require('./userList.jsx');
+import React from 'react';
+import UserList from './userList.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import RaisedButton from 'material-ui/RaisedButton';
+import MyTheme from '../theme/theme.js';
+
+class MeetupButton extends React.Component {
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+        <div>
+          <RaisedButton href='#/meetup' label="Let's Meetup!" secondary={true}/>
+        </div>
+      </MuiThemeProvider>
+    )
+  }
+}
 
 class UserDisplay extends React.Component {
 
@@ -23,6 +39,7 @@ class UserDisplay extends React.Component {
             <h3>{this.props.user.dogname}</h3>
             <h4>{this.props.user.dogBreed}</h4>
             <h4>{this.props.user.dogAge} years old</h4>
+            <MeetupButton />
           </figcaption>
         </figure>
       </div>
