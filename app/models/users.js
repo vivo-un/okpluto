@@ -3,9 +3,9 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-  username: { type: String, index: { unique: true
-  },
-default: 'anonymous' + Math.floor(Math.random()*100000000)},
+  username: { type: String, index: {
+    unique: true
+  }},
   id: {type: String, required: true, index: {
     unique: true
   }},
