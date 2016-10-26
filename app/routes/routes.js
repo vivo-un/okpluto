@@ -127,14 +127,17 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/events', (req, res) => {
-		console.log(req.body);
+		req.body = JSON.parse(req.body.data);
+		console.log(req.body)
 		new Event ({
+			eventname: req.body.eventname,
 			category: req.body.category,
 			loc: req.body.loc,
 			lat: req.body.lat,
 			lng: req.body.lng,
 			date: req.body.date,
-			time: req.body.time
+			time: req.body.time,
+			attendees: req.body.attendees
 		}).save((err, event) => {
 			if (err) throw err
 			res.status(200).send({event: event})
