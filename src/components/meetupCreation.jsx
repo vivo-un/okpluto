@@ -48,7 +48,12 @@ class MeetupCreation extends React.Component {
       mapTypeId: 'roadmap'
     }
 		GoogleMapsLoader.load(function(google) {
-		  new google.maps.Map(document.getElementById('map'), options);
+		  let map = new google.maps.Map(document.getElementById('map'), options);
+      let marker = new google.maps.Marker({
+        position: userLoc,
+        map: map,
+        title: "Choose a location nearby!"
+      });
 		});
   }
 
