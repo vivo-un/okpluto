@@ -12,6 +12,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import api from '../../config/api.js';
 import GoogleMapsLoader from 'google-maps';
+import { findUser } from '../services/userServices.js'
 
 const items = [
   <MenuItem key={1} value={1} primaryText="Dog Park" />,
@@ -31,6 +32,11 @@ class MeetupCreation extends React.Component {
   }
 
   componentDidMount() {
+    findUser(this.props.targetUser)
+    .then((user) => {
+      this.setState({'friendName': user.firstname});
+      this.setState({'friendDogName': user.dogname});
+    })
     this.loadMap();
   }
 
@@ -54,7 +60,7 @@ class MeetupCreation extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
 		    <div>
 			    <TextField
-			      hintText="Park Meetup with Violet"
+			      hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
 			      floatingLabelText="Event Name" />
 			    <br />
 			    <SelectField
