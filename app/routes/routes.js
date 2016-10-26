@@ -5,7 +5,7 @@ var request = require('request')
 var authPath = require('../../config/auth0')
 var api = require('../../config/api.js');
 var Promise = require('bluebird');
-const GeoCoder = require('@google/maps').createClient({
+const googleMaps = require('@google/maps').createClient({
 	key: api.API_KEY
 });
 
@@ -23,7 +23,7 @@ module.exports = function(app) {
 	app.get('/api/geocode', (req, res) => {
     var getCoordinates = function(address) {
     	return new Promise(function(resolve, reject) {
-    		GeoCoder.geocode({ address: address }, function(err, res) {
+    		googleMaps.geocode({ address: address }, function(err, res) {
     			if (err) reject(err);
     			resolve(res.json.results[0].geometry.location);
     		});

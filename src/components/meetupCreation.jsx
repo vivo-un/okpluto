@@ -10,14 +10,16 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
-
+import api from '../../config/api.js';
+import GoogleMapsLoader from 'google-maps';
+import $ from 'jquery';
 
 const items = [
-  <MenuItem value={1} primaryText="Dog Park" />,
-  <MenuItem value={2} primaryText="Beach" />,
-  <MenuItem value={3} primaryText="Trails" />,
-  <MenuItem value={4} primaryText="Park" />,
-  <MenuItem value={5} primaryText="Something Else" />
+  <MenuItem key={1} value={1} primaryText="Dog Park" />,
+  <MenuItem key={2} value={2} primaryText="Beach" />,
+  <MenuItem key={3} value={3} primaryText="Trails" />,
+  <MenuItem key={4} value={4} primaryText="Park" />,
+  <MenuItem key={5} value={5} primaryText="Something Else" />
 ];
 
 class MeetupCreation extends React.Component {
@@ -27,7 +29,27 @@ class MeetupCreation extends React.Component {
     this.handleChange = (event, index, value) => this.setState({value});
   }
 
+  componentWillMount() {
+    let options = {
+			center: {lat: -34.397, lng: 150.644},
+		  zoom: 8,
+		  mapTypeId: 'roadmap'
+		}
+    GoogleMapsLoader.KEY = api.API_KEY;
+    GoogleMapsLoader.onLoad(function(google) {
+		  console.log('I just loaded google maps api');
+		  console.log('What is google? ', google);
+		});
+    console.log(GoogleMapsLoader);
+		GoogleMapsLoader.load(function(google) {
+		  new google.maps.Map(document.getElementById('map'), options);
+		});
+  }
+
   render() {
+  	const styles = {
+			height: '100px'
+		}
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
 		    <div>
@@ -44,7 +66,7 @@ class MeetupCreation extends React.Component {
 	        </SelectField>
 	        <br />
 			    <TextField hintText="" floatingLabelText="Where" />
-			    <div id="map"></div>
+			    <div id="map" style={styles}></div>
 			    <br />
 		      <DatePicker hintText="Pick a Day" />
 		      <TimePicker hintText="Pick a Time" />
