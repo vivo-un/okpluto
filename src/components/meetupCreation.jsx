@@ -39,6 +39,8 @@ class MeetupCreation extends React.Component {
 		  mapTypeId: 'roadmap'
 		}
     GoogleMapsLoader.KEY = api.API_KEY;
+
+    console.log(GoogleMapsLoader);
 		GoogleMapsLoader.load(function(google) {
 		  new google.maps.Map(document.getElementById('map'), options);
 		});
