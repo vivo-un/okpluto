@@ -17,7 +17,7 @@ class UserList extends React.Component {
         <div className = "container userList">
           <div className = "row">
             {this.props.users.map(person =>
-                <UserDisplay user={person} />
+                <UserDisplay user={person} type={'user'}/>
               )}
           </div>
       </div>

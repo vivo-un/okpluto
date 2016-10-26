@@ -17,7 +17,8 @@ const style = {
 const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
 
 const isValidImage = function(url) {
-  return url.match(rValidImage)
+  return true
+  //return url.match(rValidImage)
 };
 
 
@@ -57,7 +58,7 @@ class ProfileEdit extends React.Component {
 
   componentDidMount() {
     var self = this;
-    findUser()
+    setTimeout(() => findUser()
       .then((user) => {
         this.setState({"firstname": user.firstname});
         this.setState({"lastname": user.lastname})
@@ -66,8 +67,7 @@ class ProfileEdit extends React.Component {
         this.setState({"dogBreed": user.dogBreed});
         this.setState({"dogAge": user.dogAge});
         this.setState({"picLink": user.picLink});
-        console.log(this.state);
-    })
+    }), 1000)
   }
 
   handleChange(prop, event) {
@@ -78,11 +78,10 @@ class ProfileEdit extends React.Component {
 
   handleSubmit() {
     let errors = validate(profile);
-    //
     if (Object.keys(errors).length === 0) {
       updateUser(this.state)
         .then(function (user) {
-        hashHistory.push('/profile')
+          hashHistory.push('/users')
       });
     }
     this.setState({"errorText": errors});

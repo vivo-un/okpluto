@@ -4,16 +4,19 @@ import React from 'react';
 import UserList from './userList.jsx';
 import MeetupCreation from './meetupCreation.jsx'
 import MeetupDialog from './meetupDialog.jsx'
+import DialogButton from './dialogButton.jsx'
 
 
 class UserDisplay extends React.Component {
 
   constructor(props) {
-    super()
+    super(props)
     // TBD setState
   }
 
+
   render () {
+
     return (
       <div className = "col-md-4 text-center">
         <figure className="figure profile">
@@ -26,7 +29,7 @@ class UserDisplay extends React.Component {
             <h3>{this.props.user.dogname}</h3>
             <h4>{this.props.user.dogBreed}</h4>
             <h4>{this.props.user.dogAge} years old</h4>
-            <MeetupDialog userId={this.props.user._id} lat={this.props.user.lat} lng={this.props.user.lng}/>
+            <DialogButton userId={this.props.user._id} lat={this.props.user.lat} lng={this.props.user.lng} type={this.props.type}/>
           </figcaption>
         </figure>
       </div>
