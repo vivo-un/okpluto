@@ -12,7 +12,6 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import api from '../../config/api.js';
 import GoogleMapsLoader from 'google-maps';
-import $ from 'jquery';
 
 const items = [
   <MenuItem key={1} value={1} primaryText="Dog Park" />,
@@ -29,18 +28,17 @@ class MeetupCreation extends React.Component {
     this.handleChange = (event, index, value) => this.setState({value});
   }
 
-  componentWillMount() {
-    let options = {
+  componentDidMount() {
+    this.loadMap();
+  }
+
+  loadMap() {
+  	let options = {
 			center: {lat: -34.397, lng: 150.644},
 		  zoom: 8,
 		  mapTypeId: 'roadmap'
 		}
     GoogleMapsLoader.KEY = api.API_KEY;
-    GoogleMapsLoader.onLoad(function(google) {
-		  console.log('I just loaded google maps api');
-		  console.log('What is google? ', google);
-		});
-    console.log(GoogleMapsLoader);
 		GoogleMapsLoader.load(function(google) {
 		  new google.maps.Map(document.getElementById('map'), options);
 		});
@@ -48,7 +46,8 @@ class MeetupCreation extends React.Component {
 
   render() {
   	const styles = {
-			height: '100px'
+			height: '200px',
+			width: '300px'
 		}
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
@@ -69,6 +68,7 @@ class MeetupCreation extends React.Component {
 			    <div id="map" style={styles}></div>
 			    <br />
 		      <DatePicker hintText="Pick a Day" />
+		      <br />
 		      <TimePicker hintText="Pick a Time" />
 		    </div>
       </MuiThemeProvider>
