@@ -41,9 +41,10 @@ class MeetupCreation extends React.Component {
   }
 
   loadMap() {
+    let userLoc = {lat: this.props.lat, lng: this.props.lng}
     let options = {
-      center: {lat: this.props.lat, lng: this.props.lng},
-      zoom: 8,
+      center: userLoc,
+      zoom: 13,
       mapTypeId: 'roadmap'
     }
 		GoogleMapsLoader.load(function(google) {
@@ -61,22 +62,24 @@ class MeetupCreation extends React.Component {
 		    <div>
 			    <TextField
 			      hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
-			      floatingLabelText="Event Name" />
+			      floatingLabelText="Event Name"
+            style={{width: 300}} />
 			    <br />
 			    <SelectField
 			      value={this.state.value}
 			      onChange={this.handleChange}
 			      floatingLabelText="Category"
+            style={{width: 300}}
 			    >
             {items}
 	        </SelectField>
 	        <br />
-			    <TextField hintText="" floatingLabelText="Where" />
+			    <TextField hintText="" floatingLabelText="Where" style={{width: 300}} />
 			    <div id="map" style={styles}></div>
 			    <br />
-		      <DatePicker hintText="Pick a Day" />
+		      <DatePicker hintText="Pick a Day" textFieldStyle={{width: 300}} />
 		      <br />
-		      <TimePicker hintText="Pick a Time" />
+		      <TimePicker hintText="Pick a Time" textFieldStyle={{width: 300}} />
 		    </div>
       </MuiThemeProvider>
     )
