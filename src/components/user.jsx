@@ -18,10 +18,10 @@ class UserDisplay extends React.Component {
   render () {
 
     return (
-      <div className = "col-md-4 text-center">
+
         <figure className="figure profile">
           <div className="profile-image">
-            <img src={this.props.user.profilepic} alt=""/>
+            <img src={this.props.user.picLink || this.props.user.profilepic} alt="Pic"/>
           </div>
           <figcaption>
             <h3>{this.props.user.firstname} {this.props.user.lastname}</h3>
@@ -32,7 +32,7 @@ class UserDisplay extends React.Component {
             <DialogButton userId={this.props.user._id} lat={this.props.user.lat} lng={this.props.user.lng} type={this.props.type}/>
           </figcaption>
         </figure>
-      </div>
+
     )
   }
 
