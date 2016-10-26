@@ -46,7 +46,7 @@ class MeetupDialog extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Let's Meetup!" secondary={true}/>
-          <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose}>
+          <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true}>
             <MeetupCreation />
           </Dialog>
         </div>
