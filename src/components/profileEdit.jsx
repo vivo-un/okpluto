@@ -30,7 +30,7 @@ const validate = values => {
       errors[field] = 'Required'
     }
   })
-  if (parseInt(values.dogAge.value) !== NaN) {
+  if (isNaN(parseInt(values.dogAge.value))) {
     errors.dogAge = 'Please enter a number'
   }
   if (!isValidImage(values.picLink.value)) {
