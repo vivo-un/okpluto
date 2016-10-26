@@ -11,15 +11,7 @@ const googleMaps = require('@google/maps').createClient({
 
 module.exports = function(app) {
 
-	// signup GET and POST requests for /api/users
-	app.get('/query/dbId', (req, res) => {
-		User.findById(req.query.dbId)
-		.exec((err, user) => {
-			if (err) console.log(err);
-			res.status(201).send(user)
-		});
-	});
-
+	//======Location End Points=======//
 	app.get('/api/geocode', (req, res) => {
     var getCoordinates = function(address) {
     	return new Promise(function(resolve, reject) {
@@ -36,6 +28,16 @@ module.exports = function(app) {
       });
 	});
 
+	//======User End Points=======//
+
+	app.get('/query/dbId', (req, res) => {
+		User.findById(req.query.dbId)
+		.exec((err, user) => {
+			if (err) console.log(err);
+			res.status(201).send(user)
+		});
+	});
+
 	app.get('/api/users', (req, res) => {
 		User.find()
 		.exec((err, users) => {
@@ -47,7 +49,6 @@ module.exports = function(app) {
 			res.status(201).send({users: users});
 		});
 	});
-
 
 	app.post('/signin', (req, res) => {
 		//Auth0 user ID
@@ -110,5 +111,8 @@ module.exports = function(app) {
 		.exec((user) => {
 			res.status(200).send(userRemoved)
 		})
-	})
+	});
+
+	//======Event End Points=======//
+
 };
