@@ -1,8 +1,9 @@
 "use strict";
 
 var User = require('../models/users');
-var request = require('request')
-var authPath = require('../../config/auth0')
+var Event = require('../models/events');
+var request = require('request');
+var authPath = require('../../config/auth0');
 var api = require('../../config/api.js');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
@@ -114,5 +115,28 @@ module.exports = function(app) {
 	});
 
 	//======Event End Points=======//
+	app.get('/api/events', (req, res) => {
+		Event.find()
+		.exec((err, events) => {
+			if (err) {
+				console.log(err);
+				res.status(404).send("Database error, no events found")
+			}
+			res.status(201).send({events: events});
+		});
+	});
 
+	app.post('/api/events', (req, res) => {
+		new Event ({
+			category: req.body.category,
+			loc: req.body.loc,
+			lat: req.body.lat,
+			lng: req.body.lng,
+			date: req.body.date,
+			time: req.body.time
+		}).save((err, event) => {
+			if (err) console.log(event)
+			res.status(200).send({event: event})
+		});
+	})
 };
