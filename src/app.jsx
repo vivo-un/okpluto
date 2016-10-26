@@ -14,6 +14,8 @@ import ProfileEdit from './components/profileEdit.jsx'
 import Loading from './components/loading.jsx'
 import MeetupCreation from './components/meetupCreation.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import api from '../config/api.js'
+import GoogleMapsLoader from 'google-maps'
 
 
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);

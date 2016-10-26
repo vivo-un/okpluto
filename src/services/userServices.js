@@ -2,9 +2,8 @@
 
 import Promise from 'bluebird'
 
-module.exports =  {
 
-  getLatLng: function(address) {
+  const getLatLng = function(address) {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'api/geocode?loc=' + address,
@@ -13,9 +12,9 @@ module.exports =  {
         error: reject
       });
     });
-  },
+  }
 
-  updateDb: function(newProps) {
+  const updateDb = function(newProps) {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'api/users',
@@ -25,9 +24,9 @@ module.exports =  {
         error: reject
       });
     });
-  },
+  }
 
-  getUsers: function() {
+  const getUsers = function() {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'api/users',
@@ -36,10 +35,10 @@ module.exports =  {
         error: reject
       });
     });
-  },
+  }
 
   //POST to API to get mongoDB user info
-  saveUser: function(idToken) {
+  const saveUser = function(idToken) {
     return new Promise((resolve, reject) => {
       $.ajax({
         url: '/signin',
@@ -49,9 +48,9 @@ module.exports =  {
         error: reject
       });
     });
-  },
+  }
 
-  findUser: function(dbId) {
+  const findUser = function(dbId) {
     dbId = dbId || localStorage.getItem('mongoUserId');
     return new Promise((resolve, reject) => {
       $.ajax({
@@ -61,24 +60,27 @@ module.exports =  {
         error: reject
       });
     });
-  },
+  }
 
-  updateUser: function(newProps) {
+  const updateUser = function(newProps) {
     newProps.dbId = localStorage.getItem('mongoUserId');
-    if (newProps.loc) {
-      let self = this;
-      this.getLatLng(newProps.loc)
-        .then(function(results) {
-          newProps.lat = results.lat;
-          newProps.lng = results.lng;
-          self.updateDb(newProps);
-        });
-    } else {
-      this.updateDb(newProps);
-    }
-  },
+    return new Promise((resolve, reject) => {
+      if (newProps.loc) {
+        getLatLng(newProps.loc)
+          .then(function(results) {
+            newProps.lat = results.lat;
+            newProps.lng = results.lng;
+            updateDb(newProps)
+            .then(resolve)
+          });
+      } else {
+        updateDb(newProps)
+        .then(resolve)
+      }
+    })
+  }
 
-  deleteUser: function(dbId) {
+  const deleteUser = function(dbId) {
     dbId = dbId || localStorage.getItem('mongoUserId');
     return new Promise((resolve, reject) => {
       $.ajax({
@@ -90,4 +92,13 @@ module.exports =  {
       })
     })
   }
-};
+
+module.exports = {
+  getLatLng: getLatLng,
+  updateDb: updateDb,
+  getUsers: getUsers,
+  saveUser: saveUser,
+  findUser: findUser,
+  updateUser: updateUser,
+  deleteUser: deleteUser
+}

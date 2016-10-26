@@ -21,8 +21,10 @@ const items = [
   <MenuItem key={5} value={5} primaryText="Something Else" />
 ];
 
+GoogleMapsLoader.KEY = api.API_KEY;
+
 class MeetupCreation extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props)
     this.state = {value: null};
     this.handleChange = (event, index, value) => this.setState({value});
@@ -33,12 +35,11 @@ class MeetupCreation extends React.Component {
   }
 
   loadMap() {
-  	let options = {
-			center: {lat: -34.397, lng: 150.644},
-		  zoom: 8,
-		  mapTypeId: 'roadmap'
-		}
-    GoogleMapsLoader.KEY = api.API_KEY;
+    let options = {
+      center: {lat: this.props.lat, lng: this.props.lng},
+      zoom: 8,
+      mapTypeId: 'roadmap'
+    }
 		GoogleMapsLoader.load(function(google) {
 		  new google.maps.Map(document.getElementById('map'), options);
 		});
