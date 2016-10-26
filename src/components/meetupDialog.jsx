@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import MyTheme from '../theme/theme.js';
 import Dialog from 'material-ui/Dialog';
 import MeetupCreation from './meetupCreation.jsx'
+import eventService from '../services/eventServices.js';
 
 class MeetupDialog extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class MeetupDialog extends React.Component {
     };
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleOpen() {
@@ -26,6 +28,10 @@ class MeetupDialog extends React.Component {
   handleClose() {
     this.setState({open: false});
   };
+
+  handleSubmit() {
+    eventServices.saveEvent(this.state.newEvent);
+  }
 
   render() {
     const actions = [
@@ -38,8 +44,11 @@ class MeetupDialog extends React.Component {
         label="Create Event"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
-        //TODO: add submit to create meetup
+        onTouchTap={ () => {
+            this.handleClose();
+            this.handleSubmit();
+          }
+        }
       />
     ]
     return (
