@@ -10,8 +10,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
-import api from '../../config/api.js';
-import GoogleMapsLoader from 'google-maps';
+import  { googleLoader } from '../utils/google.js'
 import { findUser } from '../services/userServices.js'
 
 const items = [
@@ -22,7 +21,6 @@ const items = [
   <MenuItem key={5} value={5} primaryText="Something Else" />
 ];
 
-GoogleMapsLoader.KEY = api.API_KEY;
 
 class MeetupCreation extends React.Component {
   constructor(props) {
@@ -47,14 +45,15 @@ class MeetupCreation extends React.Component {
       zoom: 13,
       mapTypeId: 'roadmap'
     }
-		GoogleMapsLoader.load(function(google) {
-		  let map = new google.maps.Map(document.getElementById('map'), options);
+    googleLoader.then(google => {
+  	  let map = new google.maps.Map(document.getElementById('map'), options);
       let marker = new google.maps.Marker({
         position: userLoc,
         map: map,
         title: "Choose a location nearby!"
       });
-		});
+    })
+
   }
 
   render() {
