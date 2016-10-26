@@ -26,7 +26,7 @@ class UserDisplay extends React.Component {
             <h3>{this.props.user.dogname}</h3>
             <h4>{this.props.user.dogBreed}</h4>
             <h4>{this.props.user.dogAge} years old</h4>
-            <MeetupDialog userId={this.props.user._id}/>
+            <MeetupDialog userId={this.props.user._id} lat={this.props.user.lat} lng={this.props.user.lng}/>
           </figcaption>
         </figure>
       </div>
