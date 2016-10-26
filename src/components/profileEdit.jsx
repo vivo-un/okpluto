@@ -14,11 +14,12 @@ const style = {
   'margin-left':30
 };
 
-const rValidUrl = /^(?!mailto:)(?:(?:https?|ftp):\/\/)?(?:\S+(?::\S*)?@)?(?:(?:(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[0-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))|localhost)(?::\d{2,5})?(?:\/[^\s]*)?$/i;
+const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
 
-const isValidUrl = function(url) {
-  return url.match(rValidUrl);
+const isValidImage = function(url) {
+  return url.match(rValidImage)
 };
+
 
 
 const validate = values => {
@@ -29,10 +30,10 @@ const validate = values => {
       errors[field] = 'Required'
     }
   })
-  if (typeof values.dogAge.value !== 'number') {
+  if (parseInt(values.dogAge.value) !== NaN) {
     errors.dogAge = 'Please enter a number'
   }
-  if (!isValidUrl(values.picLink.value)) {
+  if (!isValidImage(values.picLink.value)) {
     errors.picLink = 'Invalid Url'
   }
   return errors
@@ -77,15 +78,15 @@ class ProfileEdit extends React.Component {
 
   handleSubmit() {
     let errors = validate(profile);
-    if (Object.keys(errors) === 0) {
+    //
+    if (Object.keys(errors).length === 0) {
       updateUser(this.state)
         .then(function (user) {
         hashHistory.push('/profile')
       });
-    } else {
-      this.setState({"errorText": errors});
-      console.log(this.state);
     }
+    this.setState({"errorText": errors});
+    console.log(this.state);
   }
 
   render () {
@@ -107,6 +108,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.lastname}
             onChange = {this.handleChange.bind(this, 'lastname')}
             name = "lastname"
+            errorText = {this.state.errorText.lastname}
           /><br />
           <TextField
             hintText="Location"
@@ -114,6 +116,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.loc}
             onChange = {this.handleChange.bind(this, 'loc')}
             name = "loc"
+            errorText = {this.state.errorText.loc}
           /><br />
           <TextField
             hintText="Dog Name"
@@ -121,6 +124,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.dogname}
             onChange = {this.handleChange.bind(this, 'dogname')}
             name = "dogname"
+            errorText = {this.state.errorText.dogname}
           /><br />
           <TextField
             hintText="Dog Breed"
@@ -128,6 +132,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.dogBreed}
             onChange = {this.handleChange.bind(this, 'dogBreed')}
             name = "dogBreed"
+            errorText = {this.state.errorText.dogBreed}
           /><br />
           <TextField
             hintText="Dog Age"
@@ -135,6 +140,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.dogAge}
             onChange = {this.handleChange.bind(this, 'dogAge')}
             name = "dogAge"
+            errorText = {this.state.errorText.dogAge}
           /><br />
           <TextField
             hintText="Dog Profile Pic"
@@ -142,6 +148,7 @@ class ProfileEdit extends React.Component {
             value = {this.state.picLink}
             onChange = {this.handleChange.bind(this, 'picLink')}
             name = "picLink"
+            errorText = {this.state.errorText.picLink}
           /><br />
           <RaisedButton label="Submit" secondary={true} style={style} onTouchTap={this.handleSubmit.bind(this)}/></form>
         </div>
