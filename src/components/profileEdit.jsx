@@ -58,7 +58,7 @@ class ProfileEdit extends React.Component {
 
   componentDidMount() {
     var self = this;
-    findUser()
+    setTimeout(() => findUser()
       .then((user) => {
         this.setState({"firstname": user.firstname});
         this.setState({"lastname": user.lastname})
@@ -67,7 +67,7 @@ class ProfileEdit extends React.Component {
         this.setState({"dogBreed": user.dogBreed});
         this.setState({"dogAge": user.dogAge});
         this.setState({"picLink": user.picLink});
-    })
+    }), 1000)
   }
 
   handleChange(prop, event) {
@@ -78,13 +78,10 @@ class ProfileEdit extends React.Component {
 
   handleSubmit() {
     let errors = validate(profile);
-    let handleClose = this.props.handleClose
     if (Object.keys(errors).length === 0) {
       updateUser(this.state)
         .then(function (user) {
-        handleClose();
-        window.location.reload();
-        return true;
+          hashHistory.push('/users')
       });
     }
     this.setState({"errorText": errors});
