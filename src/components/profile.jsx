@@ -6,7 +6,7 @@ import React, { PropTypes as T } from 'react';
 import AuthService from '../utils/AuthService.jsx';
 import Auth0Lock from '../../node_modules/auth0-lock';
 import ProfileDisplay from './profileDisplay.jsx';
-
+import Events from './events.jsx'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -29,8 +29,13 @@ class Profile extends React.Component {
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} />
-        <div>
-          <ProfileDisplay user={this.state.info} status={this.state.complete}/>
+        <div className="row">
+          <div className="col-md-4">
+            <ProfileDisplay user={this.state.info} status={this.state.complete}/>
+          </div>
+          <div className="col-md-8">
+            <Events />
+          </div>
         </div>
       </div>
     )
