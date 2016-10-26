@@ -1,8 +1,9 @@
 "use strict";
 
 var User = require('../models/users');
-var request = require('request')
-var authPath = require('../../config/auth0')
+var Event = require('../models/events');
+var request = require('request');
+var authPath = require('../../config/auth0');
 var api = require('../../config/api.js');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
@@ -11,15 +12,7 @@ const googleMaps = require('@google/maps').createClient({
 
 module.exports = function(app) {
 
-	// signup GET and POST requests for /api/users
-	app.get('/query/dbId', (req, res) => {
-		User.findById(req.query.dbId)
-		.exec((err, user) => {
-			if (err) console.log(err);
-			res.status(201).send(user)
-		});
-	});
-
+	//======Location End Points=======//
 	app.get('/api/geocode', (req, res) => {
     var getCoordinates = function(address) {
     	return new Promise(function(resolve, reject) {
@@ -36,6 +29,16 @@ module.exports = function(app) {
       });
 	});
 
+	//======User End Points=======//
+
+	app.get('/query/dbId', (req, res) => {
+		User.findById(req.query.dbId)
+		.exec((err, user) => {
+			if (err) console.log(err);
+			res.status(201).send(user)
+		});
+	});
+
 	app.get('/api/users', (req, res) => {
 		User.find()
 		.exec((err, users) => {
@@ -47,7 +50,6 @@ module.exports = function(app) {
 			res.status(201).send({users: users});
 		});
 	});
-
 
 	app.post('/signin', (req, res) => {
 		//Auth0 user ID
@@ -110,5 +112,32 @@ module.exports = function(app) {
 		.exec((user) => {
 			res.status(200).send(userRemoved)
 		})
+	});
+
+	//======Event End Points=======//
+	app.get('/api/events', (req, res) => {
+		Event.find()
+		.exec((err, events) => {
+			if (err) {
+				console.log(err);
+				res.status(404).send("Database error, no events found")
+			}
+			res.status(201).send({events: events});
+		});
+	});
+
+	app.post('/api/events', (req, res) => {
+		console.log(req.body);
+		new Event ({
+			category: req.body.category,
+			loc: req.body.loc,
+			lat: req.body.lat,
+			lng: req.body.lng,
+			date: req.body.date,
+			time: req.body.time
+		}).save((err, event) => {
+			if (err) throw err
+			res.status(200).send({event: event})
+		});
 	})
 };

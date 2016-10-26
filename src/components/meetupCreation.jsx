@@ -14,19 +14,37 @@ import  { googleLoader } from '../utils/google.js'
 import { findUser } from '../services/userServices.js'
 
 const items = [
-  <MenuItem key={1} value={1} primaryText="Dog Park" />,
-  <MenuItem key={2} value={2} primaryText="Beach" />,
-  <MenuItem key={3} value={3} primaryText="Trails" />,
-  <MenuItem key={4} value={4} primaryText="Park" />,
-  <MenuItem key={5} value={5} primaryText="Something Else" />
+  <MenuItem key={1} value={'Dog Park'} primaryText="Dog Park" />,
+  <MenuItem key={2} value={'Beach'} primaryText="Beach" />,
+  <MenuItem key={3} value={'Trails'} primaryText="Trails" />,
+  <MenuItem key={4} value={'Park'} primaryText="Park" />,
+  <MenuItem key={5} value={'Something'} primaryText="Something Else" />
 ];
 
 
 class MeetupCreation extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {value: null};
-    this.handleChange = (event, index, value) => this.setState({value});
+    this.state = {category: null};
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSelectionChange = this.handleSelectionChange.bind(this);
+  }
+
+  handleTextChange(prop, event, time) {
+    var newValue;
+    if (event) {
+      newValue = event.target.value;
+    } else if (prop === "date"){
+      newValue = time.toDateString();
+    } else {
+      newValue = time.toTimeString();
+    }
+    this.props.change(prop, newValue);
+  }
+
+  handleSelectionChange(prop, event, index, value) {
+    this.setState({'category': value});
+    this.props.change('category', value);
   }
 
   componentDidMount() {
@@ -67,23 +85,28 @@ class MeetupCreation extends React.Component {
 			    <TextField
 			      hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
 			      floatingLabelText="Event Name"
+            onChange = {this.handleTextChange.bind(this, 'eventname')}
             style={{width: 300}} />
 			    <br />
 			    <SelectField
-			      value={this.state.value}
-			      onChange={this.handleChange}
+			      value={this.state.category}
+            onChange = {this.handleSelectionChange.bind(this, 'category')}
 			      floatingLabelText="Category"
             style={{width: 300}}
 			    >
             {items}
 	        </SelectField>
 	        <br />
-			    <TextField hintText="" floatingLabelText="Where" style={{width: 300}} />
+			    <TextField hintText="" floatingLabelText="Where" style={{width: 300}} onChange = {this.handleTextChange.bind(this, 'loc')}/>
 			    <div id="map" style={styles}></div>
 			    <br />
-		      <DatePicker hintText="Pick a Day" textFieldStyle={{width: 300}} />
+		      <DatePicker hintText="Pick a Day" textFieldStyle={{width: 300}}
+            onChange = {this.handleTextChange.bind(this, 'date')}
+           />
 		      <br />
-		      <TimePicker hintText="Pick a Time" textFieldStyle={{width: 300}} />
+		      <TimePicker hintText="Pick a Time" textFieldStyle={{width: 300}}
+          onChange = {this.handleTextChange.bind(this, 'time')}
+          />
 		    </div>
       </MuiThemeProvider>
     )
