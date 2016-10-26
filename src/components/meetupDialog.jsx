@@ -47,7 +47,7 @@ class MeetupDialog extends React.Component {
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Let's Meetup!" secondary={true}/>
           <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true}>
-            <MeetupCreation />
+            <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId}/>
           </Dialog>
         </div>
       </MuiThemeProvider>
