@@ -8,14 +8,15 @@ import FlatButton from 'material-ui/FlatButton';
 import MyTheme from '../theme/theme.js';
 import Dialog from 'material-ui/Dialog';
 import MeetupCreation from './meetupCreation.jsx'
-import eventService from '../services/eventServices.js';
+import eventServices from '../services/eventServices.js';
 
 class MeetupDialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
+      open: false
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,7 +31,17 @@ class MeetupDialog extends React.Component {
   };
 
   handleSubmit() {
-    eventServices.saveEvent(this.state.newEvent);
+    eventServices.saveEvent(this.state, function (){
+      console.log(success);
+    });
+
+  }
+
+  handleChange(prop, newValue) {
+    var change = {};
+    change[prop] = newValue;
+    this.setState(change);
+    console.log(this.state);
   }
 
   render() {
@@ -56,7 +67,8 @@ class MeetupDialog extends React.Component {
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Let's Meetup!" secondary={true}/>
           <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true}>
-            <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId}/>
+            <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId} change={this.handleChange}
+            />
           </Dialog>
         </div>
       </MuiThemeProvider>

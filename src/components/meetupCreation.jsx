@@ -14,37 +14,37 @@ import  { googleLoader } from '../utils/google.js'
 import { findUser } from '../services/userServices.js'
 
 const items = [
-  <MenuItem key={1} value={"Dog Park"} primaryText="Dog Park" />,
-  <MenuItem key={2} value={"Beach"} primaryText="Beach" />,
-  <MenuItem key={3} value={"Trails"} primaryText="Trails" />,
-  <MenuItem key={4} value={"Park"} primaryText="Park" />,
-  <MenuItem key={5} value={"Something Else"} primaryText="Something Else" />
+  <MenuItem key={1} value={'Dog Park'} primaryText="Dog Park" />,
+  <MenuItem key={2} value={'Beach'} primaryText="Beach" />,
+  <MenuItem key={3} value={'Trails'} primaryText="Trails" />,
+  <MenuItem key={4} value={'Park'} primaryText="Park" />,
+  <MenuItem key={5} value={'Something'} primaryText="Something Else" />
 ];
 
 
 class MeetupCreation extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {value: null};
+    this.state = {category: null};
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSelectionChange = this.handleSelectionChange.bind(this);
-    //this.handleTimeChange = this.handleTimeChange.bind(this);
   }
 
   handleTextChange(prop, event, time) {
-    var change = {};
+    var newValue;
     if (event) {
-      change[prop] = event.target.value;
+      newValue = event.target.value;
+    } else if (prop === "date"){
+      newValue = time.toDateString();
     } else {
-      change[prop] = time
+      newValue = time.toTimeString();
     }
-    this.setState(change);
-    console.log(this.state);
+    this.props.change(prop, newValue);
   }
 
-  handleSelectionChange(event, index, value) {
-    this.setState({"value": value});
-    console.log(this.state);
+  handleSelectionChange(prop, event, index, value) {
+    this.setState({'category': value});
+    this.props.change('category', value);
   }
 
   componentDidMount() {
@@ -89,8 +89,8 @@ class MeetupCreation extends React.Component {
             style={{width: 300}} />
 			    <br />
 			    <SelectField
-			      value={this.state.value}
-            onChange={this.handleSelectionChange}
+			      value={this.state.category}
+            onChange = {this.handleSelectionChange.bind(this, 'category')}
 			      floatingLabelText="Category"
             style={{width: 300}}
 			    >
@@ -101,7 +101,8 @@ class MeetupCreation extends React.Component {
 			    <div id="map" style={styles}></div>
 			    <br />
 		      <DatePicker hintText="Pick a Day" textFieldStyle={{width: 300}}
-           onChange = {this.handleTextChange.bind(this, 'date')}/>
+            onChange = {this.handleTextChange.bind(this, 'date')}
+           />
 		      <br />
 		      <TimePicker hintText="Pick a Time" textFieldStyle={{width: 300}}
           onChange = {this.handleTextChange.bind(this, 'time')}
