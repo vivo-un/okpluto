@@ -20,7 +20,7 @@ class InfoDrawer extends React.Component {
         <Drawer open={this.props.open}>
           <h4> Hide </h4>
           <h3> Your Info </h3>
-          <ProfileDisplay user={this.props.user} />
+          <h3> Your Events </h3>
         </Drawer>
       </MuiThemeProvider>
     )

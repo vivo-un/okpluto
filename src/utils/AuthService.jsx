@@ -99,7 +99,7 @@ export default class AuthService {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_tokenx537?');
     localStorage.removeItem('mongoUserId');
-    hashHistory.push('/home')
+    hashHistory.push('/')
   }
 
 

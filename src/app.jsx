@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRedirect, Link, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import AuthService from './utils/AuthService.jsx';
 import $ from 'jquery';
 import Home from './components/home.jsx';
@@ -32,8 +32,7 @@ injectTapEventPlugin();
 ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Container} auth={auth}>
-      <IndexRedirect to="/home" />
-      <Route path="/home" component={Home} />
+      <IndexRoute component={Home} />
       <Route path="/users" component={UsersPage} onEnter={requireAuth} />
       <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
