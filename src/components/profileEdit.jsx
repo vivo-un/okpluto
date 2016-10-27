@@ -1,50 +1,65 @@
-"use strict";
+ "use strict";
 
 import React from 'react';
+import {
+  Step,
+  Stepper,
+  StepLabel,
+} from 'material-ui/Stepper';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import MyTheme from '../theme/theme.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
-import MyTheme from '../theme/theme.js';
 import { findUser, updateUser } from '../services/userServices.js';
-import RaisedButton from 'material-ui/RaisedButton';
 import { hashHistory } from 'react-router';
-
-const style = {
-  'position': 'fixed',
-  'margin-left':30
-};
 
 const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
 
 const isValidImage = function(url) {
-  return true
-  //return url.match(rValidImage)
+  return url.match(rValidImage)
 };
 
 
-
-const validate = values => {
-  const errors = {}
-  const requiredFields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge', 'picLink' ]
-  requiredFields.forEach(field => {
-    if (!values[field].value) {
+const validate = (values, step) => {
+  const errors = {};
+  var requiredFields = [];
+  const fields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge', 'picLink' ];
+  if (step === 0) {
+    requiredFields = fields.slice(0, 3);
+    requiredFields.forEach(field => {
+      if (!values[field].value) {
       errors[field] = 'Required'
+      }
+    })
+  } else {
+    requiredFields = fields.slice(3);
+    requiredFields.forEach(field => {
+    if (!values[field].value) {
+      errors[field] = 'Required';
     }
-  })
-  if (isNaN(parseInt(values.dogAge.value))) {
-    errors.dogAge = 'Please enter a number'
+    })
+    if (isNaN(parseInt(values.dogAge.value))) {
+      errors.dogAge = 'Please enter a number'
+    }
+    if (!isValidImage(values.picLink.value)) {
+      errors.picLink = 'Invalid Url'
+    }
   }
-  if (!isValidImage(values.picLink.value)) {
-    errors.picLink = 'Invalid Url'
-  }
+
   return errors
 }
 
-class ProfileEdit extends React.Component {
+
+
+class ProfileCreation extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
+      finished: false,
+      stepIndex: 0,
       firstname: "",
       lastname: "",
       loc: "",
@@ -53,22 +68,28 @@ class ProfileEdit extends React.Component {
       dogAge: "",
       picLink:"",
       errorText: {}
-    };
+    }
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
   }
+
 
   componentDidMount() {
     var self = this;
-    setTimeout(() => findUser()
+    setTimeout(() => {
+      findUser()
       .then((user) => {
         this.setState({"firstname": user.firstname});
         this.setState({"lastname": user.lastname})
-        this.setState({"loc": user.loc});
-        this.setState({"dogname": user.dogname});
-        this.setState({"dogBreed": user.dogBreed});
-        this.setState({"dogAge": user.dogAge});
-        this.setState({"picLink": user.picLink});
-    }), 1000)
+        this.setState({"loc": user.loc || ""});
+        this.setState({"dogname": user.dogname || ""});
+        this.setState({"dogBreed": user.dogBreed || ""});
+        this.setState({"dogAge": user.dogAge || ""});
+        this.setState({"picLink": user.picLink || ""});
+      })
+    }, 1000)
   }
+
 
   handleChange(prop, event) {
     let change = {};
@@ -77,85 +98,155 @@ class ProfileEdit extends React.Component {
   }
 
   handleSubmit() {
-    let errors = validate(profile);
+    var errors = {};
+    if (this.state.stepIndex === 1) {
+      errors = validate(dogProfile, 1);
+    } else {
+      errors = validate(ownerProfile, 0);
+    }
     if (Object.keys(errors).length === 0) {
-      updateUser(this.state)
-        .then(function (user) {
-          hashHistory.push('/users')
-      });
+      this.handleNext();
+      if (this.state.stepIndex === 1) {
+
+        updateUser(this.state)
+          .then(function (user) {
+            hashHistory.push('/users')
+        });
+      }
     }
     this.setState({"errorText": errors});
     console.log(this.state);
   }
 
-  render () {
-    return (
-        <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-          <div className="middle">
-          <form name="profile">
-          <TextField
-            hintText="First Name"
-            floatingLabelText="First Name"
-            value = {this.state.firstname}
-            onChange = {this.handleChange.bind(this, 'firstname')}
-            name = "firstname"
-            errorText = {this.state.errorText.firstname}
-          /><br />
-          <TextField
-            hintText="Last Name"
-            floatingLabelText="Last Name"
-            value = {this.state.lastname}
-            onChange = {this.handleChange.bind(this, 'lastname')}
-            name = "lastname"
-            errorText = {this.state.errorText.lastname}
-          /><br />
-          <TextField
-            hintText="Location"
-            floatingLabelText="Location"
-            value = {this.state.loc}
-            onChange = {this.handleChange.bind(this, 'loc')}
-            name = "loc"
-            errorText = {this.state.errorText.loc}
-          /><br />
-          <TextField
-            hintText="Dog Name"
-            floatingLabelText="Dog Name"
-            value = {this.state.dogname}
-            onChange = {this.handleChange.bind(this, 'dogname')}
-            name = "dogname"
-            errorText = {this.state.errorText.dogname}
-          /><br />
-          <TextField
-            hintText="Dog Breed"
-            floatingLabelText="Dog Breed"
-            value = {this.state.dogBreed}
-            onChange = {this.handleChange.bind(this, 'dogBreed')}
-            name = "dogBreed"
-            errorText = {this.state.errorText.dogBreed}
-          /><br />
-          <TextField
-            hintText="Dog Age"
-            floatingLabelText="Dog Age"
-            value = {this.state.dogAge}
-            onChange = {this.handleChange.bind(this, 'dogAge')}
-            name = "dogAge"
-            errorText = {this.state.errorText.dogAge}
-          /><br />
-          <TextField
-            hintText="Dog Profile Pic"
-            floatingLabelText="Dog Profile Pic"
-            value = {this.state.picLink}
-            onChange = {this.handleChange.bind(this, 'picLink')}
-            name = "picLink"
-            errorText = {this.state.errorText.picLink}
-          /><br />
-          <RaisedButton label="Submit" secondary={true} style={style} onTouchTap={this.handleSubmit.bind(this)}/></form>
-        </div>
-      </MuiThemeProvider>
-    )
+  handleNext() {
+    var self = this;
+    this.setState({
+      stepIndex: self.state.stepIndex + 1,
+      finished: self.state.stepIndex >= 1,
+    });
   }
 
+  handlePrev(){
+    var self = this;
+    if (this.state.stepIndex > 0) {
+      this.setState({stepIndex: self.state.stepIndex - 1});
+    }
+  }
+
+  getStepContent(stepIndex) {
+    switch (stepIndex) {
+      case 0:
+        return (
+          <form name="ownerProfile">
+            <TextField
+              hintText="First Name"
+              floatingLabelText="First Name"
+              value = {this.state.firstname}
+              onChange = {this.handleChange.bind(this, 'firstname')}
+              name = "firstname"
+              errorText = {this.state.errorText.firstname}
+            /><br />
+            <TextField
+              hintText="Last Name"
+              floatingLabelText="Last Name"
+              value = {this.state.lastname}
+              onChange = {this.handleChange.bind(this, 'lastname')}
+              name = "lastname"
+              errorText = {this.state.errorText.lastname}
+            /><br />
+            <TextField
+              hintText="Location"
+              floatingLabelText="Location"
+              value = {this.state.loc}
+              onChange = {this.handleChange.bind(this, 'loc')}
+              name = "loc"
+              errorText = {this.state.errorText.loc}
+            /><br />
+          </form>
+        )
+      case 1:
+        return (
+          <form name="dogProfile">
+            <TextField
+              hintText="Dog Name"
+              floatingLabelText="Dog Name"
+              value = {this.state.dogname}
+              onChange = {this.handleChange.bind(this, 'dogname')}
+              name = "dogname"
+              errorText = {this.state.errorText.dogname}
+            /><br />
+            <TextField
+              hintText="Dog Breed"
+              floatingLabelText="Dog Breed"
+              value = {this.state.dogBreed}
+              onChange = {this.handleChange.bind(this, 'dogBreed')}
+              name = "dogBreed"
+              errorText = {this.state.errorText.dogBreed}
+            /><br />
+            <TextField
+              hintText="Dog Age"
+              floatingLabelText="Dog Age"
+              value = {this.state.dogAge}
+              onChange = {this.handleChange.bind(this, 'dogAge')}
+              name = "dogAge"
+              errorText = {this.state.errorText.dogAge}
+            /><br />
+            <TextField
+              hintText="Dog Profile Pic"
+              floatingLabelText="Dog Profile Pic"
+              value = {this.state.picLink}
+              onChange = {this.handleChange.bind(this, 'picLink')}
+              name = "picLink"
+              errorText = {this.state.errorText.picLink}
+            /><br />
+          </form>
+      )
+      default:
+        return '';
+    }
+  }
+
+  render() {
+    const {finished, stepIndex} = this.state;
+    const contentStyle = {margin: '0 16px'};
+
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+      <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
+        <Stepper activeStep={stepIndex}>
+          <Step>
+            <StepLabel>Tell us more about you</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Tell us more about your best friend</StepLabel>
+          </Step>
+        </Stepper>
+        <div >
+          {finished ? ("") : (
+            <div>
+              <div className = "middle">{this.getStepContent(stepIndex)}</div>
+              <div className ="middle" style={{marginTop: 12}}>
+                <FlatButton
+                  label="Back"
+                  disabled={stepIndex === 0}
+                  onTouchTap={this.handlePrev}
+                  style={{marginRight: 12}}
+                />
+                <RaisedButton
+                  label={stepIndex === 2 ? 'Finish' : 'Next'}
+                  secondary={true}
+                  onTouchTap={()=>{
+                    this.handleSubmit();
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      </MuiThemeProvider>
+    );
+  }
 }
 
-
-module.exports = ProfileEdit;
+module.exports = ProfileCreation
