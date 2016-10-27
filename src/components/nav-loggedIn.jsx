@@ -10,7 +10,7 @@ class NavLoggedIn extends React.Component {
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#">Ok Pluto</a>
+              <a className="navbar-brand">Ok Pluto</a>
             </div>
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
