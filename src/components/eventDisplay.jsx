@@ -30,7 +30,7 @@ const eventPics = {
   Beach: "/assets/beach.jpg",
   Park: "/assets/park.jpg",
   'Dog Park': "/assets/dogpark.jpg",
-  'Something Else': "/assets/friends.png"
+  Something: "/assets/friends.png"
 }
 
 class EventDisplay extends React.Component {
@@ -60,6 +60,7 @@ class EventDisplay extends React.Component {
       });
     });
     this.setState({eventPic: eventPics[this.props.event.category]});
+    console.log(this.state)
   }
 
   join() {
