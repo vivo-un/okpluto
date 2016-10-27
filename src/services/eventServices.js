@@ -18,18 +18,13 @@ import { getLatLng } from './userServices.js';
     data.creator = data.creator || localStorage.getItem('mongoUserId');
     console.log('about to save ', data)
     return new Promise((resolve, reject) => {
-      getLatLng(data.loc)
-        .then(function (results) {
-          data.lat = results.lat;
-          data.lng = results.lng;
-          $.ajax({
-            url: 'api/events',
-            type: 'POST',
-            data: {data: JSON.stringify(data)},
-            success: resolve,
-            error: reject
-          });
-        });
+      $.ajax({
+        url: 'api/events',
+        type: 'POST',
+        data: {data: JSON.stringify(data)},
+        success: resolve,
+        error: reject
+      });
     });
   };
 

@@ -141,3 +141,18 @@ img {
   width: 50%;
 }
 
+#map {
+  height: 100%;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+.pac-container {
+    background-color: #FFF;
+    z-index: 2000;
+    position: fixed;
+    display: inline-block;
+    float: left;
+}
