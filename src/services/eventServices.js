@@ -15,7 +15,8 @@ import { getLatLng } from './userServices.js';
   };
 
   const saveEvent = function (data) {
-    data.creator = localStorage.getItem('mongoUserId');
+    data.creator = data.creator || localStorage.getItem('mongoUserId');
+    console.log('about to save ', data)
     return new Promise((resolve, reject) => {
       getLatLng(data.loc)
         .then(function (results) {
@@ -24,7 +25,7 @@ import { getLatLng } from './userServices.js';
           $.ajax({
             url: 'api/events',
             type: 'POST',
-            data: data,
+            data: {data: JSON.stringify(data)},
             success: resolve,
             error: reject
           });
@@ -32,8 +33,22 @@ import { getLatLng } from './userServices.js';
     });
   };
 
+  const addPerson = function(eventId, userId) {
+    userId = userId || localStorage.getItem('mongoUserId')
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/events/add',
+        type: 'PUT',
+        data: {eventId: eventId, userId: userId},
+        success: resolve,
+        error: reject
+      })
+    })
+  }
+
 
 module.exports = {
   getEvents: getEvents,
-  saveEvent: saveEvent
+  saveEvent: saveEvent,
+  addPerson: addPerson
 };
