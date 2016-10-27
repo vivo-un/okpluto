@@ -127,17 +127,35 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/events', (req, res) => {
-		console.log(req.body);
+		req.body = JSON.parse(req.body.data);
 		new Event ({
+			creator: req.body.creator,
+			eventname: req.body.eventname,
 			category: req.body.category,
 			loc: req.body.loc,
 			lat: req.body.lat,
 			lng: req.body.lng,
 			date: req.body.date,
-			time: req.body.time
+			time: req.body.time,
+			attendees: req.body.attendees
 		}).save((err, event) => {
 			if (err) throw err
 			res.status(200).send({event: event})
 		});
+	})
+
+	app.put('/api/events/add', (req, res) => {
+		console.log(req.body)
+		Event.findById(req.body.eventId, (err, event) => {
+			let attendees = event.attendees;
+			if (attendees.indexOf(req.body.userId) === -1) {
+				attendees.push(req.body.userId);
+			}
+			event.attendees = attendees;
+			event.save((err, updatedEvent) => {
+				res.status(200).send({updatedEvent: updatedEvent})
+			})
+		})
+
 	})
 };

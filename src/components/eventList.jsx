@@ -1,9 +1,7 @@
 "use strict";
 
-
 var React = require('react');
-//var UsersPage = require('./usersPage.jsx');
-var UserDisplay = require('./user.jsx')
+var EventDisplay = require('./eventDisplay.jsx')
 import Loading from './loading.jsx'
 
 class UserList extends React.Component {
@@ -12,13 +10,13 @@ class UserList extends React.Component {
   }
 
   render() {
-    if (this.props.users.length) {
+    if (this.props.events.length) {
       return (
         <div className = "container userList">
           <div className = "row">
-            {this.props.users.map(person =>
-              <div className = "col-md-4 text-center">
-                <UserDisplay user={person} type={'user'}/>
+            {this.props.events.map(item =>
+              <div className = "col-md-3 text-center">
+                <EventDisplay event={item} />
               </div>
               )}
           </div>

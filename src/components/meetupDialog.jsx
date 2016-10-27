@@ -14,7 +14,9 @@ class MeetupDialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      creator: localStorage.getItem('mongoUserId'),
+      attendees: [localStorage.getItem('mongoUserId'), this.props.userId]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this)
@@ -31,8 +33,9 @@ class MeetupDialog extends React.Component {
   };
 
   handleSubmit() {
-    eventServices.saveEvent(this.state, function (){
-      console.log(success);
+    eventServices.saveEvent(this.state)
+    .then( function (d){
+      console.log(d);
     });
 
   }
