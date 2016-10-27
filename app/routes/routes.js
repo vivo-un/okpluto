@@ -128,8 +128,8 @@ module.exports = function(app) {
 
 	app.post('/api/events', (req, res) => {
 		req.body = JSON.parse(req.body.data);
-		console.log(req.body)
 		new Event ({
+			creator: req.body.creator,
 			eventname: req.body.eventname,
 			category: req.body.category,
 			loc: req.body.loc,
@@ -142,5 +142,20 @@ module.exports = function(app) {
 			if (err) throw err
 			res.status(200).send({event: event})
 		});
+	})
+
+	app.put('/api/events/add', (req, res) => {
+		console.log(req.body)
+		Event.findById(req.body.eventId, (err, event) => {
+			let attendees = event.attendees;
+			if (attendees.indexOf(req.body.userId) === -1) {
+				attendees.push(req.body.userId);
+			}
+			event.attendees = attendees;
+			event.save((err, updatedEvent) => {
+				res.status(200).send({updatedEvent: updatedEvent})
+			})
+		})
+
 	})
 };
