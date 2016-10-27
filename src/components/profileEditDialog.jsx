@@ -7,7 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import MyTheme from '../theme/theme.js';
 import Dialog from 'material-ui/Dialog';
-import ProfileEdit from './profileEdit.jsx'
 
 import TextField from 'material-ui/TextField';
 import { findUser, updateUser } from '../services/userServices.js';
