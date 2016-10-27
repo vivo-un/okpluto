@@ -79,7 +79,7 @@ class EventDisplay extends React.Component {
       <Card>
         <CardHeader
           title={this.props.event.eventname}
-          subtitle={'By: ' + this.state.creator}
+          subtitle={'At: ' + this.props.event.loc}
           avatar={this.state.pic}
           actAsExpander={true}
           showExpandableButton={true}
@@ -88,13 +88,13 @@ class EventDisplay extends React.Component {
           <img src={this.state.eventPic} />
         </CardMedia>
         <CardText expandable={true}>
+          <strong>Creator:</strong> {this.state.creator}<br />
           <strong>Who's going:</strong>{this.state.attendees.map((person, i) => {
             if (i !== this.state.attendees.length - 1) {
               person += ',';
             }
             return person
           })}<br />
-          <strong>Where:</strong> {this.props.event.loc}<br />
           <strong>When:</strong> {calendar[date.getMonth()]} {date.getDate()} at {hours}:{min} {ampm} {zone}
         </CardText>
         <CardActions>
