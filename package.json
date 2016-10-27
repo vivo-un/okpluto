@@ -4,6 +4,7 @@
   "description": "Meeting place for dogs and their owners",
   "main": "server.js",
   "scripts": {
+    "start": "grunt",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
