@@ -10,6 +10,29 @@ import MyTheme from '../theme/theme.js';
 import { findUser } from '../services/userServices.js'
 import { addPerson } from '../services/eventServices.js'
 
+const calendar = {
+  0: "Jan",
+  1: "Feb",
+  2: "Mar",
+  3: "Apr",
+  4: "May",
+  5: "June",
+  6: "July",
+  7: "Aug",
+  8: "Sept",
+  9: "Oct",
+  10: "Nov",
+  11: "Dec"
+}
+
+const eventPics = {
+  Trails: "/assets/trails.jpg",
+  Beach: "/assets/beach.jpg",
+  Park: "/assets/park.jpg",
+  'Dog Park': "/assets/dogpark.jpg",
+  'Something Else': "/assets/friends.png"
+}
+
 class EventDisplay extends React.Component {
 
   constructor(props) {
@@ -26,16 +49,17 @@ class EventDisplay extends React.Component {
     .then(user => {
       let name = user.firstname + ' ' + user.lastname
       this.setState({creator: name, creatorDog: user.dogname, pic: user.profilepic})
-    })
+    });
     let attendees = this.state.attendees;
     this.props.event.attendees.forEach(attendee => {
       findUser(attendee)
-      .then(person =>{
+      .then(person => {
         let people = attendees;
         people.push('\n' + person.firstname)
         this.setState({attendees: people})
-      })
-    })
+      });
+    });
+    this.setState({eventPic: eventPics[this.props.event.category]});
   }
 
   join() {
@@ -43,51 +67,43 @@ class EventDisplay extends React.Component {
     addPerson(eventId)
   }
 
-
   render () {
+    const date = new Date(this.props.event.date);
+    const time = this.props.event.time.split(':');
+    const hours = time[0] > 12 ? time[0] - 12 : time[0];
+    const min = time[1];
+    const ampm = time[0] >=12 ? 'PM' : 'AM';
+    const zone = this.props.event.time.slice(-5);
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
       <Card>
-    <CardHeader
-      title={'Created by: ' + this.state.creator}
-      subtitle={'Best Friend: ' + this.state.creatorDog}
-      avatar={this.state.pic}
-      actAsExpander={true}
-      showExpandableButton={true}
-    />
-    <CardMedia
-      overlay={<CardTitle title={this.props.event.eventname} subtitle={this.props.event.loc} />}
-    >
-      <img src="../../assets/meetUp.png" />
-    </CardMedia>
-    <CardText expandable={true}>
-      <strong>Who's going:</strong>{this.state.attendees.map((person, i) => {
-        if (i !== this.state.attendees.length - 1) {
-          person += ',';
-        }
-        return person
-      })}
-    </CardText>
-    <CardActions>
-      <FlatButton label="Join" onClick={this.join}/>
-    </CardActions>
-  </Card>
-  </MuiThemeProvider>
+        <CardHeader
+          title={this.props.event.eventname}
+          subtitle={'At: ' + this.props.event.loc}
+          avatar={this.state.pic}
+          actAsExpander={true}
+          showExpandableButton={true}
+        />
+        <CardMedia>
+          <img src={this.state.eventPic} />
+        </CardMedia>
+        <CardText expandable={true}>
+          <strong>Creator:</strong> {this.state.creator}<br />
+          <strong>Who's going:</strong>{this.state.attendees.map((person, i) => {
+            if (i !== this.state.attendees.length - 1) {
+              person += ',';
+            }
+            return person
+          })}<br />
+          <strong>When:</strong> {calendar[date.getMonth()]} {date.getDate()} at {hours}:{min} {ampm} {zone}
+        </CardText>
+        <CardActions>
+          <FlatButton label="Join" onClick={this.join}/>
+        </CardActions>
+      </Card>
+      </MuiThemeProvider>
     )
   }
 }
-
- /*<figure className="figure profile">
-        <div className="profile-image">
-          <img src={this.props.event.picLink} alt="Pic"/>
-        </div>
-        <figcaption>
-          <h3>{this.props.event.eventname}</h3>
-          <h4>{this.props.event.loc}</h4>
-          <h3>{this.props.event.date}</h3>
-          <h4>{this.props.event.time}</h4>
-          <h4>{this.props.event.attendees} years old</h4>
-        </figcaption>
-      </figure>*/
 
 module.exports = EventDisplay;
