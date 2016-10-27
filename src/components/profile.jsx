@@ -30,12 +30,10 @@ class Profile extends React.Component {
       <div>
         <NavLoggedIn auth={this.props.auth} />
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-3">
             <ProfileDisplay user={this.state.info} status={this.state.complete}/>
           </div>
-          <div className="col-md-8">
             <Events />
-          </div>
         </div>
       </div>
     )
