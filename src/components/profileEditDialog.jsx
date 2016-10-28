@@ -11,7 +11,7 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
-import ProfileEdit from './ProfileEdit.jsx';
+import ProfileEdit from './profileEdit.jsx';
 
 const style = {
   'position': 'fixed',
