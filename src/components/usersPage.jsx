@@ -70,7 +70,7 @@ class UsersPage extends React.Component {
     }
     return (
       <div>
-        <NavLoggedIn auth={this.props.auth}/>
+        <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={style}
                  floatingLabelText="Search Users"
