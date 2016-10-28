@@ -22,7 +22,6 @@ class Profile extends React.Component {
         <div className="row">
           <div className="col-md-3">
             <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-          </div>
           <div className ="col-md-8">
             <Events />
           </div>
