@@ -1,7 +1,6 @@
 "use strict";
 
 import React from 'react';
-// import { findUser } from '../services/userServices.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
@@ -21,14 +20,12 @@ const items = [
   <MenuItem key={5} value={'Something'} primaryText="Something Else" />
 ];
 
-//TODO: needs validation
- //state.lat and lng cannot be null
-
 class MeetupCreation extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {category: null, lat: null, lng: null};
+    this.state = {category: 'Dog Park', lat: null, lng: null};
     this.handleChange = this.handleChange.bind(this);
+    this.updateLocSearchBox = this.updateLocSearchBox.bind(this)
   }
 
   handleChange(prop, event, time, value) {
@@ -71,7 +68,7 @@ class MeetupCreation extends React.Component {
       zoomControl: true
     }
 
-	  let map = new google.maps.Map(document.getElementById('map'), options);
+    let map = new google.maps.Map(document.getElementById('map'), options);
 
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
@@ -153,50 +150,60 @@ class MeetupCreation extends React.Component {
   }
 
   render() {
-  	const styles = {
-			height: '250px',
-			width: '400px'
-		}
+    const styles = {
+      height: '250px',
+      width: '400px'
+    }
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-		    <div>
-			    <TextField
-			      hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
-			      floatingLabelText="Event Name"
-            onChange = {this.handleChange.bind(this, 'eventname')}
-            style={{width: 300}} />
-			    <br />
-			    <SelectField
-			      value={this.state.category}
-            onChange = {this.handleChange.bind(this, 'category')}
-			      floatingLabelText="Category"
-            style={{width: 300}}
-			    >
-            {items}
-	        </SelectField>
-	        <br />
-			    <TextField
-            id="pac-input"
-            hintText="Search a location and select from map"
-            floatingLabelText="Where"
-            style={{width: 300}}
-            onChange={this.handleChange.bind(this, 'loc')}
-            style={{width: 300}}/>
+        <div>
+            <TextField
+              hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
+              floatingLabelText="Event Name"
+              name="eventname"
+              errorText={this.props.errorText.eventname}
+              onChange={this.handleChange.bind(this, 'eventname')}
+              style={{width: 400}} />
+            <br />
+            <SelectField
+              floatingLabelText="Category"
+              value={this.state.category}
+              name="category"
+              errorText={this.state.category===null && 'Required'}
+              onChange={this.handleChange.bind(this, 'category')}
+              style={{width: 400, 'text-align': 'left'}}
+            >
+              {items}
+            </SelectField>
+            <br />
+            <TextField
+              id="pac-input"
+              hintText="Search a location and select from map"
+              floatingLabelText="Where"
+              name="where"
+              errorText={this.props.errorText.where}
+              onChange={this.handleChange.bind(this, 'loc')}
+              style={{width: 400}}/>
 
-			    <div id="map" style={styles}></div>
-			    <br />
-		      <DatePicker
-            hintText="Pick a Day"
-            textFieldStyle={{width: 300}}
-            onChange = {this.handleChange.bind(this, 'date')}
-           />
-		      <br />
-		      <TimePicker
-            hintText="Pick a Time"
-            textFieldStyle={{width: 300}}
-            onChange = {this.handleChange.bind(this, 'time')}
-          />
-		    </div>
+            <div id="map" style={styles}></div>
+            <br />
+            <DatePicker
+              hintText="Pick a Day"
+              name="date"
+              errorText={this.props.errorText.date}
+              onChange={this.handleChange.bind(this, 'date')}
+              textFieldStyle={{width: 400}}
+             />
+            <br />
+            <TimePicker
+              hintText="Pick a Time"
+              name="time"
+              errorText={this.props.errorText.time}
+              onChange={this.handleChange.bind(this, 'time')}
+              textFieldStyle={{width: 400}}
+            />
+        </div>
       </MuiThemeProvider>
     )
   }
