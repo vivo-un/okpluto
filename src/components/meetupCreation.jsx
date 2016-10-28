@@ -28,26 +28,22 @@ class MeetupCreation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {category: null, lat: null, lng: null};
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleSelectionChange = this.handleSelectionChange.bind(this);
-    this.updateLocSearchBox = this.updateLocSearchBox.bind(this)
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleTextChange(prop, event, time) {
+  handleChange(prop, event, time, value) {
     var newValue;
-    if (event) {
-      newValue = event.target.value;
-    } else if (prop === "date"){
+    if (prop === 'date') {
       newValue = time.toDateString();
-    } else {
+    } else if (prop === 'time') {
       newValue = time.toTimeString();
+    } else if (prop === 'category') {
+      newValue = value;
+      this.setState({'category': value});
+    } else {
+      newValue = event.target.value;
     }
     this.props.change(prop, newValue);
-  }
-
-  handleSelectionChange(prop, event, index, value) {
-    this.setState({'category': value});
-    this.props.change('category', value);
   }
 
   updateLocSearchBox(loc) {
@@ -167,12 +163,12 @@ class MeetupCreation extends React.Component {
 			    <TextField
 			      hintText={'Park Meetup with ' + this.state.friendDogName + ' and ' + this.state.friendName}
 			      floatingLabelText="Event Name"
-            onChange = {this.handleTextChange.bind(this, 'eventname')}
+            onChange = {this.handleChange.bind(this, 'eventname')}
             style={{width: 300}} />
 			    <br />
 			    <SelectField
 			      value={this.state.category}
-            onChange = {this.handleSelectionChange.bind(this, 'category')}
+            onChange = {this.handleChange.bind(this, 'category')}
 			      floatingLabelText="Category"
             style={{width: 300}}
 			    >
@@ -184,7 +180,7 @@ class MeetupCreation extends React.Component {
             hintText="Search a location and select from map"
             floatingLabelText="Where"
             style={{width: 300}}
-            onChange={this.handleTextChange.bind(this, 'loc')}
+            onChange={this.handleChange.bind(this, 'loc')}
             style={{width: 300}}/>
 
 			    <div id="map" style={styles}></div>
@@ -192,13 +188,13 @@ class MeetupCreation extends React.Component {
 		      <DatePicker
             hintText="Pick a Day"
             textFieldStyle={{width: 300}}
-            onChange = {this.handleTextChange.bind(this, 'date')}
+            onChange = {this.handleChange.bind(this, 'date')}
            />
 		      <br />
 		      <TimePicker
             hintText="Pick a Time"
             textFieldStyle={{width: 300}}
-            onChange = {this.handleTextChange.bind(this, 'time')}
+            onChange = {this.handleChange.bind(this, 'time')}
           />
 		    </div>
       </MuiThemeProvider>
