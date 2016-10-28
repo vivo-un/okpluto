@@ -12,7 +12,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
-import { getDistance } from '../services/distanceServices'
+import { getDistance } from '../services/distanceServices';
+
 
 getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
 .then(res => console.log(res))
@@ -118,7 +119,9 @@ class UsersPage extends React.Component {
                />
           </MuiThemeProvider>
         <div className="banner"></div>
+        <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+        </MuiThemeProvider>
       </div>
     )
   }
