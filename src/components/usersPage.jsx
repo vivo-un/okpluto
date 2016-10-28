@@ -12,6 +12,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
+import { getDistance } from '../services/distanceServices'
+
+getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
+.then(res => console.log(res))
 
 class UsersPage extends React.Component {
 
@@ -30,24 +34,43 @@ class UsersPage extends React.Component {
     var self = this;
     getUsers()
     .then((users) => {
-      self.setState({users: users.users})
+      var userDests = [];
+      var tracker = 0;
       //Don't display current user
       let index = -1;
       for(var i = 0; i < users.users.length; i++) {
-        if (users.users[i]._id = this.props.userInfo._id) {
+        if (users.users[i]._id === this.props.userInfo._id) {
           index = i;
           break;
         }
       }
-      console.log(index)
       users.users.splice(index, 1);
-      console.log(users.users)
-      self.setState({displayedUsers: users.users})
+      self.setState({users: users.users})
       var searchArray = [];
       users.users.forEach(user => {
         searchArray.push(user.firstname + ' ' + user.lastname, user.dogname)
       })
       self.setState({searchSource: searchArray})
+      //tracker for matching distance to user
+      users.users.forEach(user => {
+        if(user.lat && user.lng) {
+          user.tracker = tracker;
+          tracker++;
+          userDests.push({lat: user.lat, lng: user.lng})
+        }
+      })
+      //Find distance btwn current user and each other user
+      getDistance({lat: this.props.userInfo.lat, lng: this.props.userInfo.lng}, userDests)
+      .then(distances => {
+        console.log(distances)
+        users.users.forEach(user => {
+          if (user.tracker !== undefined && distances[user.tracker].status === "OK") {
+            user.distance = Number(distances[user.tracker].distance.value)
+          }
+        })
+        //Set users to display after getting distance info
+        self.setState({displayedUsers: users.users})
+      })
     })
   }
 
