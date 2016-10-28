@@ -45,7 +45,7 @@ class UsersPage extends React.Component {
         }
       }
       users.users.splice(index, 1);
-      self.setState({users: users.users})
+      // Set searchable options
       var searchArray = [];
       users.users.forEach(user => {
         searchArray.push(user.firstname + ' ' + user.lastname, user.dogname)
@@ -68,8 +68,23 @@ class UsersPage extends React.Component {
             user.distance = Number(distances[user.tracker].distance.value)
           }
         })
+        //Sort by distance
+        var noDistInfo = [];
+        var usersDistInfo = []
+        users.users.forEach(user => {
+          if (user.distance === undefined) {
+            noDistInfo.push(user)
+          } else {
+            usersDistInfo.push(user)
+          }
+        });
+        usersDistInfo.sort((a, b) => {
+          return a.distance < b.distance ? -1 : 1
+        })
+        let sortedUsers = usersDistInfo.concat(noDistInfo)
         //Set users to display after getting distance info
-        self.setState({displayedUsers: users.users})
+        self.setState({users: sortedUsers})
+        self.setState({displayedUsers: sortedUsers})
       })
     })
   }
@@ -81,8 +96,9 @@ class UsersPage extends React.Component {
       var re = new RegExp(text, "gi")
       var name = user.firstname + ' ' + user.lastname;
       return name.match(re) || user.dogname.match(re)
-      })
-      this.setState({displayedUsers: displayedUsers})
+    })
+    console.log(displayedUsers)
+    this.setState({displayedUsers: displayedUsers})
   }
 
   render () {
