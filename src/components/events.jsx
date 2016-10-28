@@ -11,6 +11,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
 import EventList from './eventList.jsx'
+import { getDistance } from '../services/distanceServices'
 
 class Events extends React.Component {
   constructor(props) {
@@ -28,8 +29,30 @@ class Events extends React.Component {
     var self = this;
     getEvents()
     .then((events) => {
-      self.setState({events: events.events})
-      self.setState({displayedEvents: events.events})
+      //Tracker to match distance to correct event
+      var eventDests = [];
+      var tracker = 0;
+      events.events.forEach(event => {
+        if(event.lat && event.lng) {
+          event.tracker = tracker;
+          tracker++;
+          eventDests.push({lat: event.lat, lng: event.lng})
+        }
+      })
+      //Find distance between user and each event
+      getDistance({lat: this.props.userInfo.lat, lng: this.props.userInfo.lng}, eventDests)
+      .then(distances => {
+        console.log(distances)
+        events.events.forEach(event => {
+          if (event.tracker !== undefined && distances[event.tracker].status === "OK") {
+            event.distance = Number(distances[event.tracker].distance.value)
+          }
+        })
+        //Set events into state after getting distance
+        self.setState({events: events.events})
+        self.setState({displayedEvents: events.events})
+      })
+      //Set Searchable options
       var searchArray = [];
       events.events.forEach(event => {
         searchArray.push(event.eventname, event.loc)
