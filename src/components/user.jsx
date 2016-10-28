@@ -13,17 +13,13 @@ class UserDisplay extends React.Component {
     super(props)
   }
 
-  componentWillMount() {
+
+  render () {
     if (this.props.type === 'profile') {
       this.user = this.props.userInfo;
     } else {
       this.user = this.props.user;
     }
-  }
-
-
-  render () {
-
     return (
 
         <figure className="figure profile">

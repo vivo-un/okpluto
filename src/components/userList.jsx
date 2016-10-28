@@ -10,7 +10,7 @@ const Row = (props) => (
     {
       props.row.map((user) => (
         <div className= "col-md-4 text-center">
-          <UserDisplay user={user} userInfo = {props.userInfo} resetUserInfo={props.resetUserInfo} type='user' />
+          <UserDisplay user={user} userInfo={props.userInfo} resetUserInfo={props.resetUserInfo} type='user' />
         </div>
       ))
     }
@@ -24,19 +24,8 @@ class UserList extends React.Component {
 
   render() {
     if (this.props.users.length) {
-      var noDistInfo = [];
-      var usersDistInfo = []
-      this.props.users.forEach(user => {
-        if (user.distance === undefined) {
-          noDistInfo.push(user)
-        } else {
-          usersDistInfo.push(user)
-        }
-      });
-      usersDistInfo.sort((a, b) => {
-        return a.distance < b.distance ? -1 : 1
-      })
-      var users = usersDistInfo.concat(noDistInfo)
+
+      var users = this.props.users
       var rows = [];
       var row = [];
       for (var i = 0; i < users.length; i++) {
@@ -50,6 +39,7 @@ class UserList extends React.Component {
           rows.push(row);
         }
       }
+      console.log(rows)
       return (
         <div className = "container userList">
           {

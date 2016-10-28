@@ -22,9 +22,9 @@ class UserList extends React.Component {
   }
 
   render() {
-
+    //sort by distance from user
     if (this.props.events.length) {
-      var events = this.props.events;
+      var events = this.props.events
       var rows = [];
       var row = [];
       for (var i = 0; i < events.length; i++) {
