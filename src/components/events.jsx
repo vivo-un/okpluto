@@ -48,9 +48,23 @@ class Events extends React.Component {
             event.distance = Number(distances[event.tracker].distance.value)
           }
         })
+        // Sort by distance
+        var noDistInfo = [];
+        var eventsDistInfo = []
+        events.events.forEach(event => {
+          if (event.distance === undefined) {
+            noDistInfo.push(event)
+          } else {
+            eventsDistInfo.push(event)
+          }
+        });
+        eventsDistInfo.sort((a, b) => {
+          return a.distance < b.distance ? -1 : 1
+        })
+        let sortedEvents = eventsDistInfo.concat(noDistInfo)
         //Set events into state after getting distance
-        self.setState({events: events.events})
-        self.setState({displayedEvents: events.events})
+        self.setState({events: sortedEvents})
+        self.setState({displayedEvents: sortedEvents})
       })
       //Set Searchable options
       var searchArray = [];
@@ -63,15 +77,17 @@ class Events extends React.Component {
 
   handleChange(text, userNames) {
     var displayedEvents = this.state.events.filter(event => {
-      for (var key in event) {
-        if (event[key] === undefined) {
-          event[key] = '';
+      if(event.eventname && event.loc) {
+        for (var key in event) {
+          if (event[key] === undefined) {
+            event[key] = '';
+          }
         }
+        var re = new RegExp(text, "gi")
+        return event.eventname.match(re) || event.loc.match(re)
       }
-      var re = new RegExp(text, "gi")
-      return event.eventname.match(re) || event.loc.match(re)
-      })
-      this.setState({displayedEvents: displayedEvents})
+    })
+    this.setState({displayedEvents: displayedEvents})
   }
 
   render () {

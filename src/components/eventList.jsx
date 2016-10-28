@@ -24,19 +24,7 @@ class UserList extends React.Component {
   render() {
     //sort by distance from user
     if (this.props.events.length) {
-      var noDistInfo = [];
-      var eventsDistInfo = []
-      this.props.events.forEach(event => {
-        if (event.distance === undefined) {
-          noDistInfo.push(event)
-        } else {
-          eventsDistInfo.push(event)
-        }
-      });
-      eventsDistInfo.sort((a, b) => {
-        return a.distance < b.distance ? -1 : 1
-      })
-      var events = eventsDistInfo.concat(noDistInfo)
+      var events = this.props.events
       var rows = [];
       var row = [];
       for (var i = 0; i < events.length; i++) {
