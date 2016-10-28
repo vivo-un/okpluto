@@ -37,14 +37,9 @@ class UsersPage extends React.Component {
       var userDests = [];
       var tracker = 0;
       //Don't display current user
-      let index = -1;
-      for(var i = 0; i < users.users.length; i++) {
-        if (users.users[i]._id === this.props.userInfo._id) {
-          index = i;
-          break;
-        }
-      }
-      users.users.splice(index, 1);
+      users.users = users.users.filter((user) => {
+        return user._id !== this.props.userInfo._id;
+      })
       // Set searchable options
       var searchArray = [];
       users.users.forEach(user => {
