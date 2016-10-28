@@ -14,7 +14,7 @@ class Navigation extends React.Component {
   render () {
     const barStyle= {
       position: 'fixed',
-      backgroundColor: Colors.grey300
+      backgroundColor: Colors.grey100
     }
     const titleStyle = {
       textAlign: 'left'
