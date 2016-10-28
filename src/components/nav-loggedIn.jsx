@@ -13,8 +13,9 @@ class NavLoggedIn extends React.Component {
 
   render () {
     const barStyle= {
+      backgroundColor: Colors.grey100,
       position: 'fixed',
-      backgroundColor: Colors.grey100
+      top: '0px'
     }
     const titleStyle = {
       textAlign: 'left'
@@ -24,9 +25,9 @@ class NavLoggedIn extends React.Component {
         <AppBar
           style={barStyle}
           title={<span style={titleStyle}>Ok Pluto</span>}
-          showMenuIconButton={false}
-          iconElementRight={<FlatButton label="Login / Signup" />}
-          onRightIconButtonTouchTap={this.props.auth.login.bind(this)}
+          iconElementRight={<FlatButton label="Logout" />}
+          onLeftIconButtonTouchTap={this.props.toggleDrawer}
+          onRightIconButtonTouchTap={this.props.auth.logout.bind(this)}
         />
       </MuiThemeProvider>
     )
