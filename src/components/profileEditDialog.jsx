@@ -79,6 +79,7 @@ class ProfileEditDialog extends React.Component {
       updateUser(self.state.user)
         .then(function (user) {
         handleClose();
+        self.props.toggleProfile()
         self.props.resetUserInfo();
         return true;
       });
@@ -87,11 +88,12 @@ class ProfileEditDialog extends React.Component {
   }
 
   handleOpen() {
-    this.setState({open: true});
+    this.setState({open: true})
   };
 
   handleClose() {
     this.setState({open: false});
+    this.props.toggleProfile()
   };
 
   render() {
@@ -113,7 +115,7 @@ class ProfileEditDialog extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Edit Profile" secondary={true}/>
-          <Dialog title="Edit Profile" modal={false} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
+          <Dialog style={{zIndex: 2100}} title="Edit Profile" modal={true} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
           <div>
             <div className="middle">
             <form name="profile">
