@@ -61,6 +61,7 @@ class Events extends React.Component {
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer} />
+        <div className="row">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={style}
                  floatingLabelText="Search Events"
@@ -72,7 +73,7 @@ class Events extends React.Component {
                  onNewRequest={this.handleChange}
                />
           </MuiThemeProvider>
-
+        </div>
         <div className="row">
             <EventList events={this.state.displayedEvents} />
         </div>
