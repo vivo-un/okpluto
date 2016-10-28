@@ -23,6 +23,7 @@ class IconItem extends React.Component {
         <img src={this.props.url} className="img-circle"/>
         <h2>{this.props.display}</h2>
         <p>{this.props.info}</p>
+        <a href={this.props.link}>{this.props.linkInfo}</a>
       </div>
     )
   }
@@ -64,7 +65,7 @@ class Home extends React.Component {
           <div className="row">
             <IconItem url={Connect} display={"CONNECT"} info={"OkPluto instantly puts you in touch with other dog lovers from around the world"}/>
             <IconItem url={MeetUp} display={"MEET UP"} info={"We make it easy for you to set up walks and dog park meet ups with other local dog owners"}/>
-            <IconItem url={House} display={"DOG SIT"} info = {"Find trusted dog sitters in your area, or arrange for your OkPluto friends to watch your dogs while you're away"}/>
+            <IconItem url={House} display={"ADOPT A DOG"} info={"Don't have a dog? No worries! Adopt your new best friend at a shelter near you!"} link={"https://www.petfinder.com/animal-shelters-and-rescues/search"} linkInfo={"Find a Shelter"}/>
           </div>
         </div>
 
@@ -91,5 +92,7 @@ Home.propTypes = {
   location: T.object,
   auth: T.instanceOf(AuthService)
 };
+
+// <IconItem url={House} display={"DOG SIT"} info = {"Find trusted dog sitters in your area, or arrange for your OkPluto friends to watch your dogs while you're away"}/>
 
 module.exports = Home;
