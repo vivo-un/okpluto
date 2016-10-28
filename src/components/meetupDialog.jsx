@@ -19,7 +19,8 @@ class MeetupDialog extends React.Component {
       open: false,
       errorText: {},
       creator: this.props.userInfo._id,
-      attendees: [this.props.userInfo._id, this.props.userId]
+      attendees: [this.props.userInfo._id, this.props.userId],
+      catogory:'Dog Park'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -54,7 +55,6 @@ class MeetupDialog extends React.Component {
   }
 
   handleSubmit() {
-    console.log('Trying to submit!');
     var self = this;
     let errors = this.validate(events);
     let handleClose = this.handleClose;
@@ -66,14 +66,12 @@ class MeetupDialog extends React.Component {
       });
     }
     this.setState({"errorText": errors});
-    console.log("the state: ", this.state);
   }
 
   handleChange(prop, newValue) {
     var change = {};
     change[prop] = newValue;
     this.setState(change);
-    console.log(this.state);
   }
 
   render() {
