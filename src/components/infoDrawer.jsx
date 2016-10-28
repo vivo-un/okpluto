@@ -101,6 +101,7 @@ class InfoDrawer extends React.Component {
             </div>
             <h3> Menu </h3>
             <Divider />
+
             <MenuItem onTouchTap={() => this.reRoute('/profile')} rightIcon={<EventNote color='#488985' />}> View Events </MenuItem>
             <MenuItem onTouchTap={() => this.reRoute('/users')} rightIcon={<Person color='#488985'/>}> View Users </MenuItem>
             <Divider />
