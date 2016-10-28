@@ -13,6 +13,8 @@ const googleMaps = require('@google/maps').createClient({
 module.exports = function(app) {
 
 	//======Location End Points=======//
+
+	//Find Latitude and Longitude of an address / location
 	app.get('/api/geocode', (req, res) => {
     var getCoordinates = function(address) {
     	return new Promise(function(resolve, reject) {
@@ -28,6 +30,28 @@ module.exports = function(app) {
       	res.status(200).send(results);
       });
 	});
+
+	//Find distance btwn coordinates
+	app.post('/api/distance', (req, res) => {
+		console.log(req.body)
+		var getDistance = function(originCoor, destCoors) {
+			return new Promise((resolve, reject) => {
+				googleMaps.distanceMatrix({
+					origins: originCoor,
+					destinations: destCoors
+				}, (err, res) => {
+					if (err) reject(err);
+					resolve(res)
+				})
+			})
+		}
+
+		getDistance(JSON.parse(req.body.origin), JSON.parse(req.body.destinations))
+		.then(results => {
+			console.log(results.json.rows[0].elements)
+			res.status(200).send(results.json.rows[0].elements)
+		})
+	})
 
 	//======User End Points=======//
 
