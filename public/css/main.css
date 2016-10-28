@@ -3,6 +3,11 @@
   background-size: cover;
   height: 600px;
 }
+.banner {
+  background: url('/assets/banner.jpg') no-repeat center center;
+  background-size: cover;
+  height: 400px;
+}
 
 h1, h2 {
   text-align: right;

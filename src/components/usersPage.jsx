@@ -104,6 +104,7 @@ class UsersPage extends React.Component {
     }
     return (
       <div>
+
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={style}
@@ -116,6 +117,7 @@ class UsersPage extends React.Component {
                  onNewRequest={this.handleChange}
                />
           </MuiThemeProvider>
+        <div className="banner"></div>
         <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
       </div>
     )
