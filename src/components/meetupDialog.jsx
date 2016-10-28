@@ -20,7 +20,7 @@ class MeetupDialog extends React.Component {
       errorText: {},
       creator: this.props.userInfo._id,
       attendees: [this.props.userInfo._id, this.props.userId],
-      catogory:'Dog Park'
+      category:'Dog Park'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -48,8 +48,8 @@ class MeetupDialog extends React.Component {
     if (this.state.lat === null || this.state.lng === null) {
       errors.where = 'Please enter a valid location';
     }
-    if (!this.state.catogory) {
-      errors.catogory = 'Required';
+    if (!this.state.category) {
+      errors.category = 'Required';
     }
     return errors;
   }
