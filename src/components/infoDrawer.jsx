@@ -13,6 +13,7 @@ import Person from 'material-ui/svg-icons/social/person';
 import EventNote from 'material-ui/svg-icons/notification/event-note';
 import UserEvent from 'material-ui/svg-icons/social/group';
 import Avatar from 'material-ui/Avatar';
+import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 import { hashHistory } from 'react-router'
 import {Popover, PopoverAnimationVertical} from 'material-ui/Popover'
@@ -72,7 +73,7 @@ class InfoDrawer extends React.Component {
       float: 'right',
       rightIcon: {
         textAlign: 'center',
-        lineHeight: '24px',
+        lineHeight: '24px'
       }
     }
 
@@ -100,15 +101,14 @@ class InfoDrawer extends React.Component {
             </div>
             <h3> Menu </h3>
             <Divider />
-            <MenuItem onTouchTap={() => this.reRoute('/profile')} rightIcon={<EventNote />}> View Events </MenuItem>
-            <MenuItem onTouchTap={() => this.reRoute('/users')} rightIcon={<Person />}> View Users </MenuItem>
+            <MenuItem onTouchTap={() => this.reRoute('/profile')} rightIcon={<EventNote color='#488985' />}> View Events </MenuItem>
+            <MenuItem onTouchTap={() => this.reRoute('/users')} rightIcon={<Person color='#488985'/>}> View Users </MenuItem>
             <Divider />
             <MenuItem onTouchTap={this.toggleProfile}
                       rightIcon={
                         <Avatar
                           src={this.state.pic}
                           size={30}
-                          style={style}
                         />
                       }
             > Your Profile </MenuItem>
@@ -122,7 +122,7 @@ class InfoDrawer extends React.Component {
             >
             <UserDisplay userInfo={this.state.info} resetUserInfo={this.state.resetUserInfo} toggleProfile={this.toggleProfile} toggleDrawer={this.toggleDrawer} type={'profile'}/>
             </Popover>
-            <MenuItem rightIcon={< UserEvent/>}> Your Events </MenuItem>
+            <MenuItem rightIcon={<UserEvent color='#488985'/>}> Your Events </MenuItem>
           </Drawer>
         </MuiThemeProvider>
         <div>
