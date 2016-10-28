@@ -1,19 +1,37 @@
 "use strict";
 
+import * as Colors from 'material-ui/styles/colors';
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import AppBar from 'material-ui/AppBar'
+import FlatButton from 'material-ui/FlatButton';
 
 
 class Navigation extends React.Component {
 
   render () {
+    const barStyle= {
+      position: 'fixed',
+      backgroundColor: Colors.grey300
+    }
+    const titleStyle = {
+      textAlign: 'left'
+    }
+
     return (
-      <div>
-        <AppBar />
-      </div>
+      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+        <AppBar
+          style={barStyle}
+          secondary={true}
+          title={<span style={titleStyle}>Ok Pluto</span>}
+          showMenuIconButton={false}
+          iconElementRight={<FlatButton label="Login / Signup" />}
+          onRightIconButtonTouchTap={this.props.auth.login.bind(this)}
+        />
+      </MuiThemeProvider>
+
     )
   }
 }
