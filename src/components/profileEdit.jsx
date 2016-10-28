@@ -9,147 +9,77 @@ import { findUser, updateUser } from '../services/userServices.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import { hashHistory } from 'react-router';
 
-const style = {
-  'position': 'fixed',
-  'margin-left':30
-};
-
-const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
-
-const isValidImage = function(url) {
-  return true
-  //return url.match(rValidImage)
-};
-
-
-
-const validate = values => {
-  const errors = {}
-  const requiredFields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge', 'picLink' ]
-  requiredFields.forEach(field => {
-    if (!values[field].value) {
-      errors[field] = 'Required'
-    }
-  })
-  if (isNaN(parseInt(values.dogAge.value))) {
-    errors.dogAge = 'Please enter a number'
-  }
-  if (!isValidImage(values.picLink.value)) {
-    errors.picLink = 'Invalid Url'
-  }
-  return errors
-}
-
 class ProfileEdit extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      firstname: "",
-      lastname: "",
-      loc: "",
-      dogname: "",
-      dogBreed: "",
-      dogAge: "",
-      picLink:"",
-      errorText: {}
-    };
-  }
-
-  componentDidMount() {
-    var self = this;
-    setTimeout(() => findUser()
-      .then((user) => {
-        this.setState({"firstname": user.firstname});
-        this.setState({"lastname": user.lastname})
-        this.setState({"loc": user.loc});
-        this.setState({"dogname": user.dogname});
-        this.setState({"dogBreed": user.dogBreed});
-        this.setState({"dogAge": user.dogAge});
-        this.setState({"picLink": user.picLink});
-    }), 1000)
   }
 
   handleChange(prop, event) {
-    let change = {};
-    change[prop] = event.target.value
-    this.setState(change);
-  }
-
-  handleSubmit() {
-    let errors = validate(profile);
-    if (Object.keys(errors).length === 0) {
-      updateUser(this.state)
-        .then(function (user) {
-          hashHistory.push('/users')
-      });
-    }
-    this.setState({"errorText": errors});
-    console.log(this.state);
+    this.props.profile[prop] = event.target.value;
+    this.props.change(this.props.profile);
   }
 
   render () {
     return (
         <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
           <div className="middle">
-          <form name="profile">
           <TextField
             hintText="First Name"
             floatingLabelText="First Name"
-            value = {this.state.firstname}
+            value = {this.props.profile.firstname}
             onChange = {this.handleChange.bind(this, 'firstname')}
             name = "firstname"
-            errorText = {this.state.errorText.firstname}
+            errorText = {this.props.error.firstname}
           /><br />
           <TextField
             hintText="Last Name"
             floatingLabelText="Last Name"
-            value = {this.state.lastname}
+            value = {this.props.profile.lastname}
             onChange = {this.handleChange.bind(this, 'lastname')}
             name = "lastname"
-            errorText = {this.state.errorText.lastname}
+            errorText = {this.props.error.lastname}
           /><br />
           <TextField
             hintText="Location"
             floatingLabelText="Location"
-            value = {this.state.loc}
+            value = {this.props.profile.loc}
             onChange = {this.handleChange.bind(this, 'loc')}
             name = "loc"
-            errorText = {this.state.errorText.loc}
+            errorText = {this.props.error.loc}
           /><br />
           <TextField
             hintText="Dog Name"
             floatingLabelText="Dog Name"
-            value = {this.state.dogname}
+            value = {this.props.profile.dogname}
             onChange = {this.handleChange.bind(this, 'dogname')}
             name = "dogname"
-            errorText = {this.state.errorText.dogname}
+            errorText = {this.props.error.dogname}
           /><br />
           <TextField
             hintText="Dog Breed"
             floatingLabelText="Dog Breed"
-            value = {this.state.dogBreed}
+            value = {this.props.profile.dogBreed}
             onChange = {this.handleChange.bind(this, 'dogBreed')}
             name = "dogBreed"
-            errorText = {this.state.errorText.dogBreed}
+            errorText = {this.props.error.dogBreed}
           /><br />
           <TextField
             hintText="Dog Age"
             floatingLabelText="Dog Age"
-            value = {this.state.dogAge}
+            value = {this.props.profile.dogAge}
             onChange = {this.handleChange.bind(this, 'dogAge')}
             name = "dogAge"
-            errorText = {this.state.errorText.dogAge}
+            errorText = {this.props.error.dogAge}
           /><br />
           <TextField
             hintText="Dog Profile Pic"
             floatingLabelText="Dog Profile Pic"
-            value = {this.state.picLink}
+            value = {this.props.profile.picLink}
             onChange = {this.handleChange.bind(this, 'picLink')}
             name = "picLink"
-            errorText = {this.state.errorText.picLink}
+            errorText = {this.props.error.picLink}
           /><br />
-          <RaisedButton label="Submit" secondary={true} style={style} onTouchTap={this.handleSubmit.bind(this)}/></form>
         </div>
       </MuiThemeProvider>
     )

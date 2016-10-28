@@ -11,6 +11,7 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
+import ProfileEdit from './ProfileEdit.jsx';
 
 const style = {
   'position': 'fixed',
@@ -65,9 +66,7 @@ class ProfileEditDialog extends React.Component {
   //     })
   // }
 
-  handleChange(prop, event) {
-    var newUser = this.state.user;
-    newUser[prop] = event.target.value;
+  handleChange(newUser) {
     this.setState({'user': newUser});
   }
 
@@ -117,68 +116,13 @@ class ProfileEditDialog extends React.Component {
           <RaisedButton onTouchTap={this.handleOpen} label="Edit Profile" secondary={true}/>
           <RaisedButton onTouchTap={this.props.toggleProfile} label="Close" secondary={true} style={{float: 'right'}}/>
           <Dialog style={{zIndex: 2100}} title="Edit Profile" modal={true} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
-          <div>
+
             <div className="middle">
             <form name="profile">
-            <TextField
-              hintText="First Name"
-              floatingLabelText="First Name"
-              value = {this.state.user.firstname}
-              onChange = {this.handleChange.bind(this, 'firstname')}
-              name = "firstname"
-              errorText = {this.state.errorText.firstname}
-            /><br />
-            <TextField
-              hintText="Last Name"
-              floatingLabelText="Last Name"
-              value = {this.state.user.lastname}
-              onChange = {this.handleChange.bind(this, 'lastname')}
-              name = "lastname"
-              errorText = {this.state.errorText.lastname}
-            /><br />
-            <TextField
-              hintText="Location"
-              floatingLabelText="Location"
-              value = {this.state.user.loc}
-              onChange = {this.handleChange.bind(this, 'loc')}
-              name = "loc"
-              errorText = {this.state.errorText.loc}
-            /><br />
-            <TextField
-              hintText="Dog Name"
-              floatingLabelText="Dog Name"
-              value = {this.state.user.dogname}
-              onChange = {this.handleChange.bind(this, 'dogname')}
-              name = "dogname"
-              errorText = {this.state.errorText.dogname}
-            /><br />
-            <TextField
-              hintText="Dog Breed"
-              floatingLabelText="Dog Breed"
-              value = {this.state.user.dogBreed}
-              onChange = {this.handleChange.bind(this, 'dogBreed')}
-              name = "dogBreed"
-              errorText = {this.state.errorText.dogBreed}
-            /><br />
-            <TextField
-              hintText="Dog Age"
-              floatingLabelText="Dog Age"
-              value = {this.state.user.dogAge}
-              onChange = {this.handleChange.bind(this, 'dogAge')}
-              name = "dogAge"
-              errorText = {this.state.errorText.dogAge}
-            /><br />
-            <TextField
-              hintText="Dog Profile Pic"
-              floatingLabelText="Dog Profile Pic"
-              value = {this.state.user.picLink}
-              onChange = {this.handleChange.bind(this, 'picLink')}
-              name = "picLink"
-              errorText = {this.state.errorText.picLink}
-            /><br />
+              <ProfileEdit profile={this.state.user} error={this.state.errorText} change={this.handleChange.bind(this)} />
             </form>
           </div>
-        </div>
+
           </Dialog>
         </div>
       </MuiThemeProvider>
