@@ -115,6 +115,7 @@ class ProfileEditDialog extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Edit Profile" secondary={true}/>
+          <RaisedButton onTouchTap={this.props.toggleProfile} label="Close" secondary={true} style={{float: 'right'}}/>
           <Dialog style={{zIndex: 2100}} title="Edit Profile" modal={true} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
           <div>
             <div className="middle">
