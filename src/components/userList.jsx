@@ -10,7 +10,7 @@ const Row = (props) => (
     {
       props.row.map((user) => (
         <div className= "col-md-4 text-center">
-          <UserDisplay user={user} type='user' />
+          <UserDisplay user={user} userInfo = {props.userInfo} resetUserInfo={props.resetUserInfo} type='user' />
         </div>
       ))
     }
@@ -41,7 +41,7 @@ class UserList extends React.Component {
         <div className = "container userList">
           {
             rows.map(row => (
-              <Row row={row} />
+              <Row row={row} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} />
             ))
           }
         </div>

@@ -25,8 +25,8 @@ class Profile extends React.Component {
           <div className ="col-md-8">
             <Events />
           </div>
+          </div>
         </div>
-
       </div>
     )
   }

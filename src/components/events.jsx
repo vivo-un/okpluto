@@ -77,6 +77,7 @@ class Events extends React.Component {
         <div className="row">
             <EventList events={this.state.displayedEvents} />
         </div>
+      </div>
     )
   }
 
