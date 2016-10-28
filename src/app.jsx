@@ -38,7 +38,7 @@ ReactDOM.render(
         <Route path="/users" component={UsersPage} onEnter={requireAuth} />
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
       </Route>
-      <Route path="/creation" component={ProfileEdit} onEnter={requireAuth} creation={true}/>
+      <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
     </Route>
   </Router>, $('#app')[0]
