@@ -24,7 +24,19 @@ class UserList extends React.Component {
 
   render() {
     if (this.props.users.length) {
-      var users = this.props.users;
+      var noDistInfo = [];
+      var usersDistInfo = []
+      this.props.users.forEach(user => {
+        if (user.distance === undefined) {
+          noDistInfo.push(user)
+        } else {
+          usersDistInfo.push(user)
+        }
+      });
+      usersDistInfo.sort((a, b) => {
+        return a.distance < b.distance ? -1 : 1
+      })
+      var users = usersDistInfo.concat(noDistInfo)
       var rows = [];
       var row = [];
       for (var i = 0; i < users.length; i++) {
@@ -32,6 +44,7 @@ class UserList extends React.Component {
           rows.push(row);
           row = [];
         }
+        console.log(users[i])
         row.push(users[i]);
         if (i === users.length - 1 && row.length > 0) {
           rows.push(row);
