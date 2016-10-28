@@ -72,11 +72,10 @@ class Events extends React.Component {
                  onNewRequest={this.handleChange}
                />
           </MuiThemeProvider>
-
+        </div>
         <div className="row">
             <EventList events={this.state.displayedEvents} />
         </div>
-      </div>
     )
   }
 
