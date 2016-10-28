@@ -2,7 +2,6 @@
 
 
 var React = require('react');
-//var UsersPage = require('./usersPage.jsx');
 var UserDisplay = require('./user.jsx')
 import Loading from './loading.jsx'
 
@@ -18,7 +17,7 @@ class UserList extends React.Component {
           <div className = "row">
             {this.props.users.map(person =>
               <div className = "col-md-4 text-center">
-                <UserDisplay user={person} type={'user'}/>
+                <UserDisplay user={person} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} type={'user'}/>
               </div>
               )}
           </div>

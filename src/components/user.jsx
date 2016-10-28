@@ -11,7 +11,14 @@ class UserDisplay extends React.Component {
 
   constructor(props) {
     super(props)
-    // TBD setState
+  }
+
+  componentWillMount() {
+    if (this.props.type === 'profile') {
+      this.user = this.props.userInfo;
+    } else {
+      this.user = this.props.user;
+    }
   }
 
 
@@ -21,15 +28,15 @@ class UserDisplay extends React.Component {
 
         <figure className="figure profile">
           <div className="profile-image">
-            <img src={this.props.user.picLink || this.props.user.profilepic} alt="Pic"/>
+            <img src={this.user.picLink || this.user.profilepic} alt="Pic"/>
           </div>
           <figcaption>
-            <h3>{this.props.user.firstname} {this.props.user.lastname}</h3>
-            <h4>{this.props.user.loc}</h4>
-            <h3>{this.props.user.dogname}</h3>
-            <h4>{this.props.user.dogBreed}</h4>
-            <h4>{this.props.user.dogAge} years old</h4>
-            <DialogButton userId={this.props.user._id} lat={this.props.user.lat} lng={this.props.user.lng} type={this.props.type}/>
+            <h3>{this.user.firstname} {this.user.lastname}</h3>
+            <h4>{this.user.loc}</h4>
+            <h3>{this.user.dogname}</h3>
+            <h4>{this.user.dogBreed}</h4>
+            <h4>{this.user.dogAge} years old</h4>
+            <DialogButton userId={this.user._id} lat={this.user.lat} lng={this.user.lng} type={this.props.type} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </figcaption>
         </figure>
 

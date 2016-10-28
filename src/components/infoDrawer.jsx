@@ -5,27 +5,69 @@ import MyTheme from '../theme/theme.js';
 import Drawer from 'material-ui/Drawer'
 import ProfileDisplay from './profileDisplay.jsx';
 import { findUser } from '../services/userServices.js'
+import Loading from './loading.jsx'
 
 
 class InfoDrawer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      open: false
+    }
+    this.toggleDrawer = this.toggleDrawer.bind(this)
+    this.resetUserInfo = this.resetUserInfo.bind(this)
   }
 
+  componentWillMount() {
+    var self = this;
+    findUser()
+    .then(user => {
+      if (!user) self.resetUserInfo();
+      self.setState({info: user});
+    })
+  }
+
+  toggleDrawer() {
+    this.setState('open', !this.state.open)
+  }
+
+  resetUserInfo() {
+    var self = this;
+    findUser()
+    .then(user => {
+      self.setState({info: user});
+    })
+  }
 
   render() {
-    if (this.props.user._id) {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-        <Drawer open={this.props.open}>
-          <h4> Hide </h4>
-          <h3> Your Info </h3>
-          <h3> Your Events </h3>
-        </Drawer>
-      </MuiThemeProvider>
-    )
-    } else{
-      return (<div></div>)
+    if(this.state.info) {
+      let children = null;
+      if (this.props.children) {
+        children = React.cloneElement(this.props.children, {
+          auth: this.props.auth,
+          userInfo: this.state.info,
+          toggleDrawer: this.toggleDrawer,
+          resetUserInfo: this.resetUserInfo
+        })
+      }
+      return (
+        <div>
+        <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+          <Drawer open={this.state.open}>
+            <h4> Hide </h4>
+            <h3> Your Info </h3>
+            <h3> Your Events </h3>
+          </Drawer>
+        </MuiThemeProvider>
+        <div>
+          {children}
+        </div>
+        </div>
+      )
+    } else {
+      return (
+        <Loading />
+      )
     }
   }
 }

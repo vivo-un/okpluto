@@ -11,18 +11,8 @@ import Events from './events.jsx'
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {info: {}, complete: false};
   }
 
-
-
-  componentDidMount() {
-    var self = this;
-    userServices.findUser()
-    .then(user => {
-      self.setState({info: user, complete: true});
-    })
-  }
 
 
   render () {
@@ -31,7 +21,7 @@ class Profile extends React.Component {
         <NavLoggedIn auth={this.props.auth} />
         <div className="row">
           <div className="col-md-3">
-            <ProfileDisplay user={this.state.info} status={this.state.complete}/>
+            <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </div>
             <Events />
         </div>

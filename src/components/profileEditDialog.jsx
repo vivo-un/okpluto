@@ -47,15 +47,7 @@ class ProfileEditDialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {
-        firstname: "",
-        lastname: "",
-        loc: "",
-        dogname: "",
-        dogBreed: "",
-        dogAge: "",
-        picLink:""
-      },
+      user: this.props.userInfo,
       errorText: {},
       open: false
     };
@@ -65,13 +57,13 @@ class ProfileEditDialog extends React.Component {
   }
 
 
-  componentDidMount() {
-    var self = this;
-    findUser()
-      .then((user) => {
-        this.setState({"user": user});
-      })
-  }
+  // componentDidMount() {
+  //   var self = this;
+  //   findUser()
+  //     .then((user) => {
+  //       this.setState({"user": user});
+  //     })
+  // }
 
   handleChange(prop, event) {
     var newUser = this.state.user;
@@ -80,13 +72,14 @@ class ProfileEditDialog extends React.Component {
   }
 
   handleSubmit() {
+    var self = this;
     let errors = validate(profile);
     let handleClose = this.handleClose;
     if (Object.keys(errors).length === 0) {
-      updateUser(this.state.user)
+      updateUser(self.state.user)
         .then(function (user) {
         handleClose();
-        window.location.reload();
+        self.props.resetUserInfo();
         return true;
       });
     }

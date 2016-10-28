@@ -16,6 +16,7 @@ import MeetupCreation from './components/meetupCreation.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import api from '../config/api.js'
 import GoogleMapsLoader from 'google-maps'
+import InfoDrawer from './components/infoDrawer.jsx'
 
 
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
@@ -33,9 +34,11 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Container} auth={auth}>
       <IndexRoute component={Home} />
-      <Route path="/users" component={UsersPage} onEnter={requireAuth} />
-      <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
-      <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
+      <Route component={InfoDrawer} >
+        <Route path="/users" component={UsersPage} onEnter={requireAuth} />
+        <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
+      </Route>
+      <Route path="/creation" component={ProfileEdit} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
     </Route>
   </Router>, $('#app')[0]
