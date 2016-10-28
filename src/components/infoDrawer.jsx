@@ -6,6 +6,8 @@ import Drawer from 'material-ui/Drawer'
 import ProfileDisplay from './profileDisplay.jsx';
 import { findUser } from '../services/userServices.js'
 import Loading from './loading.jsx'
+import IconButton from 'material-ui/IconButton'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 
 class InfoDrawer extends React.Component {
@@ -28,7 +30,7 @@ class InfoDrawer extends React.Component {
   }
 
   toggleDrawer() {
-    this.setState('open', !this.state.open)
+    this.setState({'open': !this.state.open})
   }
 
   resetUserInfo() {
@@ -40,6 +42,9 @@ class InfoDrawer extends React.Component {
   }
 
   render() {
+    const iconStyle = {
+      float: 'right'
+    }
     if(this.state.info) {
       let children = null;
       if (this.props.children) {
@@ -54,7 +59,11 @@ class InfoDrawer extends React.Component {
         <div>
         <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
           <Drawer open={this.state.open}>
-            <h4> Hide </h4>
+            <div style={iconStyle} >
+            <IconButton onTouchTap={this.toggleDrawer}>
+              <NavigationClose />
+            </IconButton>
+            </div>
             <h3> Your Info </h3>
             <h3> Your Events </h3>
           </Drawer>
