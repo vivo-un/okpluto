@@ -9,9 +9,9 @@ class DialogButton extends React.Component {
 
   render() {
     if (this.props.type === 'user') {
-      return (<MeetupDialog userId={this.props.userId} lat={this.props.lat} lng={this.props.lng}/>)
+      return (<MeetupDialog userId={this.props.userId} lat={this.props.lat} lng={this.props.lng} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} />)
     } else if (this.props.type === 'profile') {
-      return (<ProfileEditDialog />)
+      return (<ProfileEditDialog userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} toggleDrawer={this.props.toggleDrawer} toggleProfile={this.props.toggleProfile}/>)
     }
   }
 }

@@ -47,15 +47,7 @@ class ProfileEditDialog extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {
-        firstname: "",
-        lastname: "",
-        loc: "",
-        dogname: "",
-        dogBreed: "",
-        dogAge: "",
-        picLink:""
-      },
+      user: this.props.userInfo,
       errorText: {},
       open: false
     };
@@ -65,13 +57,13 @@ class ProfileEditDialog extends React.Component {
   }
 
 
-  componentDidMount() {
-    var self = this;
-    findUser()
-      .then((user) => {
-        this.setState({"user": user});
-      })
-  }
+  // componentDidMount() {
+  //   var self = this;
+  //   findUser()
+  //     .then((user) => {
+  //       this.setState({"user": user});
+  //     })
+  // }
 
   handleChange(prop, event) {
     var newUser = this.state.user;
@@ -80,13 +72,15 @@ class ProfileEditDialog extends React.Component {
   }
 
   handleSubmit() {
+    var self = this;
     let errors = validate(profile);
     let handleClose = this.handleClose;
     if (Object.keys(errors).length === 0) {
-      updateUser(this.state.user)
+      updateUser(self.state.user)
         .then(function (user) {
         handleClose();
-        window.location.reload();
+        self.props.toggleProfile()
+        self.props.resetUserInfo();
         return true;
       });
     }
@@ -94,11 +88,12 @@ class ProfileEditDialog extends React.Component {
   }
 
   handleOpen() {
-    this.setState({open: true});
+    this.setState({open: true})
   };
 
   handleClose() {
     this.setState({open: false});
+    this.props.toggleProfile()
   };
 
   render() {
@@ -120,7 +115,8 @@ class ProfileEditDialog extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Edit Profile" secondary={true}/>
-          <Dialog title="Edit Profile" modal={false} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
+          <RaisedButton onTouchTap={this.props.toggleProfile} label="Close" secondary={true} style={{float: 'right'}}/>
+          <Dialog style={{zIndex: 2100}} title="Edit Profile" modal={true} actions={actions} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true} >
           <div>
             <div className="middle">
             <form name="profile">

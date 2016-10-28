@@ -31,6 +31,17 @@ class UsersPage extends React.Component {
     getUsers()
     .then((users) => {
       self.setState({users: users.users})
+      //Don't display current user
+      let index = -1;
+      for(var i = 0; i < users.users.length; i++) {
+        if (users.users[i]._id = this.props.userInfo._id) {
+          index = i;
+          break;
+        }
+      }
+      console.log(index)
+      users.users.splice(index, 1);
+      console.log(users.users)
       self.setState({displayedUsers: users.users})
       var searchArray = [];
       users.users.forEach(user => {
@@ -59,7 +70,7 @@ class UsersPage extends React.Component {
     }
     return (
       <div>
-        <NavLoggedIn auth={this.props.auth}/>
+        <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={style}
                  floatingLabelText="Search Users"
@@ -71,7 +82,7 @@ class UsersPage extends React.Component {
                  onNewRequest={this.handleChange}
                />
           </MuiThemeProvider>
-        <UserList users={this.state.displayedUsers} />
+        <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
       </div>
     )
   }

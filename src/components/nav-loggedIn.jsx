@@ -1,12 +1,42 @@
 "use strict";
 
-var React = require('react');
+import * as Colors from 'material-ui/styles/colors';
+import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MyTheme from '../theme/theme.js';
+import AppBar from 'material-ui/AppBar'
+import FlatButton from 'material-ui/FlatButton';
 import { hashHistory } from 'react-router';
+
 class NavLoggedIn extends React.Component {
 
   render () {
+    const barStyle= {
+      backgroundColor: Colors.grey100,
+      position: 'fixed',
+      top: '0px'
+    }
+    const titleStyle = {
+      textAlign: 'left'
+    }
     return (
-      <div>
+      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+        <AppBar
+          style={barStyle}
+          title={<span style={titleStyle}>Ok Pluto</span>}
+          iconElementRight={<FlatButton label="Logout" />}
+          onLeftIconButtonTouchTap={this.props.toggleDrawer}
+          onRightIconButtonTouchTap={this.props.auth.logout.bind(this)}
+        />
+      </MuiThemeProvider>
+    )
+  }
+}
+
+module.exports = NavLoggedIn;
+
+/* <div>
         <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
@@ -29,9 +59,4 @@ class NavLoggedIn extends React.Component {
             </div>
           </div>
         </nav>
-      </div>
-    )
-  }
-}
-
-module.exports = NavLoggedIn;
+      </div> */

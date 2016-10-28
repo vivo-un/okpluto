@@ -15,8 +15,8 @@ class MeetupDialog extends React.Component {
     super(props)
     this.state = {
       open: false,
-      creator: localStorage.getItem('mongoUserId'),
-      attendees: [localStorage.getItem('mongoUserId'), this.props.userId]
+      creator: this.props.userInfo._id,
+      attendees: [this.props.userInfo._id, this.props.userId]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this)
@@ -70,7 +70,7 @@ class MeetupDialog extends React.Component {
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Let's Meetup!" secondary={true}/>
           <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true}>
-            <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId} change={this.handleChange}
+            <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId} change={this.handleChange} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}
             />
           </Dialog>
         </div>
