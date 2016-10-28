@@ -36,7 +36,7 @@ class UserDisplay extends React.Component {
             <h3>{this.user.dogname}</h3>
             <h4>{this.user.dogBreed}</h4>
             <h4>{this.user.dogAge} years old</h4>
-            <DialogButton userId={this.user._id} lat={this.user.lat} lng={this.user.lng} type={this.props.type} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+            <DialogButton userId={this.user._id} lat={this.user.lat} lng={this.user.lng} type={this.props.type} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} toggleDrawer={this.props.toggleDrawer} toggleProfile={this.props.toggleProfile}/>
           </figcaption>
         </figure>
 
