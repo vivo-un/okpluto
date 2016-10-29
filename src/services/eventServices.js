@@ -53,10 +53,22 @@ import { getLatLng } from './userServices.js';
     });
   }
 
+  const removePerson = function(eventId, userId) {
+    userId = userId || localStorage.getItem('mongoUserId')
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/events/remove',
+        type: 'DELETE',
+        data: {eventId: eventId, userId: userId},
+        success: resolve,
+        error: reject
+      })
+    })
 
 module.exports = {
   getEvents: getEvents,
   saveEvent: saveEvent,
   addPerson: addPerson,
-  searchEvents: searchEvents
+  searchEvents: searchEvents,
+  removePerson: removePerson
 };
