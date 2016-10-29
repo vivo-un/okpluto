@@ -22,13 +22,16 @@ class EventList extends React.Component {
   }
 
   render() {
-    //sort by distance from user
+    var rowLength = 4;
+    if (this.props.type === "profile") {
+      rowLength = 3;
+    }
     if (this.props.events.length) {
       var events = this.props.events
       var rows = [];
       var row = [];
       for (var i = 0; i < events.length; i++) {
-        if (i % 4 === 0 && row.length > 0) {
+        if (i % rowLength === 0 && row.length > 0) {
           rows.push(row);
           row = [];
         }
