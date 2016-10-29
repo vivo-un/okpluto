@@ -11,12 +11,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import {Tabs, Tab} from 'material-ui/Tabs'
+import Banner from './banner.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      attendingEvents: [],
+      noAttendingEvents: false,
+      createdEvents: [],
+      noCreatedEvents: false,
       value: 'a'
     }
   }
@@ -25,8 +29,18 @@ class Profile extends React.Component {
     var self = this;
     searchEvents()
     .then(events => {
-      console.log(events.events)
-      self.setState({events: events.events})
+      if(!events.attendingEvents.length) {
+        self.setState({attendingEvents: []})
+        self.setState({noAttendingEvents: true})
+      } else {
+        self.setState({attendingEvents: events.attendingEvents})
+      }
+      if(!events.createdEvents.length) {
+        self.setState({createdEvents: []})
+        self.setState({noCreatedEvents: true})
+      } else {
+        self.setState({createdEvents: events.createdEvents})
+      }
     })
   }
 
@@ -48,6 +62,7 @@ class Profile extends React.Component {
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
+        <Banner />
         <div className="container">
         <div className="col-md-3 profile">
           <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
@@ -59,15 +74,12 @@ class Profile extends React.Component {
               value={this.state.value} >
               <Tab label="My Events List" value='a' onActive={() => this.handleChange('a') }>
                 <div>
-                  <EventList events={this.state.events} />
+                  <EventList events={this.state.attendingEvents} noEvents={this.state.noAttendingEvents}/>
                 </div>
               </Tab>
-              <Tab label="Item Two" value='b' onActive={() => this.handleChange('b') }>
+              <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
                 <div>
-                  <h2 style={styles.headline}>Tab Two</h2>
-                  <p>
-                    This is another example tab.
-                  </p>
+                  <EventList events={this.state.createdEvents} noEvents={this.state.noCreatedEvents}/>
                 </div>
               </Tab>
             </Tabs>
