@@ -15,15 +15,24 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      events: [],
+      value: 'a'
+    }
   }
 
   componentDidMount() {
     var self = this;
     searchEvents()
     .then(events => {
-      console.log(events)
-      this.setState({events: events})
+      console.log(events.events)
+      self.setState({events: events.events})
+    })
+  }
+
+  handleChange(value) {
+    this.setState({
+      value: value
     })
   }
 
@@ -45,14 +54,15 @@ class Profile extends React.Component {
         </div>
 
         <div className="col-md-9 profile-events">
-          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-            <Tabs>
-              <Tab label="Item One" >
+          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
+            <Tabs
+              value={this.state.value} >
+              <Tab label="My Events List" value='a' onActive={() => this.handleChange('a') }>
                 <div>
                   <EventList events={this.state.events} />
                 </div>
               </Tab>
-              <Tab label="Item Two" >
+              <Tab label="Item Two" value='b' onActive={() => this.handleChange('b') }>
                 <div>
                   <h2 style={styles.headline}>Tab Two</h2>
                   <p>
