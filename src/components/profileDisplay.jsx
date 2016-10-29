@@ -15,7 +15,9 @@ class ProfileDisplay extends React.Component {
 
   render() {
     return (
-      <UserDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} type={'profile'}/>
+      <div className="profile-image">
+        <img src={this.props.userInfo.picLink || this.props.userInfo.profilepic} alt="Pic"/>
+      </div>
     )
   }
 }

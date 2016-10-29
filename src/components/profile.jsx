@@ -21,7 +21,7 @@ class Profile extends React.Component {
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <div className="container">
-        <div className="col-md-3">
+        <div className="col-md-3 profile">
           <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
         </div>
         <div className="col-md-9">Other Stuff</div>
