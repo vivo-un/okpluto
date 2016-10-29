@@ -19,12 +19,11 @@ class IconItem extends React.Component {
   }
   render() {
     return (
-      <div className="col-md-4">
-        <img src={this.props.url} className="img-circle"/>
-        <h2>{this.props.display}</h2>
-        <p>{this.props.info}</p>
-        <a href={this.props.link}>{this.props.linkInfo}</a>
-      </div>
+        <div className="col-md-4">
+          <a href={this.props.link} onClick={this.props.onTouchTap}><img src={this.props.url} className="img-circle"/></a>
+          <h2>{this.props.display}</h2>
+          <p>{this.props.info}</p>
+        </div>
     )
   }
 }
@@ -37,7 +36,7 @@ class TeamIcon extends React.Component {
   render() {
     return (
       <div className="col-md-3">
-        <img src={this.props.url} className="img-circle"/>
+        <a href={this.props.link}><img src={this.props.url} className="img-circle"/></a>
         <h3>{this.props.display}</h3>
       </div>
     )
@@ -63,9 +62,12 @@ class Home extends React.Component {
 
         <div className="container icons">
           <div className="row">
-            <IconItem url={Connect} display={"CONNECT"} info={"OkPluto instantly puts you in touch with other dog lovers from around the world"}/>
-            <IconItem url={MeetUp} display={"MEET UP"} info={"We make it easy for you to set up walks and dog park meet ups with other local dog owners"}/>
-            <IconItem url={House} display={"ADOPT A DOG"} info={"Don't have a dog? No worries! Adopt your new best friend at a shelter near you!"} link={"https://www.petfinder.com/animal-shelters-and-rescues/search"} linkInfo={"Find a Shelter"}/>
+            <IconItem url={Connect} display={"CONNECT"} info={"OkPluto instantly puts you in touch with other dog lovers from around the world"}
+            onTouchTap={this.props.auth.signup.bind(this)}/>
+            <IconItem url={MeetUp} display={"MEET UP"} info={"We make it easy for you to set up walks and dog park meet ups with other local dog owners"}
+            onTouchTap={this.props.auth.signup.bind(this)}/>
+            <IconItem url={House} display={"ADOPT A DOG"} info={"Don't have a dog? No worries! Adopt your new best friend at a shelter near you!"}
+            link={"https://www.petfinder.com/animal-shelters-and-rescues/search"}/>
           </div>
         </div>
 
@@ -75,10 +77,10 @@ class Home extends React.Component {
 
         <div className="team">
           <div className="row">
-            <TeamIcon url={Daisy} display={"Daisy Good"} />
-            <TeamIcon url={Kat} display={"Kat Gurdak"} />
-            <TeamIcon url={Jarrett} display={"Jarrett Kennedy"} />
-            <TeamIcon url={Ivey} display={"Ivey Topaz"} />
+            <TeamIcon url={Daisy} display={"Daisy Good"} link={"https://www.linkedin.com/in/daisy-good-49a2a46a"}/>
+            <TeamIcon url={Kat} display={"Kat Gurdak"} link={"https://www.linkedin.com/in/katgurdak"}/>
+            <TeamIcon url={Jarrett} display={"Jarrett Kennedy"} link={"https://www.linkedin.com/in/jarrettk"}/>
+            <TeamIcon url={Ivey} display={"Ivey Topaz"} link={"https://www.linkedin.com/in/ivey-topaz-765a85124"}/>
           </div>
         </div>
       </div>

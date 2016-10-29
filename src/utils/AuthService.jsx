@@ -46,6 +46,8 @@ export default class AuthService {
     this.lock.on('authenticated', this._doAuthentication.bind(this))
     // binds login functions to keep this context
     this.login = this.login.bind(this)
+    // binds signup functions
+    this.signup = this.signup.bind(this);
   }
 
   _doAuthentication(authResult){
@@ -66,8 +68,13 @@ export default class AuthService {
   }
 
   login() {
-    // Call the show method to display the widget.
-    this.lock.show()
+    // Call the show method to display the widget, turning both login and signup on
+    this.lock.show({allowLogin : true, allowSignUp: true});
+  }
+
+  signup() {
+    // only show signup
+    this.lock.show({allowLogin : false, allowSignUp: true});
   }
 
   loggedIn(){

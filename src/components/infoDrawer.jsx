@@ -36,7 +36,7 @@ class InfoDrawer extends React.Component {
     findUser()
     .then(user => {
       if (!user) self.resetUserInfo();
-      self.setState({info: user, pic: user.profilepic});
+      self.setState({info: user});
     })
   }
 
@@ -107,7 +107,7 @@ class InfoDrawer extends React.Component {
             <MenuItem onTouchTap={this.toggleProfile}
                       rightIcon={
                         <Avatar
-                          src={this.state.pic}
+                          src={this.state.info.profilepic}
                           size={30}
                         />
                       }
