@@ -84,17 +84,14 @@ class EventDisplay extends React.Component {
   }
 
   unjoin() {
-    let eventId = this.state.eventId;
+    console.log(this.state);
     let attendees = this.state.attendees;
-    this.props.event.attendees.forEach(attendee => {
-      removePerson(attendee)
-      .then(person => {
-        let people = attendees;
-        console.log(people);
-        people.pop();
-        this.setState({attendees: people})
+    removePerson(attendees);
+      this.setState({
+        joined: false,
+        message: "Left event successfully"
       });
-    });
+    this.setState({open: true});
   }
 
   handleRequestClose() {
