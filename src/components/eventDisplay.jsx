@@ -9,7 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import { findUser } from '../services/userServices.js'
-import { addPerson } from '../services/eventServices.js'
+import { addPerson, removePerson } from '../services/eventServices.js'
 
 const calendar = {
   0: "Jan",
@@ -46,6 +46,7 @@ class EventDisplay extends React.Component {
       message: "Joined event successfully"
     };
     this.join = this.join.bind(this);
+    this.unjoin = this.unjoin.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
@@ -79,6 +80,17 @@ class EventDisplay extends React.Component {
     } else {
       this.setState({message: "You've already joined this event"});
     }
+    this.setState({open: true});
+  }
+
+  unjoin() {
+    console.log(this.state);
+    let attendees = this.state.attendees;
+    removePerson(attendees);
+      this.setState({
+        joined: false,
+        message: "Left event successfully"
+      });
     this.setState({open: true});
   }
 
@@ -118,6 +130,7 @@ class EventDisplay extends React.Component {
         </CardText>
         <CardActions>
           <FlatButton label="Join" onClick={this.join}/>
+          <FlatButton label="Leave" onClick={this.unjoin}/>
           <Snackbar
             open={this.state.open}
             message={this.state.message}

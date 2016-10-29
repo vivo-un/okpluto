@@ -197,4 +197,13 @@ module.exports = function(app) {
 		})
 
 	})
+
+	app.delete('/api/events/remove', (req, res) => {
+		//console.log(req.body);
+		User.findByIdAndRemove(req.body.eventId, (err, event) => {
+			console.log(event);
+			res.status(200).send('lol');
+		})
+
+	})
 };

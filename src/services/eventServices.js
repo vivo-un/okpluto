@@ -53,6 +53,7 @@ import { getLatLng } from './userServices.js';
     });
   }
 
+
 module.exports = {
   getEvents: getEvents,
   saveEvent: saveEvent,
