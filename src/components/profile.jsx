@@ -11,6 +11,7 @@ import Events from './events.jsx'
 class Profile extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
   }
 
 
@@ -18,13 +19,12 @@ class Profile extends React.Component {
   render () {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-3">
-            <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-          <div className ="col-md-8">
-            <Events />
-          </div>
-          </div>
+        <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
+        <div className="container">
+        <div className="col-md-3 profile">
+          <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+        </div>
+        <div className="col-md-9">Other Stuff</div>
         </div>
       </div>
     )
