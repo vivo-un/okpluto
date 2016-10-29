@@ -16,7 +16,7 @@ const Row = (props) => (
   </div>
 )
 
-class UserList extends React.Component {
+class EventList extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -54,4 +54,4 @@ class UserList extends React.Component {
   }
 }
 
-module.exports = UserList;
+module.exports = EventList;
