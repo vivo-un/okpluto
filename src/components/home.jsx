@@ -5,6 +5,7 @@ import {ButtonToolbar, Button, Jumbotron} from 'react-bootstrap';
 import AuthService from '../utils/AuthService.jsx';
 import Navigation from './nav.jsx';
 import Auth0Lock from '../../node_modules/auth0-lock';
+import Footer from './footer.jsx';
 const House = '/assets/house.png';
 const Connect = '/assets/connect.png';
 const MeetUp = '/assets/meetUp.png';
@@ -84,8 +85,8 @@ class Home extends React.Component {
             <TeamIcon url={Ivey} display={"Ivey Topaz"} link={"https://www.linkedin.com/in/ivey-topaz-765a85124"}/>
           </div>
         </div>
+        <Footer />
       </div>
-
     )
   }
 
