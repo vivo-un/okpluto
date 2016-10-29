@@ -46,6 +46,10 @@ class EventList extends React.Component {
           }
       </div>
       )
+    } else if (this.props.noEvents) {
+      return (
+        <h3 className="middle">No Events to Show</h3>
+      )
     } else {
       return (
         <Loading />
