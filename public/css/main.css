@@ -123,6 +123,10 @@ img {
   background-color: gainsboro;
 }
 
+.profile-events {
+  margin-top: 90px;
+}
+
 .profile figcaption {
   width: 100%;
   background-color: #203D3B;
