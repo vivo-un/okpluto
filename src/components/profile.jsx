@@ -51,18 +51,11 @@ class Profile extends React.Component {
   }
 
   render () {
-    const styles = {
-      headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-      },
-    };
+
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
-        <Banner />
+        <Banner display="Your Profile"/>
         <div className="container">
         <div className="col-md-3 profile">
           <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
@@ -71,6 +64,7 @@ class Profile extends React.Component {
         <div className="col-md-9 profile-events">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
             <Tabs
+              style={{backgroundColor: 'whitesmoke', paddingBottom: '8px'}}
               value={this.state.value} >
               <Tab label="My Events List" value='a' onActive={() => this.handleChange('a') }>
                 <div>
