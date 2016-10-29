@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import Paper from 'material-ui/Paper'
+import ProfileEditDialog from './profileEditDialog.jsx'
 
 class ProfileDisplay extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class ProfileDisplay extends React.Component {
 
   render() {
     const style = {
-      height: 100,
+      height: '100%',
       width: '100%',
       margin: 20,
       textAlign: 'center',
@@ -23,28 +24,28 @@ class ProfileDisplay extends React.Component {
     };
     return (
       <div>
-      <div className="profile-image">
-        <img src={this.props.userInfo.profilepic} alt="Pic"/>
-      </div>
-      <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-        <div>
-        <Paper style={style} zDepth={1} rounded={false}>
-          <div className={"profile-header"}><h3> Your Info </h3></div>
-          <h4>Name: {this.props.userInfo.firstname} {this.props.userInfo.lastname}</h4>
-          <h4>Location {this.props.userInfo.loc}</h4>
-          <h4></h4>
-        </Paper>
         <div className="profile-image">
-        <img src={this.props.userInfo.picLink} alt="Pic"/>
-      </div>
-        <Paper style={style} zDepth={1} rounded={false}>
-          <div className={"profile-header"}><h3> Your Pup's Info </h3></div>
-          <h4>Name: {this.props.userInfo.dogname}</h4>
-          <h4>Location {this.props.userInfo.loc}</h4>
-          <h4></h4>
-        </Paper>
+          <img src={this.props.userInfo.profilepic} alt="Pic"/>
         </div>
-      </MuiThemeProvider>
+        <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+          <div>
+            <Paper style={style} zDepth={1} rounded={false}>
+              <div className={"profile-header"}><h3> Your Info </h3></div>
+              <h4>Name: {this.props.userInfo.firstname} {this.props.userInfo.lastname}</h4>
+              <h4>Location {this.props.userInfo.loc}</h4>
+            </Paper>
+            <div className="profile-image">
+              <img src={this.props.userInfo.picLink} alt="Pic"/>
+            </div>
+            <Paper style={style} zDepth={1} rounded={false}>
+              <div className={"profile-header"}><h3> Your Pup's Info </h3></div>
+              <h4>Name: {this.props.userInfo.dogname}</h4>
+              <h4>Breed: {this.props.userInfo.dogBreed}</h4>
+              <h4>Age: {this.props.userInfo.dogAge}</h4>
+            </Paper>
+            <ProfileEditDialog userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} />
+          </div>
+        </MuiThemeProvider>
       </div>
     )
   }
