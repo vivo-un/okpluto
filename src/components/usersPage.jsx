@@ -12,7 +12,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
-import { getDistance } from '../services/distanceServices'
+import { getDistance } from '../services/distanceServices';
+import Banner from './banner.jsx';
 
 getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
 .then(res => console.log(res))
@@ -37,14 +38,9 @@ class UsersPage extends React.Component {
       var userDests = [];
       var tracker = 0;
       //Don't display current user
-      let index = -1;
-      for(var i = 0; i < users.users.length; i++) {
-        if (users.users[i]._id === this.props.userInfo._id) {
-          index = i;
-          break;
-        }
-      }
-      users.users.splice(index, 1);
+      users.users = users.users.filter((user) => {
+        return user._id !== this.props.userInfo._id;
+      })
       // Set searchable options
       var searchArray = [];
       users.users.forEach(user => {
@@ -109,19 +105,25 @@ class UsersPage extends React.Component {
     }
     return (
       <div>
+
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
+        <Banner />
+        <div>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-               <AutoComplete style={style}
-                 floatingLabelText="Search Users"
-                 filter={AutoComplete.fuzzyFilter}
-                 dataSource={this.state.searchSource}
-                 maxSearchResults={5}
-                 searchText={this.state.search}
-                 onUpdateInput={this.handleChange}
-                 onNewRequest={this.handleChange}
-               />
+             <AutoComplete style={{marginLeft: '40%'}}
+               floatingLabelText="Search Users"
+               filter={AutoComplete.fuzzyFilter}
+               dataSource={this.state.searchSource}
+               maxSearchResults={5}
+               searchText={this.state.search}
+               onUpdateInput={this.handleChange}
+               onNewRequest={this.handleChange}
+             />
           </MuiThemeProvider>
-        <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+              <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+          </MuiThemeProvider>
+        </div>
       </div>
     )
   }

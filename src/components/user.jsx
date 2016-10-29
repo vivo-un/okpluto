@@ -5,7 +5,8 @@ import UserList from './userList.jsx';
 import MeetupCreation from './meetupCreation.jsx'
 import MeetupDialog from './meetupDialog.jsx'
 import DialogButton from './dialogButton.jsx'
-
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class UserDisplay extends React.Component {
 
@@ -21,21 +22,29 @@ class UserDisplay extends React.Component {
       this.user = this.props.user;
     }
     return (
+      <div>
+      <Card>
+        <CardHeader
+          title={this.user.dogname}
+          subtitle={'At: ' + this.user.loc}
+          avatar={this.user.profilepic}
+          actAsExpander={false}
+          showExpandableButton={false}
+        />
+        <CardMedia>
+          <img src={this.user.picLink || this.user.profilepic} alt="Pic" />
+        </CardMedia>
+        <CardText expandable={false}>
 
-        <figure className="figure profile">
-          <div className="profile-image">
-            <img src={this.user.picLink || this.user.profilepic} alt="Pic"/>
-          </div>
-          <figcaption>
-            <h3>{this.user.firstname} {this.user.lastname}</h3>
-            <h4>{this.user.loc}</h4>
-            <h3>{this.user.dogname}</h3>
-            <h4>{this.user.dogBreed}</h4>
-            <h4>{this.user.dogAge} years old</h4>
-            <DialogButton userId={this.user._id} lat={this.user.lat} lng={this.user.lng} type={this.props.type} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} toggleDrawer={this.props.toggleDrawer} toggleProfile={this.props.toggleProfile}/>
-          </figcaption>
-        </figure>
+        </CardText>
+        <CardActions>
+          <DialogButton userId={this.user._id} lat={this.user.lat} lng={this.user.lng} type={this.props.type} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} toggleDrawer={this.props.toggleDrawer} toggleProfile={this.props.toggleProfile}/>
+        </CardActions>
+      </Card>
 
+
+
+            </div>
     )
   }
 
