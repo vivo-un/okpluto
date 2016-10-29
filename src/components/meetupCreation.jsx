@@ -172,7 +172,7 @@ class MeetupCreation extends React.Component {
               name="category"
               errorText={this.state.category===null && 'Required'}
               onChange={this.handleChange.bind(this, 'category')}
-              style={{width: 400, 'text-align': 'left'}}
+              style={{width: 400, 'textAlign': 'left'}}
             >
               {items}
             </SelectField>
