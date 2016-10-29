@@ -11,7 +11,6 @@ import MeetupCreation from './meetupCreation.jsx'
 import eventServices from '../services/eventServices.js';
 
 
-
 class MeetupDialog extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +19,7 @@ class MeetupDialog extends React.Component {
       errorText: {},
       creator: this.props.userInfo._id,
       attendees: [this.props.userInfo._id, this.props.userId],
-      category:'Dog Park'
+      category: 'Dog Park'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -37,7 +36,7 @@ class MeetupDialog extends React.Component {
     this.setState({open: false});
   }
 
-  validate(values){
+  validate(values) {
     const errors = {};
     const requiredFields = [ 'eventname', 'where', 'date', 'time' ];
     requiredFields.forEach(field => {
@@ -93,7 +92,7 @@ class MeetupDialog extends React.Component {
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Let's Meetup!" secondary={true}/>
-          <Dialog title="Meetup Creation" actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true}>
+          <Dialog title="Meetup Creation" titleStyle={{textAlign: 'center'}}actions={actions} modal={true} open={this.state.open} onRequestClose={this.handleClose} autoScrollBodyContent={true} autoDetectWindowHeight={true}>
             <div className="middle">
               <form name="events">
               <MeetupCreation lat={this.props.lat} lng={this.props.lng} targetUser={this.props.userId} change={this.handleChange} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} errorText={this.state.errorText}
