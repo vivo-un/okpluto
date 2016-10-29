@@ -7,14 +7,16 @@ import AuthService from '../utils/AuthService.jsx';
 import Auth0Lock from '../../node_modules/auth0-lock';
 import ProfileDisplay from './profileDisplay.jsx';
 import Events from './events.jsx'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MyTheme from '../theme/theme.js';
+import {Tabs, Tab} from 'material-ui/Tabs'
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     console.log(props)
   }
-
-
 
   render () {
     return (
@@ -24,7 +26,13 @@ class Profile extends React.Component {
         <div className="col-md-3 profile">
           <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
         </div>
-        <div className="col-md-9">Other Stuff</div>
+
+        <div className="col-md-9">
+          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+            <Tabs></Tabs>
+          </MuiThemeProvider>
+        </div>
+
         </div>
       </div>
     )
