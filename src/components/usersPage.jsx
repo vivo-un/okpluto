@@ -13,7 +13,7 @@ import AutoComplete from 'material-ui/AutoComplete';
 import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
 import { getDistance } from '../services/distanceServices';
-
+import Banner from './banner.jsx';
 
 getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
 .then(res => console.log(res))
@@ -107,21 +107,23 @@ class UsersPage extends React.Component {
       <div>
 
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
+        <Banner />
+        <div>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-               <AutoComplete style={style}
-                 floatingLabelText="Search Users"
-                 filter={AutoComplete.fuzzyFilter}
-                 dataSource={this.state.searchSource}
-                 maxSearchResults={5}
-                 searchText={this.state.search}
-                 onUpdateInput={this.handleChange}
-                 onNewRequest={this.handleChange}
-               />
+             <AutoComplete style={{marginLeft: '40%'}}
+               floatingLabelText="Search Users"
+               filter={AutoComplete.fuzzyFilter}
+               dataSource={this.state.searchSource}
+               maxSearchResults={5}
+               searchText={this.state.search}
+               onUpdateInput={this.handleChange}
+               onNewRequest={this.handleChange}
+             />
           </MuiThemeProvider>
-        <div className="banner"></div>
-        <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-        <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-        </MuiThemeProvider>
+          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+              <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+          </MuiThemeProvider>
+        </div>
       </div>
     )
   }
