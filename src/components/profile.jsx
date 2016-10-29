@@ -74,12 +74,12 @@ class Profile extends React.Component {
               value={this.state.value} >
               <Tab label="My Events List" value='a' onActive={() => this.handleChange('a') }>
                 <div>
-                  <EventList events={this.state.attendingEvents} noEvents={this.state.noAttendingEvents}/>
+                  <EventList type="profile" events={this.state.attendingEvents} noEvents={this.state.noAttendingEvents}/>
                 </div>
               </Tab>
               <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
                 <div>
-                  <EventList events={this.state.createdEvents} noEvents={this.state.noCreatedEvents}/>
+                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents}/>
                 </div>
               </Tab>
             </Tabs>
