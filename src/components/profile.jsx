@@ -20,11 +20,11 @@ class Profile extends React.Component {
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
-        <div className="row">
-          <div className="col-md-3">
-            <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-
-          </div>
+        <div className="container">
+        <div className="col-md-3">
+          <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+        </div>
+        <div className="col-md-9">Other Stuff</div>
         </div>
       </div>
     )

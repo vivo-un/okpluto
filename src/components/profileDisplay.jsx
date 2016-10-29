@@ -15,7 +15,7 @@ class ProfileDisplay extends React.Component {
 
   render() {
     return (
-      <div>hello</div>
+      <UserDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} type={'profile'}/>
     )
   }
 }
