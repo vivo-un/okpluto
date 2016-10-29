@@ -41,9 +41,12 @@ class EventDisplay extends React.Component {
     this.state = {
       attendees: [],
       eventId: this.props.event._id,
-      joined: false
+      open: false,
+      joined: false,
+      message: "Joined event successfully"
     };
     this.join = this.join.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
   }
 
   componentWillMount() {
@@ -67,8 +70,20 @@ class EventDisplay extends React.Component {
 
   join() {
     let eventId = this.state.eventId;
-    addPerson(eventId)
-    this.setState({joined: true});
+    addPerson(eventId);
+    if (!this.state.joined) {
+      this.setState({
+        joined: true,
+        message: "Joined event successfully"
+      });
+    } else {
+      this.setState({message: "You've already joined this event"});
+    }
+    this.setState({open: true});
+  }
+
+  handleRequestClose() {
+    this.setState({open: false});
   }
 
   render () {
@@ -104,9 +119,10 @@ class EventDisplay extends React.Component {
         <CardActions>
           <FlatButton label="Join" onClick={this.join}/>
           <Snackbar
-            open={this.state.joined}
-            message="Joined event successfully"
+            open={this.state.open}
+            message={this.state.message}
             autoHideDuration={3000}
+            onRequestClose={this.handleRequestClose}
           />
         </CardActions>
       </Card>
