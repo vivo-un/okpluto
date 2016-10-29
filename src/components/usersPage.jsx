@@ -110,7 +110,7 @@ class UsersPage extends React.Component {
         <Banner />
         <div>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-             <AutoComplete style={{marginLeft: '40%'}}
+             <AutoComplete style={{marginLeft: '75%'}}
                floatingLabelText="Search Users"
                filter={AutoComplete.fuzzyFilter}
                dataSource={this.state.searchSource}
