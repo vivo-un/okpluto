@@ -150,6 +150,18 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/queryEvents/dbId', (req, res) => {
+		Event.find({attendees: req.query.dbId})
+		.exec((err, events) => {
+			if (err) {
+				console.log(err);
+				res.status(404).send("Database error, no events found")
+			} else {
+				res.status(201).send({events: events})
+			}
+		})
+	})
+
 	app.post('/api/events', (req, res) => {
 		req.body = JSON.parse(req.body.data);
 		new Event ({

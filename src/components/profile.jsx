@@ -1,12 +1,12 @@
 'use strict';
 
-import userServices from '../services/userServices.js'
+import { searchEvents } from '../services/eventServices.js'
 import NavLoggedIn from './nav-loggedIn.jsx';
 import React, { PropTypes as T } from 'react';
 import AuthService from '../utils/AuthService.jsx';
 import Auth0Lock from '../../node_modules/auth0-lock';
 import ProfileDisplay from './profileDisplay.jsx';
-import Events from './events.jsx'
+import EventList from './eventList.jsx'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
@@ -15,7 +15,16 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 class Profile extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    this.state = {}
+  }
+
+  componentDidMount() {
+    var self = this;
+    searchEvents()
+    .then(events => {
+      console.log(events)
+      this.setState({events: events})
+    })
   }
 
   render () {
@@ -40,13 +49,7 @@ class Profile extends React.Component {
             <Tabs>
               <Tab label="Item One" >
                 <div>
-                  <h2 style={styles.headline}>Tab One</h2>
-                  <p>
-                    This is an example tab.
-                  </p>
-                  <p>
-                    You can put any sort of HTML or react component in here. It even keeps the component state!
-                  </p>
+                  <EventList events={this.state.events} />
                 </div>
               </Tab>
               <Tab label="Item Two" >
