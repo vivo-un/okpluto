@@ -16,19 +16,22 @@ const Row = (props) => (
   </div>
 )
 
-class UserList extends React.Component {
+class EventList extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    //sort by distance from user
+    var rowLength = 4;
+    if (this.props.type === "profile") {
+      rowLength = 3;
+    }
     if (this.props.events.length) {
       var events = this.props.events
       var rows = [];
       var row = [];
       for (var i = 0; i < events.length; i++) {
-        if (i % 4 === 0 && row.length > 0) {
+        if (i % rowLength === 0 && row.length > 0) {
           rows.push(row);
           row = [];
         }
@@ -46,6 +49,10 @@ class UserList extends React.Component {
           }
       </div>
       )
+    } else if (this.props.noEvents) {
+      return (
+        <h3 className="middle">No Events to Show</h3>
+      )
     } else {
       return (
         <Loading />
@@ -54,4 +61,4 @@ class UserList extends React.Component {
   }
 }
 
-module.exports = UserList;
+module.exports = EventList;

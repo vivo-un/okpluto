@@ -91,7 +91,7 @@ class InfoDrawer extends React.Component {
         <div>
         <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
           <Drawer
-            width={350}
+            width={250}
             open={this.state.open}
           >
             <div style={iconStyle} >

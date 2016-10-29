@@ -41,9 +41,21 @@ import { getLatLng } from './userServices.js';
     })
   }
 
+  const searchEvents = function(dbId) {
+    dbId = dbId || localStorage.getItem('mongoUserId');
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: `api/events?dbId=${dbId}`,
+        type: 'GET',
+        success: resolve,
+        error: reject
+      });
+    });
+  }
 
 module.exports = {
   getEvents: getEvents,
   saveEvent: saveEvent,
-  addPerson: addPerson
+  addPerson: addPerson,
+  searchEvents: searchEvents
 };

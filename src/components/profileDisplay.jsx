@@ -16,9 +16,8 @@ class ProfileDisplay extends React.Component {
 
   render() {
     const style = {
-      height: '100%',
-      width: '100%',
-      margin: 20,
+      height: '220px',
+      width: '1220px',
       textAlign: 'center',
       display: 'inline-block',
     };
@@ -26,23 +25,23 @@ class ProfileDisplay extends React.Component {
       <div>
         <div className="profile-image">
           <img src={this.props.userInfo.profilepic} alt="Pic"/>
-        </div>
+        </div> <br/>
         <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
           <div>
-            <Paper style={style} zDepth={1} rounded={false}>
+            <Paper className="profile-info" zDepth={1} rounded={false}>
               <div className={"profile-header"}><h3> Your Info </h3></div>
               <h4>Name: {this.props.userInfo.firstname} {this.props.userInfo.lastname}</h4>
               <h4>Location {this.props.userInfo.loc}</h4>
-            </Paper>
+            </Paper> <br/>
             <div className="profile-image">
               <img src={this.props.userInfo.picLink} alt="Pic"/>
-            </div>
-            <Paper style={style} zDepth={1} rounded={false}>
+            </div> <br/>
+            <Paper className="profile-info" zDepth={1} rounded={false}>
               <div className={"profile-header"}><h3> Your Pup's Info </h3></div>
               <h4>Name: {this.props.userInfo.dogname}</h4>
               <h4>Breed: {this.props.userInfo.dogBreed}</h4>
               <h4>Age: {this.props.userInfo.dogAge}</h4>
-            </Paper>
+            </Paper> <br/>
             <ProfileEditDialog userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} />
           </div>
         </MuiThemeProvider>
