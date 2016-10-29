@@ -28,7 +28,7 @@ class UserList extends React.Component {
       var rows = [];
       var row = [];
       for (var i = 0; i < events.length; i++) {
-        if (i % 3 === 0 && row.length > 0) {
+        if (i % 4 === 0 && row.length > 0) {
           rows.push(row);
           row = [];
         }
