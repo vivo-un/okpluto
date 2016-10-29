@@ -142,6 +142,8 @@ img {
 }
 
 .profile h4 {
+  text-align: left;
+  margin-left: 5px;
   color: #777;
 }
 
