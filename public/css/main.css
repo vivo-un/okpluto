@@ -101,7 +101,7 @@ img {
 }
 
 .profile {
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .profile .profile-image {
@@ -112,7 +112,6 @@ img {
   position: relative;
   padding: 8px;
   border: 2px solid #70D6CF;
-  margin-top: 20px;
 }
 
 .profile .profile-image img {
@@ -124,7 +123,7 @@ img {
 }
 
 .profile-events {
-  margin-top: 90px;
+  margin-top: 60px;
 }
 
 .profile figcaption {
