@@ -14,11 +14,6 @@ h1, h2 {
   margin-top:100px;
 }
 
-img {
-  width:140px;
-  height: 140px;
-}
-
 .col-md-4 {
   text-align: center;
 }
@@ -171,4 +166,14 @@ img {
     position: fixed;
     display: inline-block;
     float: left;
+}
+.card-img{
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.img{
+  width: 100%;
 }
