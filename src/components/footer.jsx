@@ -8,7 +8,7 @@ const Footer = (props) => (
     <nav className="nav">
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Why Choose OK Pluto</a></li>
+        <li><a href="#">Why choose OK Pluto</a></li>
         <li><a href="#">About Us</a></li>
       </ul>
     </nav>
