@@ -4,6 +4,7 @@ import React from 'react';
 import Loading from './loading.jsx'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import Snackbar from 'material-ui/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
@@ -39,7 +40,8 @@ class EventDisplay extends React.Component {
     super(props)
     this.state = {
       attendees: [],
-      eventId: this.props.event._id
+      eventId: this.props.event._id,
+      joined: false
     };
     this.join = this.join.bind(this);
   }
@@ -66,6 +68,7 @@ class EventDisplay extends React.Component {
   join() {
     let eventId = this.state.eventId;
     addPerson(eventId)
+    this.setState({joined: true});
   }
 
   render () {
@@ -100,6 +103,11 @@ class EventDisplay extends React.Component {
         </CardText>
         <CardActions>
           <FlatButton label="Join" onClick={this.join}/>
+          <Snackbar
+            open={this.state.joined}
+            message="Joined event successfully"
+            autoHideDuration={3000}
+          />
         </CardActions>
       </Card>
       </MuiThemeProvider>
