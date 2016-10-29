@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Quattrocento|Quicksand');
+
+body {
+  font-family: 'Quattrocento', serif;
+}
+
 .jumbotron {
-  background: url('/assets/cover.jpg') no-repeat center center;
+  background: url('/assets/cover2.jpg') no-repeat center center;
   background-size: cover;
   height: 600px;
 }
@@ -9,9 +15,13 @@
   height: 400px;
 }
 
-h1, h2 {
+h1{
   text-align: right;
-  margin-top:100px;
+  margin-top:80px;
+}
+h2 {
+  text-align: right;
+  margin-top:20px;
 }
 
 img {
@@ -41,25 +51,26 @@ img {
 }
 
 .container > h1 {
-  color: #203d3b;
+  font-family: 'Quicksand', sans-serif ;
+  color: #004D40;
   font-size: 9em;
   font-weight: 600;
   text-shadow: 1px 1px #c2c1bd;
 }
 
 .container > h2 {
+  font-family: 'Quicksand', sans-serif;
   font-size: 3em;
-  color: #c2c1bd;
-  text-shadow: 2px 2px #564D49;
+  color: #546E7A;
+  text-shadow: 2px 2px #c2c1bd;
 }
 
 .icons {
-  background-color: gainsboro;
+  background-color: #CFD8DC;
   width: 100%;
   margin: 0px;
   padding: 0px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #768f8d;
 }
 
 .icons > p {
@@ -67,21 +78,20 @@ img {
 }
 
 .team {
-  background-color: whitesmoke;
+  background-color: #ECEFF1;
   padding-top: 40px;
   padding-bottom: 40px;
 }
 
 .section-heading {
   height: 125px;
-  border-top: 1px solid #768f8d;
   text-align: center;
   vertical-align: middle;
-  background-color: gainsboro;
+  background-color: #CFD8DC;
 }
 
 .section-heading.alt {
-  background-color: whitesmoke;
+  background-color: #ECEFF1;
 }
 
 .section-heading > p {

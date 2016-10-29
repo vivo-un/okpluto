@@ -52,7 +52,8 @@ class Home extends React.Component {
         <div className="jumbotron main-image" >
           <div className="container">
             <h1>Ok Pluto</h1>
-            <h2>Online playground for your best friend</h2>
+            <h2>Online playground </h2>
+            <h2>for your best friend</h2>
           </div>
         </div>
 

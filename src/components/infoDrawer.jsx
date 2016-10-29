@@ -99,7 +99,7 @@ class InfoDrawer extends React.Component {
               <NavigationClose />
             </IconButton>
             </div>
-            <h3> Menu </h3>
+            <h3 style={{marginLeft: 15}}> Menu </h3>
             <Divider />
 
             <MenuItem onTouchTap={() => this.reRoute('/events')} rightIcon={<EventNote color='#488985' />}> View Events </MenuItem>
