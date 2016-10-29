@@ -64,6 +64,7 @@ import { getLatLng } from './userServices.js';
         error: reject
       })
     })
+  }
 
 module.exports = {
   getEvents: getEvents,
