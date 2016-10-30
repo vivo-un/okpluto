@@ -12,6 +12,8 @@ import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
 import EventList from './eventList.jsx'
 import { getDistance } from '../services/distanceServices'
+import Banner from './banner.jsx';
+import Footer from './footer.jsx';
 
 class Events extends React.Component {
   constructor(props) {
@@ -92,18 +94,13 @@ class Events extends React.Component {
   }
 
   render () {
-    var style = {
-      'top': '40px',
-      'left': '20px',
-      'float': 'right',
-      'margin-right': '20px'
-    }
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer} />
+        <Banner display={'Local Users'}/>
         <div className="row">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-               <AutoComplete style={style}
+               <AutoComplete style={{marginLeft: '75%'}}
                  floatingLabelText="Search Events"
                  filter={AutoComplete.fuzzyFilter}
                  dataSource={this.state.searchSource}
@@ -114,9 +111,10 @@ class Events extends React.Component {
                />
           </MuiThemeProvider>
         </div>
-        <div className="row">
+        <div className="row" style={{marginBottom: 20}}>
             <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
         </div>
+        <Footer/>
       </div>
     )
   }

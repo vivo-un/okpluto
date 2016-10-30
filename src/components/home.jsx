@@ -36,7 +36,7 @@ class TeamIcon extends React.Component {
 
   render() {
     return (
-      <div className="col-md-3">
+      <div className="col-md-3" >
         <a href={this.props.link}><img src={this.props.url} className="img-circle"/></a>
         <h3>{this.props.display}</h3>
       </div>

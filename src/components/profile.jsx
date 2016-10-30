@@ -12,6 +12,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import {Tabs, Tab} from 'material-ui/Tabs'
 import Banner from './banner.jsx';
+import Footer from './footer.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -81,36 +82,36 @@ class Profile extends React.Component {
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <Banner display="Your Profile"/>
-        <div className="container">
-        <div className="col-md-3 profile">
-          <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-        </div>
+        <div className="container" style={{marginBottom: 20}}>
+          <div className="col-md-3 profile">
+            <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+          </div>
 
-        <div className="col-md-9 profile-events">
-          <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
-            <Tabs
-              style={{backgroundColor: 'whitesmoke', paddingBottom: '8px'}}
-              value={this.state.value} >
-              <Tab label="Upcoming Events" value='a' onActive={() => this.handleChange('a') }>
-                <div>
-                  <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
-                </div>
-              </Tab>
-              <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
-                <div>
-                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
-                </div>
-              </Tab>
-              <Tab label="past Events" value='c' onActive={() => this.handleChange('c') }>
-                <div>
-                  <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
-                </div>
-              </Tab>
-            </Tabs>
-          </MuiThemeProvider>
+          <div className="col-md-9 profile-events">
+            <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
+              <Tabs
+                style={{backgroundColor: 'whitesmoke', paddingBottom: '8px'}}
+                value={this.state.value} >
+                <Tab label="Upcoming Events" value='a' onActive={() => this.handleChange('a') }>
+                  <div>
+                    <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
+                  </div>
+                </Tab>
+                <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
+                  <div>
+                    <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
+                  </div>
+                </Tab>
+                <Tab label="past Events" value='c' onActive={() => this.handleChange('c') }>
+                  <div>
+                    <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
+                  </div>
+                </Tab>
+              </Tabs>
+            </MuiThemeProvider>
+          </div>
         </div>
-
-        </div>
+        <Footer/>
       </div>
     )
   }
