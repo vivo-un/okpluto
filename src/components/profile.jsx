@@ -33,7 +33,7 @@ class Profile extends React.Component {
     .then(events => {
       if(!events.attendingEvents.length) {
         self.setState({upcomingEvents: []})
-        self.setState({noupcomingEvents: true})
+        self.setState({noUpcomingEvents: true})
         self.setState({pastEvents: []})
         self.setState({noPastEvents: true})
       } else {
@@ -93,17 +93,17 @@ class Profile extends React.Component {
               value={this.state.value} >
               <Tab label="Upcoming Events" value='a' onActive={() => this.handleChange('a') }>
                 <div>
-                  <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents}/>
+                  <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
                 </div>
               </Tab>
               <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
                 <div>
-                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents}/>
+                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
                 </div>
               </Tab>
               <Tab label="past Events" value='c' onActive={() => this.handleChange('c') }>
                 <div>
-                  <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents}/>
+                  <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
                 </div>
               </Tab>
             </Tabs>
