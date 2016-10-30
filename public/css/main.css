@@ -183,7 +183,7 @@ img {
   color: #777;
 }
 
-.userList {
+.userList, .inside {
   margin-top: 30px;
   width: 95%;
 }
