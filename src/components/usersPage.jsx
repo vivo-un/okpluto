@@ -14,7 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
 import { getDistance } from '../services/distanceServices';
 import Banner from './banner.jsx';
-
+import Footer from './footer.jsx';
 getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
 .then(res => console.log(res))
 
@@ -99,11 +99,6 @@ class UsersPage extends React.Component {
   }
 
   render () {
-    var style = {
-      'top': '40px',
-      'left': '20px',
-      'position': 'absolute'
-    }
     return (
       <div>
 
@@ -125,6 +120,7 @@ class UsersPage extends React.Component {
               <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </MuiThemeProvider>
         </div>
+        <Footer />
       </div>
     )
   }
