@@ -13,6 +13,14 @@ body {
   background: url('/assets/banner.jpg') no-repeat center center;
   background-size: cover;
   height: 400px;
+  padding-top: 200px;
+}
+
+.banner h1 {
+  color: white;
+  margin-top: 40px;
+  padding-right: 20px;
+  font-size: 4em;
 }
 
 h1{
@@ -139,11 +147,13 @@ img {
 
 .profile .profile-header {
   background-color: gainsboro;
+  text-align: left;
+  padding-left: 5px;
 }
 
-.profile .profile-edit {
-  margin-right: 75px;
-}
+/*.profile .profile-edit {
+  margin-right: 80px;
+}*/
 
 .profile-events {
   margin-top: 60px;
@@ -175,6 +185,7 @@ img {
 
 .userList {
   margin-top: 30px;
+  width: 95%;
 }
 
 .middle {
