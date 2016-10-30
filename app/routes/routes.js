@@ -33,7 +33,6 @@ module.exports = function(app) {
 
 	//Find distance btwn coordinates
 	app.post('/api/distance', (req, res) => {
-		console.log(req.body)
 		var getDistance = function(originCoor, destCoors) {
 			return new Promise((resolve, reject) => {
 				googleMaps.distanceMatrix({
@@ -48,7 +47,6 @@ module.exports = function(app) {
 
 		getDistance(JSON.parse(req.body.origin), JSON.parse(req.body.destinations))
 		.then(results => {
-			console.log(results.json.rows[0].elements)
 			res.status(200).send(results.json.rows[0].elements)
 		})
 	})
@@ -70,7 +68,6 @@ module.exports = function(app) {
 				console.log(err);
 				res.status(404).send("Database error, no users found")
 			}
-			//console.log(users)
 			res.status(201).send({users: users});
 		});
 	});
@@ -184,7 +181,6 @@ module.exports = function(app) {
 	})
 
 	app.put('/api/events/add', (req, res) => {
-		console.log(req.body)
 		Event.findById(req.body.eventId, (err, event) => {
 			let attendees = event.attendees;
 			if (attendees.indexOf(req.body.userId) === -1) {
@@ -199,7 +195,6 @@ module.exports = function(app) {
 	})
 
 	app.put('/api/events/remove', (req, res) => {
-		console.log(req.body);
 		Event.findById(req.body.eventId, (err, event) => {
 			let attendees = event.attendees;
 			let index = -1;

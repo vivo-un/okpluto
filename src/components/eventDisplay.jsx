@@ -89,7 +89,6 @@ class EventDisplay extends React.Component {
   unjoin() {
     const self = this
     let attendees = this.state.attendees;
-    console.log('should remove ', this.props.userInfo.firstname)
     let index = attendees.indexOf(this.props.userInfo.firstname);
     attendees.splice(index, 1);
     this.setState({attendees: attendees})
@@ -113,7 +112,6 @@ class EventDisplay extends React.Component {
   handleEventButtonClick() {
     let self = this;
     if (this.props.event.creator === this.props.userInfo._id) {
-      console.log('should delete ', this.props.event)
       deleteEvent(this.props.event._id)
       .then(deletedEvent => {
       self.setState({

@@ -33,13 +33,11 @@ class UserList extends React.Component {
           rows.push(row);
           row = [];
         }
-        console.log(users[i])
         row.push(users[i]);
         if (i === users.length - 1 && row.length > 0) {
           rows.push(row);
         }
       }
-      console.log(rows)
       return (
         <div className = "container userList">
           {
