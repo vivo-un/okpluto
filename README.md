@@ -1,12 +1,12 @@
-# Project Name
+# Ok Pluto
 
 > Pithy project description
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Daisy Good
+  - __Scrum Master__: Ivey Topaz
+  - __Development Team Members__: Kat Gurdak, Jarrett Kennedy
 
 ## Table of Contents
 
@@ -37,9 +37,7 @@
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
