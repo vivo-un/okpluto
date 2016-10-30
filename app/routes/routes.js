@@ -198,12 +198,27 @@ module.exports = function(app) {
 
 	})
 
-	app.delete('/api/events/remove', (req, res) => {
-		//console.log(req.body);
-		User.findByIdAndRemove(req.body.eventId, (err, event) => {
-			console.log(event);
-			res.status(200).send('lol');
+	app.put('/api/events/remove', (req, res) => {
+		console.log(req.body);
+		Event.findById(req.body.eventId, (err, event) => {
+			let attendees = event.attendees;
+			let index = -1;
+			for (var i = 0; i < attendees.length; i++) {
+				if (attendees[i] === req.body.userId) {
+					index = i;
+					break;
+				}
+			}
+			event.attendees.splice(index, 1)
+			event.save((err, updatedEvent) => {
+				res.status(200).send({updatedEvent: updatedEvent});
+			})
 		})
+	})
 
+	app.delete('/api/events', (req, res) => {
+		Event.findByIdAndRemove(req.body.eventId, (err, event) => {
+			res.status(201).send({removedEvent: event})
+		})
 	})
 };
