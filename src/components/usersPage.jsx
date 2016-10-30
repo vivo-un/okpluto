@@ -108,7 +108,7 @@ class UsersPage extends React.Component {
       <div>
 
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
-        <Banner />
+        <Banner display={'Local Users'}/>
         <div>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
              <AutoComplete style={{marginLeft: '75%'}}
