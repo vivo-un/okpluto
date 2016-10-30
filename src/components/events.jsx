@@ -115,7 +115,7 @@ class Events extends React.Component {
           </MuiThemeProvider>
         </div>
         <div className="row">
-            <EventList events={this.state.displayedEvents} />
+            <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
         </div>
       </div>
     )
