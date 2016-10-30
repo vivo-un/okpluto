@@ -58,8 +58,20 @@ import { getLatLng } from './userServices.js';
     return new Promise((resolve, reject) => {
       $.ajax({
         url: 'api/events/remove',
-        type: 'DELETE',
+        type: 'PUT',
         data: {eventId: eventId, userId: userId},
+        success: resolve,
+        error: reject
+      })
+    })
+  };
+
+  const deleteEvent = function(eventId) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/events',
+        type: 'DELETE',
+        data: {eventId: eventId},
         success: resolve,
         error: reject
       })
@@ -71,5 +83,6 @@ module.exports = {
   saveEvent: saveEvent,
   addPerson: addPerson,
   searchEvents: searchEvents,
-  removePerson: removePerson
+  removePerson: removePerson,
+  deleteEvent: deleteEvent
 };
