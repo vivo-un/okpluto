@@ -82,7 +82,7 @@ class Profile extends React.Component {
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <Banner display="Your Profile"/>
-        <div className="container">
+        <div className="container" style={{marginBottom: 20}}>
           <div className="col-md-3 profile">
             <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </div>
@@ -111,7 +111,7 @@ class Profile extends React.Component {
             </MuiThemeProvider>
           </div>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     )
   }

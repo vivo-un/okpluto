@@ -104,7 +104,7 @@ class UsersPage extends React.Component {
 
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <Banner display={'Local Users'}/>
-        <div>
+        <div style={{marginBottom: 20}}>
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
              <AutoComplete style={{marginLeft: '75%'}}
                floatingLabelText="Search Users"
@@ -120,7 +120,7 @@ class UsersPage extends React.Component {
               <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </MuiThemeProvider>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     )
   }

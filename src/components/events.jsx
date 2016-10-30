@@ -111,10 +111,10 @@ class Events extends React.Component {
                />
           </MuiThemeProvider>
         </div>
-        <div className="row">
+        <div className="row" style={{marginBottom: 20}}>
             <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
         </div>
-        <Footer />
+        <Footer/>
       </div>
     )
   }
