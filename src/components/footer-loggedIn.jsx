@@ -4,7 +4,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 
 const FooterLoggedIn = (props) => (
-  <footer className="primary-footer">
+  <footer className="primary-footer inside">
     <small>&copy; Ok Pluto</small>
     <nav className="nav">
       <ul>
