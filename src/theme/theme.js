@@ -10,9 +10,9 @@ export default {
   fontFamily: 'Quattrocento, sans-serif',
   palette: {
     primary1Color: Colors.teal900,
-    primary2Color: Colors.blueGrey600,
+    primary2Color: Colors.teal700,
     primary3Color: Colors.teal50,
-    accent1Color: Colors.teal500,
+    accent1Color: Colors.blueGrey600,
     accent2Color: Colors.blueGrey400,
     accent3Color: Colors.blueGrey100,
     textColor: Colors.teal900,
