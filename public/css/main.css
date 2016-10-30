@@ -254,11 +254,3 @@ img {
 .img-circle {
   cursor: pointer;
 }
-
-.search {
-  float: right;
-  margin-right: 20px;
-  position: absolute;
-  top: 40px;
-  left:20px;
-}
