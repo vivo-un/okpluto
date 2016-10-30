@@ -53,10 +53,36 @@ import { getLatLng } from './userServices.js';
     });
   }
 
+  const removePerson = function(eventId, userId) {
+    userId = userId || localStorage.getItem('mongoUserId')
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/events/remove',
+        type: 'PUT',
+        data: {eventId: eventId, userId: userId},
+        success: resolve,
+        error: reject
+      })
+    })
+  };
+
+  const deleteEvent = function(eventId) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        url: 'api/events',
+        type: 'DELETE',
+        data: {eventId: eventId},
+        success: resolve,
+        error: reject
+      })
+    })
+  }
 
 module.exports = {
   getEvents: getEvents,
   saveEvent: saveEvent,
   addPerson: addPerson,
-  searchEvents: searchEvents
+  searchEvents: searchEvents,
+  removePerson: removePerson,
+  deleteEvent: deleteEvent
 };

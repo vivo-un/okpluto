@@ -17,8 +17,10 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      attendingEvents: [],
-      noAttendingEvents: false,
+      upcomingEvents: [],
+      noUpcomingEvents: false,
+      pastEvents: [],
+      noPastEvents: false,
       createdEvents: [],
       noCreatedEvents: false,
       value: 'a'
@@ -30,10 +32,33 @@ class Profile extends React.Component {
     searchEvents()
     .then(events => {
       if(!events.attendingEvents.length) {
-        self.setState({attendingEvents: []})
-        self.setState({noAttendingEvents: true})
+        self.setState({upcomingEvents: []})
+        self.setState({noUpcomingEvents: true})
+        self.setState({pastEvents: []})
+        self.setState({noPastEvents: true})
       } else {
-        self.setState({attendingEvents: events.attendingEvents})
+        let upcoming = [];
+        let past = [];
+        events.attendingEvents.forEach(event => {
+        let date = new Date(event.date.slice(0, 11) + event.time.slice(0, 8))
+        if (date > new Date()) {
+          upcoming.push(event)
+        } else {
+          past.push(event)
+        }
+        })
+        if (upcoming.length) {
+          self.setState({upcomingEvents: upcoming})
+        } else {
+          self.setState({upcomingEvents: []})
+          self.setState({noUpcomingEvents: true})
+        }
+        if (past.length) {
+          self.setState({pastEvents: past})
+        } else {
+          self.setState({pastEvents: []})
+          self.setState({noPastEvents: true})
+        }
       }
       if(!events.createdEvents.length) {
         self.setState({createdEvents: []})
@@ -51,18 +76,11 @@ class Profile extends React.Component {
   }
 
   render () {
-    const styles = {
-      headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-      },
-    };
+
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
-        <Banner />
+        <Banner display="Your Profile"/>
         <div className="container">
         <div className="col-md-3 profile">
           <ProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
@@ -71,15 +89,21 @@ class Profile extends React.Component {
         <div className="col-md-9 profile-events">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
             <Tabs
+              style={{backgroundColor: 'whitesmoke', paddingBottom: '8px'}}
               value={this.state.value} >
-              <Tab label="My Events List" value='a' onActive={() => this.handleChange('a') }>
+              <Tab label="Upcoming Events" value='a' onActive={() => this.handleChange('a') }>
                 <div>
-                  <EventList type="profile" events={this.state.attendingEvents} noEvents={this.state.noAttendingEvents}/>
+                  <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
                 </div>
               </Tab>
               <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
                 <div>
-                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents}/>
+                  <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
+                </div>
+              </Tab>
+              <Tab label="past Events" value='c' onActive={() => this.handleChange('c') }>
+                <div>
+                  <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
                 </div>
               </Tab>
             </Tabs>

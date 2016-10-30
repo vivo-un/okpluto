@@ -12,7 +12,6 @@ import { hashHistory } from 'react-router';
 class NavLoggedIn extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
 
   render () {
