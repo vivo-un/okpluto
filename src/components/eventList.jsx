@@ -8,8 +8,8 @@ const Row = (props) => (
   <div className="row">
     {
       props.row.map((event) => (
-        <div className= "col-md-3 text-center">
-          <EventDisplay event={event} type='user' />
+        <div className={props.class}>
+          <EventDisplay event={event} type='user' userInfo={props.userInfo}/>
         </div>
       ))
     }
@@ -23,8 +23,10 @@ class EventList extends React.Component {
 
   render() {
     var rowLength = 4;
+    var className = "col-md-3 text-center";
     if (this.props.type === "profile") {
       rowLength = 3;
+      className = "col-md-4 text-center"
     }
     if (this.props.events.length) {
       var events = this.props.events
@@ -44,7 +46,7 @@ class EventList extends React.Component {
         <div className = "container userList">
           {
             rows.map(row => (
-              <Row row={row} />
+              <Row row={row} userInfo={this.props.userInfo} class={className}/>
             ))
           }
       </div>
