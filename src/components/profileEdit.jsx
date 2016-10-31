@@ -50,6 +50,14 @@ class ProfileEdit extends React.Component {
             errorText = {this.props.error.loc}
           /><br />
           <TextField
+            hintText="Your Profile Pic"
+            floatingLabelText="Your Profile Pic"
+            value = {this.props.profile.profilepic}
+            onChange = {this.handleChange.bind(this, 'profilepic')}
+            name = "profilepic"
+            errorText = {this.props.error.picLink}
+          /><br />
+          <TextField
             hintText="Dog Name"
             floatingLabelText="Dog Name"
             value = {this.props.profile.dogname}
