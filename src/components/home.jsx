@@ -1,7 +1,5 @@
 "use strict";
-
 import React, { PropTypes as T } from 'react';
-import {ButtonToolbar, Button, Jumbotron} from 'react-bootstrap';
 import AuthService from '../utils/AuthService.jsx';
 import Navigation from './nav.jsx';
 import Auth0Lock from '../../node_modules/auth0-lock';
@@ -14,35 +12,40 @@ const Kat = '/assets/kat.png';
 const Jarrett = '/assets/jarrett.png';
 const Ivey = '/assets/ivey.png';
 
+// Stateless Components
+
 class IconItem extends React.Component {
   constructor(props) {
     super(props);
-  }
+  };
   render() {
     return (
-        <div className="col-md-4">
-          <a href={this.props.link} onClick={this.props.onTouchTap}><img src={this.props.url} className="img-circle"/></a>
-          <h2>{this.props.display}</h2>
-          <p>{this.props.info}</p>
-        </div>
-    )
-  }
-}
+      <div className="col-md-4">
+        <a href={this.props.link} onClick={this.props.onTouchTap}>
+          <img src={this.props.url} className="img-circle"/>
+        </a>
+        <h2>{this.props.display}</h2>
+        <p>{this.props.info}</p>
+      </div>
+    );
+  };
+};
 
 class TeamIcon extends React.Component {
   constructor(props) {
-    super(props)
-  }
-
+    super(props);
+  };
   render() {
     return (
       <div className="col-md-3" >
-        <a href={this.props.link}><img src={this.props.url} className="img-circle"/></a>
+        <a href={this.props.link}>
+          <img src={this.props.url} className="img-circle"/>
+        </a>
         <h3>{this.props.display}</h3>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 class Home extends React.Component {
 
@@ -53,7 +56,7 @@ class Home extends React.Component {
         <div className="jumbotron main-image" >
           <div className="container">
             <h1>Ok Pluto</h1>
-            <h2>Online playground </h2>
+            <h2>Online playground</h2>
             <h2>for your best friend</h2>
           </div>
         </div>
@@ -64,12 +67,24 @@ class Home extends React.Component {
 
         <div className="container icons">
           <div className="row">
-            <IconItem url={Connect} display={"CONNECT"} info={"OkPluto instantly puts you in touch with other dog lovers from around the world"}
-            onTouchTap={this.props.auth.signup.bind(this)}/>
-            <IconItem url={MeetUp} display={"MEET UP"} info={"We make it easy for you to set up walks and dog park meet ups with other local dog owners"}
-            onTouchTap={this.props.auth.signup.bind(this)}/>
-            <IconItem url={House} display={"ADOPT A DOG"} info={"Don't have a dog? No worries! Adopt your new best friend at a shelter near you!"}
-            link={"https://www.petfinder.com/animal-shelters-and-rescues/search"}/>
+            <IconItem
+              url={Connect}
+              display={"CONNECT"}
+              info={"OkPluto instantly puts you in touch with other dog lovers from around the world"}
+              onTouchTap={this.props.auth.signup.bind(this)}
+            />
+            <IconItem
+              url={MeetUp}
+              display={"MEET UP"}
+              info={"We make it easy for you to set up walks and dog park meet ups with other local dog owners"}
+              onTouchTap={this.props.auth.signup.bind(this)}
+            />
+            <IconItem
+              url={House}
+              display={"ADOPT A DOG"}
+              info={"Don't have a dog? No worries! Adopt your new best friend at a shelter near you!"}
+              link={"https://www.petfinder.com/animal-shelters-and-rescues/search"}
+            />
           </div>
         </div>
 
@@ -79,24 +94,38 @@ class Home extends React.Component {
 
         <div className="team">
           <div className="row">
-            <TeamIcon url={Daisy} display={"Daisy Good"} link={"https://www.linkedin.com/in/daisy-good-49a2a46a"}/>
-            <TeamIcon url={Kat} display={"Kat Gurdak"} link={"https://www.linkedin.com/in/katgurdak"}/>
-            <TeamIcon url={Jarrett} display={"Jarrett Kennedy"} link={"https://www.linkedin.com/in/jarrettk"}/>
-            <TeamIcon url={Ivey} display={"Ivey Topaz"} link={"https://www.linkedin.com/in/ivey-topaz-765a85124"}/>
+            <TeamIcon
+              url={Daisy}
+              display={"Daisy Good"}
+              link={"https://www.linkedin.com/in/daisy-good-49a2a46a"}
+            />
+            <TeamIcon
+              url={Kat}
+              display={"Kat Gurdak"}
+              link={"https://www.linkedin.com/in/katgurdak"}
+            />
+            <TeamIcon
+              url={Jarrett}
+              display={"Jarrett Kennedy"}
+              link={"https://www.linkedin.com/in/jarrettk"}
+            />
+            <TeamIcon
+              url={Ivey}
+              display={"Ivey Topaz"}
+              link={"https://www.linkedin.com/in/ivey-topaz-765a85124"}
+            />
           </div>
         </div>
         <Footer />
       </div>
-    )
-  }
+    );
+  };
+};
 
-}
-
+// for debugging/developing
 Home.propTypes = {
   location: T.object,
   auth: T.instanceOf(AuthService)
 };
-
-// <IconItem url={House} display={"DOG SIT"} info = {"Find trusted dog sitters in your area, or arrange for your OkPluto friends to watch your dogs while you're away"}/>
 
 module.exports = Home;
