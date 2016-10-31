@@ -10,7 +10,7 @@ import Dialog from 'material-ui/Dialog';
 import MeetupCreation from './meetupCreation.jsx'
 import eventServices from '../services/eventServices.js';
 import Snackbar from 'material-ui/Snackbar';
-
+import * as Colors from 'material-ui/styles/colors';
 
 class MeetupDialog extends React.Component {
   constructor(props) {
@@ -21,13 +21,14 @@ class MeetupDialog extends React.Component {
       creator: this.props.userInfo._id,
       attendees: [this.props.userInfo._id, this.props.userId],
       category: 'Dog Park',
-      submitted: false
+      snackbar: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validate = this.validate.bind(this);
+    this.handleSnackbarClose = this.handleSnackbarClose.bind(this);
   }
 
   handleOpen() {
@@ -36,6 +37,10 @@ class MeetupDialog extends React.Component {
 
   handleClose() {
     this.setState({open: false});
+  }
+
+  handleSnackbarClose() {
+    this.setState({snackbar: false});
   }
 
   validate(values) {
@@ -64,7 +69,7 @@ class MeetupDialog extends React.Component {
         .then(function (data){
           console.log('Data: ', data);
           handleClose();
-          self.setState({submitted: true });
+          self.setState({snackbar: true });
         });
     }
     this.setState({"errorText": errors});
@@ -104,9 +109,11 @@ class MeetupDialog extends React.Component {
             </div>
           </Dialog>
           <Snackbar
-            open={this.state.submitted}
+            bodyStyle={{background: Colors.blueGrey600}}
+            open={this.state.snackbar}
             message="Event created successfully"
             autoHideDuration={3000}
+            onRequestClose={this.handleSnackbarClose}
           />
         </div>
       </MuiThemeProvider>
