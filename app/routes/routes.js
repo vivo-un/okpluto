@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var User = require('../models/users');
 var Event = require('../models/events');
@@ -66,7 +66,7 @@ module.exports = function(app) {
 		.exec((err, users) => {
 			if (err) {
 				console.log(err);
-				res.status(404).send("Database error, no users found")
+				res.status(404).send('Database error, no users found')
 			}
 			res.status(201).send({users: users});
 		});
@@ -141,7 +141,7 @@ module.exports = function(app) {
 		.exec((err, events) => {
 			if (err) {
 				console.log(err);
-				res.status(404).send("Database error, no events found")
+				res.status(404).send('Database error, no events found')
 			}
 			res.status(201).send({events: events});
 		});
@@ -154,7 +154,7 @@ module.exports = function(app) {
 			.exec((err, createdEvents) => {
 				if (err) {
 				console.log(err);
-				res.status(404).send("Database error, no events found")
+				res.status(404).send('Database error, no events found')
 			} else {
 				res.status(201).send({attendingEvents: attendingEvents, createdEvents, createdEvents})
 			}
