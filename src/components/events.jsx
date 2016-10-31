@@ -88,6 +88,9 @@ class Events extends React.Component {
     })
   }
 
+// Live update events displayed on page based on user search input
+// TODO: need a debounce function so this doesn't fire contantly
+// as user types
   handleChange(text, userNames) {
     var displayedEvents = this.state.events.filter(event => {
       if(event.eventname && event.loc) {
