@@ -106,7 +106,6 @@ class EventDisplay extends React.Component {
     let attendees = this.state.attendees;
     let index = attendees.indexOf(this.props.userInfo.firstname);
     attendees.splice(index, 1);
-    // this.setState({attendees: attendees})
     removePerson(this.state.eventId)
     .then(updatedEvent => {
       self.setState({
