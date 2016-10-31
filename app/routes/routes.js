@@ -1,5 +1,5 @@
 'use strict';
-// import models from db
+
 var User = require('../models/users');
 var Event = require('../models/events');
 // import dependencies
