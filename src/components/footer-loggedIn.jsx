@@ -1,3 +1,7 @@
+/*
+  This file contains the footer users see after they log in! Using hashHistory, it redirects users to the corresponding description given for the page (Users, Events, or Profile). Note that there's a different footer component to be shown on the home page within footer.jsx (right below this one).
+*/
+
 "use strict";
 
 import React from 'react';
