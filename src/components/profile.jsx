@@ -12,7 +12,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import {Tabs, Tab} from 'material-ui/Tabs'
 import Banner from './banner.jsx';
-import Footer from './footer.jsx';
+import FooterLoggedIn from './footer-loggedIn.jsx';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -111,7 +111,7 @@ class Profile extends React.Component {
             </MuiThemeProvider>
           </div>
         </div>
-        <Footer/>
+        <FooterLoggedIn />
       </div>
     )
   }
