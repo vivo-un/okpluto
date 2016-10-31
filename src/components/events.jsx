@@ -13,7 +13,7 @@ import MyTheme from '../theme/theme.js';
 import EventList from './eventList.jsx'
 import { getDistance } from '../services/distanceServices'
 import Banner from './banner.jsx';
-import Footer from './footer.jsx';
+import FooterLoggedIn from './footer-loggedIn.jsx';
 
 class Events extends React.Component {
   constructor(props) {
@@ -114,7 +114,7 @@ class Events extends React.Component {
         <div className="row" style={{marginBottom: 20}}>
             <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
         </div>
-        <Footer/>
+        <FooterLoggedIn />
       </div>
     )
   }
