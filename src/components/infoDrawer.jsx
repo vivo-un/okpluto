@@ -38,6 +38,7 @@ class InfoDrawer extends React.Component {
     })
   }
 
+  // Reset user info with changes
   resetUserInfo() {
     var self = this;
     findUser()
@@ -46,11 +47,13 @@ class InfoDrawer extends React.Component {
     })
   }
 
+  // Toggle info drawer
   toggleDrawer() {
     this.setState({'open': !this.state.open});
     this.setState({'profileOpen': false})
   }
 
+  // Redirect page to match the button clicked
   reRoute(route) {
     this.toggleDrawer();
     hashHistory.push(route)
@@ -68,6 +71,7 @@ class InfoDrawer extends React.Component {
     if(this.state.info) {
       let children = null;
       if (this.props.children) {
+        // pass auth, userInfo, toggleDrawer function and resetUserInfo function to all child components
         children = React.cloneElement(this.props.children, {
           auth: this.props.auth,
           userInfo: this.state.info,
