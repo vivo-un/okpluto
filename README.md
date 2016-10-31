@@ -76,7 +76,7 @@ npm install
 grunt
 ```
 
-Will open a DB connection, and compile and run the program. Can run grunt build to just compile.
+Will open a DB connection, and compile and run the program. Can run grunt build to just compile. If you have a watch running and it errors out, you may need to run `killall node` before restarting
 
 ### Feature To Do List
 
