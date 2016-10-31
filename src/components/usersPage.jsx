@@ -14,9 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import MyTheme from '../theme/theme.js';
 import { getDistance } from '../services/distanceServices';
 import Banner from './banner.jsx';
-import Footer from './footer.jsx';
-getDistance({lat: 34, lng: -84}, {lat: 35, lng: -82})
-.then(res => console.log(res))
+import FooterLoggedIn from './footer-loggedIn.jsx';
 
 class UsersPage extends React.Component {
 
@@ -86,7 +84,6 @@ class UsersPage extends React.Component {
     })
   }
 
-
   handleChange(text, userNames) {
     var displayedUsers = this.state.users.filter(user => {
       if (user.dogname === undefined) user.dogname = '';
@@ -101,7 +98,6 @@ class UsersPage extends React.Component {
   render () {
     return (
       <div>
-
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <Banner display={'Local Users'}/>
         <div style={{marginBottom: 20}}>
@@ -120,7 +116,7 @@ class UsersPage extends React.Component {
               <UserList users={this.state.displayedUsers} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
           </MuiThemeProvider>
         </div>
-        <Footer/>
+        <FooterLoggedIn />
       </div>
     )
   }
