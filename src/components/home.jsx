@@ -14,6 +14,7 @@ const Ivey = '/assets/ivey.png';
 
 // Stateless Components
 
+// component that will show clickable site features for visitors
 class IconItem extends React.Component {
   constructor(props) {
     super(props);
@@ -31,6 +32,7 @@ class IconItem extends React.Component {
   };
 };
 
+// component that displays the development team and links to their github page
 class TeamIcon extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +49,7 @@ class TeamIcon extends React.Component {
   };
 };
 
+// component for the home page
 class Home extends React.Component {
 
   render () {
