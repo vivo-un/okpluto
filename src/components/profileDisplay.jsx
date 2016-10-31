@@ -16,7 +16,8 @@ class ProfileDisplay extends React.Component {
   constructor(props) {
     super(props);
   }
-
+// Renders profile info, along with button to edit
+// profile, handled by ProfileEditDialog
   render() {
 
     return (
