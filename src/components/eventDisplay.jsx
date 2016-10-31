@@ -10,6 +10,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MyTheme from '../theme/theme.js';
 import { findUser } from '../services/userServices.js'
 import { addPerson, removePerson, deleteEvent } from '../services/eventServices.js'
+import * as Colors from 'material-ui/styles/colors';
 
 const calendar = {
   0: "Jan",
@@ -151,7 +152,7 @@ class EventDisplay extends React.Component {
         </CardMedia>
         <CardText expandable={true}>
           <strong>Creator:</strong> {this.state.creator}<br />
-          <strong>Who's going:</strong>{this.state.attendees.map((person, i) => {
+          <strong>Who's going:</strong> {this.state.attendees.map((person, i) => {
             if (i !== this.state.attendees.length - 1) {
               person += ', ';
             }
@@ -162,6 +163,7 @@ class EventDisplay extends React.Component {
         <CardActions>
           <FlatButton label={this.getTitle()} onClick={this.handleEventButtonClick}/>
           <Snackbar
+            bodyStyle={{background: Colors.blueGrey600}}
             open={this.state.open}
             message={this.state.message}
             autoHideDuration={3000}
