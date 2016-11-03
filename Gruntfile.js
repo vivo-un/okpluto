@@ -88,5 +88,5 @@ module.exports = function(grunt) {
 // open a browser window with the site and watch for changes
   // grunt.registerTask('default', ['build']);
   // grunt.registerTask('kill', ['shell:mongo:kill'])
-  grunt.registerTask('default', ['browserify']);
+  grunt.registerTask('browserify', ['browserify']);
 }

@@ -35,7 +35,7 @@
     "express": "^4.14.0",
     "google-maps": "^3.2.1",
     "grunt": "1.0.1",
-    "grunt-browserify": "^5.0.0",
+    "grunt-browserify": "5.0.0",
     "grunt-cli": "1.2.0",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-watch": "1.0.0",
@@ -52,9 +52,5 @@
     "react-router": "^2.8.1",
     "react-tap-event-plugin": "^1.0.0",
     "request": "^2.76.0"
-  },
-  "scripts":{
-    "postinstall":"grunt browserify",
-    "start":"node server.js"
   }
 }
