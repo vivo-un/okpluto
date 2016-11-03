@@ -96520,7 +96520,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Setting up auth service
 
 // import { auth0 } from '../config/auth0.js';
-var auth = new _AuthService2.default(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN);
+var auth = new _AuthService2.default('B7Tb8f5Dw3ZgCuMoBsxtdCNY3NoF42oN', process.env.AUTH0_DOMAIN);
 
 // check for authenication in all protected routes
 var requireAuth = function requireAuth(nextState, replace) {
