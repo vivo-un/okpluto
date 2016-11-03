@@ -96456,6 +96456,7 @@ function extend() {
 }
 
 },{"./has-keys":703,"object-keys":437}],705:[function(require,module,exports){
+(function (process){
 "use strict";
 
 //Controls React Routes, sets up auth0 service
@@ -96519,7 +96520,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // Setting up auth service
 
 // import { auth0 } from '../config/auth0.js';
-var auth = new _AuthService2.default('process.env.AUTH0_CLIENT_ID', 'process.env.AUTH0_DOMAIN');
+var auth = new _AuthService2.default(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN);
 
 // check for authenication in all protected routes
 var requireAuth = function requireAuth(nextState, replace) {
@@ -96556,7 +96557,8 @@ _reactDom2.default.render(_react2.default.createElement(
   )
 ), (0, _jquery2.default)('#app')[0]);
 
-},{"./components/container.jsx":707,"./components/events.jsx":711,"./components/home.jsx":714,"./components/infoDrawer.jsx":715,"./components/loading.jsx":716,"./components/profile.jsx":721,"./components/profileCreation.jsx":722,"./components/usersPage.jsx":728,"./utils/AuthService.jsx":733,"jquery":281,"react":681,"react-dom":458,"react-router":491,"react-tap-event-plugin":505}],706:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"./components/container.jsx":707,"./components/events.jsx":711,"./components/home.jsx":714,"./components/infoDrawer.jsx":715,"./components/loading.jsx":716,"./components/profile.jsx":721,"./components/profileCreation.jsx":722,"./components/usersPage.jsx":728,"./utils/AuthService.jsx":733,"_process":447,"jquery":281,"react":681,"react-dom":458,"react-router":491,"react-tap-event-plugin":505}],706:[function(require,module,exports){
 "use strict";
 
 var _react = require("react");
