@@ -4,6 +4,7 @@ var User = require('../models/users');
 var Event = require('../models/events');
 // import dependencies
 var request = require('request');
+require('dotenv').config();
 // var configKey = require('../../config/api.js');
 var apiKeys = process.env.API_KEY;
 // import API keys
