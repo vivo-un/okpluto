@@ -21,7 +21,7 @@ import InfoDrawer from './components/infoDrawer.jsx'
 import DogRental from './components/rentalPage.jsx'
 
 // Setting up auth service
-const auth = new AuthService('process.env.AUTH0_CLIENT_ID', 'process.env.AUTH0_DOMAIN');
+const auth = new AuthService(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN);
 
 
 // check for authenication in all protected routes
