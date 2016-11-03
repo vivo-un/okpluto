@@ -9,6 +9,7 @@ const Logo = '/assets/logo.png';
 export default class AuthService {
   constructor(clientId, domain) {
     console.log(clientId);
+    console.log(process.env);
     //Set custom signup fields
     var options = {
       additionalSignUpFields: [{
