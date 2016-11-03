@@ -52,7 +52,8 @@ module.exports = function(grunt) {
         src: ['src/**/*.jsx'],
         dest: 'public/bundle.js'
       }
-    },
+    }
+  });
 
 // Opens a new browser window each time nodemon starts up
   //   nodemon: {
@@ -88,5 +89,5 @@ module.exports = function(grunt) {
 // open a browser window with the site and watch for changes
   // grunt.registerTask('default', ['build']);
   // grunt.registerTask('kill', ['shell:mongo:kill'])
-  grunt.registerTask('browserify', ['browserify']);
+  grunt.registerTask('default', ['browserify']);
 }
