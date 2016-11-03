@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "grunt build",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -40,11 +42,13 @@
     "jquery": "^3.1.1",
     "material-ui": "^0.16.1",
     "mongoose": "^4.6.4",
+    "morgan": "^1.7.0",
     "open": "0.0.5",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
-    "react-tap-event-plugin": "^1.0.0"
+    "react-tap-event-plugin": "^1.0.0",
+    "request": "^2.76.0"
   }
 }

@@ -7,6 +7,7 @@ var request = require('request');
 // import API keys
 var authPath = require('../../config/auth0');
 var api = require('../../config/api.js');
+var preData = require('../../config/data');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
 	key: api.API_KEY
@@ -70,6 +71,7 @@ module.exports = function(app) {
 				console.log(err);
 				res.status(404).send('Database error, no users found')
 			}
+			console.log('user list:',users);
 			res.status(201).send({users: users});
 		});
 	});
@@ -116,6 +118,42 @@ module.exports = function(app) {
 			})
 		})
 	});
+
+	//pre-populate database
+	app.get('/api/populate', (req, res) => {
+		preData.forEach(user => {
+			User.findOne({
+				'id': user.id
+			}).exec((err, existingUser) => {
+					if (!existingUser) {
+					//Create user in mongoDB
+					new User ({
+						id: user.id,
+						firstname: user.firstname,
+						lastname: user.lastname,
+						profilepic: user.profilepic,
+						username: user.username,
+						loc: user.loc,
+					  lat: user.lat,
+					  lng: user.lng,
+					  picLink: user.picLink,
+					  dogname: user.dogname,
+					  dogLikes: user.dogLikes,
+					  dogBreed: user.dogBreed,
+					  dogAge: user.dogAge,
+					  events: user.events,
+					  rentDog: user.rentDog
+					}).save((err, user) => {
+						if (err) console.log(err);
+						console.log('user saved:',user);
+					})
+				}
+			})
+		});
+		res.status(200).send(preData);
+	});
+
+
   // update users by finding their id from the db
 	app.put('/api/users', (req, res) => {
 		User.findById(req.body.dbId, (err, user) => {
