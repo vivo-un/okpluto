@@ -67,7 +67,7 @@ axios.get('/env')
 
   })
   .catch(function(err){
-    console.log(error);
+    console.log(err);
   });
 // Container is a parent route that passes authenication service to all
 // of its children

@@ -4,6 +4,9 @@ var express = require('express');
 const morgan = require('morgan');
 var app = express();
 var bodyParser = require('body-parser');
+var id = require('./config/auth0')
+var auth0ID = process.env.AUTH0_CLIENT_ID || id.auth0.AUTH0_CLIENT_ID;
+console.log('auth id is ', auth0ID);
 
 // setting port
 var port = process.env.PORT || 8080;
@@ -35,8 +38,9 @@ app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 
+//need to protect this route
 app.get('/env', function(req, res){
-  res.end(process.env.AUTH0_CLIENT_ID);
+  res.end(auth0ID);
 });
 
 // routes
