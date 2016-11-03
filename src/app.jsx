@@ -19,9 +19,8 @@ import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
 import InfoDrawer from './components/infoDrawer.jsx'
 import DogRental from './components/rentalPage.jsx'
-
 // Setting up auth service
-const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
+const auth = new AuthService(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
 
 
 // check for authenication in all protected routes
