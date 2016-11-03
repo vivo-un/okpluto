@@ -39,6 +39,7 @@
     "google-maps": "^3.2.1",
     "grunt": "1.0.1",
     "grunt-cli": "1.2.0",
+    "grunt-contrib-watch": "1.0.0",
     "jquery": "^3.1.1",
     "material-ui": "^0.16.1",
     "mongoose": "^4.6.4",
@@ -49,5 +50,9 @@
     "react-router": "^2.8.1",
     "react-tap-event-plugin": "^1.0.0",
     "request": "^2.76.0"
+  },
+  "scripts":{
+    "postinstall":"grunt build",
+    "start":"grunt"
   }
 }
