@@ -96615,13 +96615,18 @@ var _infoDrawer = require('./components/infoDrawer.jsx');
 
 var _infoDrawer2 = _interopRequireDefault(_infoDrawer);
 
+var _envVariable = require('env-variable');
+
+var _envVariable2 = _interopRequireDefault(_envVariable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import { auth0 } from '../config/auth0.js';
-var env = require('env-variable')();
+(0, _envVariable2.default)();
 
 // Setting up auth service
-var auth = new _AuthService2.default(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
+
+// import { auth0 } from '../config/auth0.js';
+var auth = new _AuthService2.default(_envVariable2.default.AUTH0_CLIENT_ID, _envVariable2.default.AUTH0_DOMAIN);
 
 // check for authenication in all protected routes
 var requireAuth = function requireAuth(nextState, replace) {
