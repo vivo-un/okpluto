@@ -19,7 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import InfoDrawer from './components/infoDrawer.jsx';
 
 // Setting up auth service
-const auth = new AuthService(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN);
+const auth = new AuthService('B7Tb8f5Dw3ZgCuMoBsxtdCNY3NoF42oN', process.env.AUTH0_DOMAIN);
 
 
 // check for authenication in all protected routes
