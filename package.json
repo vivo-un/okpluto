@@ -54,7 +54,7 @@
     "request": "^2.76.0"
   },
   "scripts":{
-    "postinstall":"grunt",
+    "postinstall":"grunt browserify",
     "start":"node server.js"
   }
 }
