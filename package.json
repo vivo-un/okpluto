@@ -56,4 +56,5 @@
   "scripts":{
     "postinstall":"grunt",
     "start":"node server.js"
+  }
 }
