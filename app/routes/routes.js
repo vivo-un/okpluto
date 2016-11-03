@@ -4,8 +4,8 @@ var User = require('../models/users');
 var Event = require('../models/events');
 // import dependencies
 var request = require('request');
-var configKey = require('../../config/api.js');
-var apiKeys = process.env.API_KEY || configKey.API_KEY;
+// var configKey = require('../../config/api.js');
+var apiKeys = process.env.API_KEY;
 // import API keys
 // var authPath = require('../../config/auth0');
 // var api = require('../../config/api.js');
