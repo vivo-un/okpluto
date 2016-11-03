@@ -8,7 +8,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import AuthService from './utils/AuthService.jsx';
 import $ from 'jquery';
 import Home from './components/home.jsx';
-import { auth0 } from '../config/auth0.js';
+// import { auth0 } from '../config/auth0.js';
 import UsersPage from './components/usersPage.jsx';
 import Container from './components/container.jsx';
 import Profile from './components/profile.jsx';
@@ -17,9 +17,13 @@ import ProfileCreation from './components/profileCreation.jsx';
 import Loading from './components/loading.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import InfoDrawer from './components/infoDrawer.jsx';
+var env = require('env-variable')({
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID
+});
 
 // Setting up auth service
-const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
+const auth = new AuthService(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
 
 
 // check for authenication in all protected routes

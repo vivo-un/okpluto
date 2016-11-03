@@ -3,6 +3,10 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var env = require('env-variable')({
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID
+});
 
 // setting port
 var port = process.env.PORT || 8080;
