@@ -4,12 +4,14 @@ var User = require('../models/users');
 var Event = require('../models/events');
 // import dependencies
 var request = require('request');
+var configKey = require('../../config/api.js');
+var apiKeys = process.env.API_KEY || configKey.API_KEY;
 // import API keys
 // var authPath = require('../../config/auth0');
 // var api = require('../../config/api.js');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
-	key: process.env.API_KEY
+	key: apiKeys
 });
 
 module.exports = function(app) {
@@ -78,7 +80,7 @@ module.exports = function(app) {
 		//Auth0 user ID
 		var id = req.body.id;
 		//POST path to retrieve user info from Auth0
-		var url = 'https://' + process.env.AUTH0_DOMAIN + '/tokeninfo';
+		var url = 'https://' + 'vivou.auth0.com' + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
 			//Look for user in mongoDB
