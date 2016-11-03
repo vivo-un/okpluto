@@ -20,7 +20,8 @@ var userSchema = mongoose.Schema({
   dogLikes: [String],
   dogBreed: String,
   dogAge: Number,
-  events: [String]
+  events: [String],
+  rentDog: Boolean
 });
 
 var User = mongoose.model('User', userSchema);

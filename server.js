@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+const morgan = require('morgan');
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -12,6 +13,7 @@ var port = process.env.PORT || 8080;
 var db = require('./config/db');
 
 // serving static files
+app.use(morgan('combined'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
