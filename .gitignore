@@ -1,6 +1,7 @@
-public/bundle.js
+
 config/auth0.js
 config/api.js
+
 
 ## Mac OSX ##
 .DS_Store
