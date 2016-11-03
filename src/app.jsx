@@ -21,19 +21,20 @@ import axios from 'axios';
 // import env from 'env-variable';
 // env();
 var env;
+var auth;
 
 axios.get('/env')
   .then(function(response){
     console.log(response.body);
     console.log(response.data);
     env = response.data;
+    auth = new AuthService(env, 'vivou.auth0.com');
   })
   .catch(function(err){
     console.log(error);
   });
 
 // Setting up auth service
-const auth = new AuthService(env, 'vivou.auth0.com');
 
 
 // check for authenication in all protected routes

@@ -97908,17 +97908,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var env;
 // import { auth0 } from '../config/auth0.js';
 
+var auth;
 
 _axios2.default.get('/env').then(function (response) {
   console.log(response.body);
   console.log(response.data);
   env = response.data;
+  auth = new _AuthService2.default(env, 'vivou.auth0.com');
 }).catch(function (err) {
   console.log(error);
 });
 
 // Setting up auth service
-var auth = new _AuthService2.default(env, 'vivou.auth0.com');
+
 
 // check for authenication in all protected routes
 var requireAuth = function requireAuth(nextState, replace) {
