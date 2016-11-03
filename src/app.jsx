@@ -19,9 +19,23 @@ import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
 import InfoDrawer from './components/infoDrawer.jsx'
 import DogRental from './components/rentalPage.jsx'
+import axios from 'axios';
+// import env from 'env-variable';
+// env();
+var env;
+
+axios.get('/env')
+  .then(function(response){
+    console.log(response.body);
+    console.log(response.data);
+    env = response.data;
+  })
+  .catch(function(err){
+    console.log(error);
+  });
 
 // Setting up auth service
-const auth = new AuthService(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
+const auth = new AuthService(env, 'vivou.auth0.com');
 
 
 // check for authenication in all protected routes
