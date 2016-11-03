@@ -42,7 +42,7 @@ module.exports = function(grunt) {
             ['babelify', {
               presets: ['es2015', 'react']
             }]
-          ],
+          ]
           // watch: true,
           // browserifyOptions: {
           //   debug: true,
@@ -88,5 +88,5 @@ module.exports = function(grunt) {
 // open a browser window with the site and watch for changes
   // grunt.registerTask('default', ['build']);
   // grunt.registerTask('kill', ['shell:mongo:kill'])
-  grunt.registerTask('build', ['browserify']);
+  grunt.registerTask('default', ['browserify']);
 }
