@@ -100467,6 +100467,7 @@ exports.default = {
 };
 
 },{"material-ui/styles/colors":404,"material-ui/styles/spacing":406,"material-ui/styles/zIndex":409}],733:[function(require,module,exports){
+(function (process){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -100496,6 +100497,7 @@ var AuthService = function () {
     _classCallCheck(this, AuthService);
 
     console.log(clientId);
+    console.log(process.env);
     //Set custom signup fields
     var options = {
       additionalSignUpFields: [{
@@ -100612,4 +100614,5 @@ var AuthService = function () {
 
 exports.default = AuthService;
 
-},{"../services/userServices.js":731,"auth0-lock":70,"react-router":491}]},{},[705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,733]);
+}).call(this,require('_process'))
+},{"../services/userServices.js":731,"_process":447,"auth0-lock":70,"react-router":491}]},{},[705,706,707,708,709,710,711,712,713,714,715,716,717,718,719,720,721,722,723,724,725,726,727,728,733]);
