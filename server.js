@@ -4,9 +4,7 @@ var express = require('express');
 const morgan = require('morgan');
 var app = express();
 var bodyParser = require('body-parser');
-var id = require('./config/auth0')
-var auth0ID = process.env.AUTH0_CLIENT_ID || id.auth0.AUTH0_CLIENT_ID;
-console.log('auth id is ', auth0ID);
+var auth0ID = process.env.AUTH0_CLIENT_ID;
 
 // setting port
 var port = process.env.PORT || 8080;
