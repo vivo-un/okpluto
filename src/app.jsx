@@ -12,6 +12,7 @@ import { auth0 } from '../config/auth0.js';
 import UsersPage from './components/usersPage.jsx'
 import Container from './components/container.jsx'
 import Profile from './components/profile.jsx'
+import DogProfile from './components/dogProfile.jsx'
 import Events from './components/events.jsx'
 import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
@@ -46,6 +47,7 @@ ReactDOM.render(
         <Route path="/users" component={UsersPage} onEnter={requireAuth} />
         <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
+        <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
       </Route>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
