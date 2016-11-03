@@ -17,10 +17,7 @@ import ProfileCreation from './components/profileCreation.jsx';
 import Loading from './components/loading.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import InfoDrawer from './components/infoDrawer.jsx';
-var env = require('env-variable')({
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID
-});
+var env = require('env-variable')();
 
 // Setting up auth service
 const auth = new AuthService(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
