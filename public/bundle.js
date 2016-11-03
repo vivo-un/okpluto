@@ -97915,47 +97915,46 @@ _axios2.default.get('/env').then(function (response) {
   console.log(response.data);
   env = response.data;
   auth = new _AuthService2.default(env, 'vivou.auth0.com');
+  // Setting up auth service
+
+
+  // check for authenication in all protected routes
+  var requireAuth = function requireAuth(nextState, replace) {
+    if (!auth.loggedIn()) {
+      replace({ pathname: '/' });
+    }
+  };
+
+  // Allows onTouchTap to work in material ui components
+  (0, _reactTapEventPlugin2.default)();
+
+  // Container is a parent route that passes authenication service to all
+  // of its children
+  // Info drawer is a parent route that loads in the current users info,
+  // and passes it as props to all direct child routes
+  // "access_token" route is so auth0 login has a route that matches it
+  // otherwise login will fail
+  _reactDom2.default.render(_react2.default.createElement(
+    _reactRouter.Router,
+    { history: _reactRouter.hashHistory },
+    _react2.default.createElement(
+      _reactRouter.Route,
+      { path: '/', component: _container2.default, auth: auth },
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { component: _infoDrawer2.default },
+        _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _usersPage2.default, onEnter: requireAuth }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/events', component: _events2.default, onEnter: requireAuth, creation: false }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: _profile2.default, onEnter: requireAuth, creation: false })
+      ),
+      _react2.default.createElement(_reactRouter.Route, { path: '/creation', component: _profileCreation2.default, onEnter: requireAuth, creation: true }),
+      _react2.default.createElement(_reactRouter.Route, { path: 'access_token=:token', component: _loading2.default })
+    )
+  ), (0, _jquery2.default)('#app')[0]);
 }).catch(function (err) {
   console.log(error);
 });
-
-// Setting up auth service
-
-
-// check for authenication in all protected routes
-var requireAuth = function requireAuth(nextState, replace) {
-  if (!auth.loggedIn()) {
-    replace({ pathname: '/' });
-  }
-};
-
-// Allows onTouchTap to work in material ui components
-(0, _reactTapEventPlugin2.default)();
-
-// Container is a parent route that passes authenication service to all
-// of its children
-// Info drawer is a parent route that loads in the current users info,
-// and passes it as props to all direct child routes
-// "access_token" route is so auth0 login has a route that matches it
-// otherwise login will fail
-_reactDom2.default.render(_react2.default.createElement(
-  _reactRouter.Router,
-  { history: _reactRouter.hashHistory },
-  _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/', component: _container2.default, auth: auth },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _home2.default }),
-    _react2.default.createElement(
-      _reactRouter.Route,
-      { component: _infoDrawer2.default },
-      _react2.default.createElement(_reactRouter.Route, { path: '/users', component: _usersPage2.default, onEnter: requireAuth }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/events', component: _events2.default, onEnter: requireAuth, creation: false }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: _profile2.default, onEnter: requireAuth, creation: false })
-    ),
-    _react2.default.createElement(_reactRouter.Route, { path: '/creation', component: _profileCreation2.default, onEnter: requireAuth, creation: true }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'access_token=:token', component: _loading2.default })
-  )
-), (0, _jquery2.default)('#app')[0]);
 
 },{"./components/container.jsx":732,"./components/events.jsx":736,"./components/home.jsx":739,"./components/infoDrawer.jsx":740,"./components/loading.jsx":741,"./components/profile.jsx":746,"./components/profileCreation.jsx":747,"./components/usersPage.jsx":753,"./utils/AuthService.jsx":758,"axios":106,"jquery":306,"react":706,"react-dom":483,"react-router":516,"react-tap-event-plugin":530}],731:[function(require,module,exports){
 "use strict";
