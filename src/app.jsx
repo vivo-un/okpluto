@@ -19,6 +19,7 @@ import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
 import InfoDrawer from './components/infoDrawer.jsx'
 import DogRental from './components/rentalPage.jsx'
+
 // Setting up auth service
 const auth = new AuthService(env.AUTH0_CLIENT_ID, env.AUTH0_DOMAIN);
 
