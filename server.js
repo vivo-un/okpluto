@@ -3,10 +3,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var env = require('env-variable')({
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID
-});
 
 // setting port
 var port = process.env.PORT || 8080;
@@ -36,6 +32,10 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+
+app.get('/env', function(req, res){
+  res.end(process.env.AUTH0_CLIENT_ID);
+});
 
 // routes
 require('./app/routes/routes')(app)
