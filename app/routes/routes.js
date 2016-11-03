@@ -5,7 +5,7 @@ var Event = require('../models/events');
 // import dependencies
 var request = require('request');
 // import API keys
-var authPath = require('../../config/auth0');
+// var authPath = require('../../config/auth0');
 var api = require('../../config/api.js');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
@@ -78,7 +78,7 @@ module.exports = function(app) {
 		//Auth0 user ID
 		var id = req.body.id;
 		//POST path to retrieve user info from Auth0
-		var url = 'https://' + authPath.auth0.AUTH0_DOMAIN + '/tokeninfo';
+		var url = 'https://' + process.env.auth0.AUTH0_DOMAIN + '/tokeninfo';
 		request.post(url, { json: {id_token: id} } , (err, response) => {
 			if (err) console.log(err)
 			//Look for user in mongoDB
