@@ -34,6 +34,7 @@ class UsersPage extends React.Component {
       var userDests = [];
       var tracker = 0;
 
+//displaying users dog in rental
       //Don't display current user
       // users.users = users.users.filter((user) => {
       //   return user._id !== this.props.userInfo._id;
