@@ -28,6 +28,7 @@ class UsersPage extends React.Component {
 
   componentDidMount() {
     var self = this;
+    console.log("hello", this);
     getUsers()
     .then((users) => {
       var userDests = [];
@@ -81,10 +82,8 @@ class UsersPage extends React.Component {
 //get users who have dog for rent
 
       let dogsForRent = users.users.filter((user) => {
-        if(user.rentDog === true){
-          return user;
-        }
-      )};
+        return user.rentDog === true;
+      });
 
       //got rid of sortedUsers we could sort users with dog for rent
       //let sortedUsers = users.users
