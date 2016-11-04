@@ -5,6 +5,7 @@
 // to get user's profile info
 
 
+
 import React from 'react';
 import {
   Step,
@@ -20,6 +21,8 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
+import {bindAll} from 'lodash';
+import $ from 'jquery';
 
 const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
 
@@ -78,7 +81,11 @@ class ProfileCreation extends React.Component {
       picLink:"",
       rentDog: false,
       switch: false,
-      errorText: {}
+      errorText: {},
+      data_uri:null,
+      processing:false,
+      filename:'',
+      filetype:''
     }
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
@@ -160,6 +167,48 @@ class ProfileCreation extends React.Component {
     }
   }
 
+  handleImgUpload(event) {
+    event.preventDefault();
+    const _this = this;
+
+    this.setState({
+      processing: true
+    });
+
+    const promise = $.ajax({
+      url: '/sign-s3',
+      type: "GET",
+      data: {
+        filename: this.state.filename,
+        filetype: this.state.filetype
+      },
+      dataType: 'json'
+    });
+
+    promise.done(function(data){
+      console.log('response data',data);
+      _this.setState({
+        processing: false,
+        uploaded_uri: data.uri
+      });
+    });
+  }
+  handleFile(event) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+
+    reader.onload = (upload) => {
+      this.setState({
+        data_uri: upload.target.result,
+        filename: file.name,
+        filetype: file.type
+      });
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+
 // Material ui - info for step form with 2 steps (user info and dog info)
   getStepContent(stepIndex) {
     switch (stepIndex) {
@@ -219,14 +268,17 @@ class ProfileCreation extends React.Component {
               name = "dogAge"
               errorText = {this.state.errorText.dogAge}
             /><br />
-            <TextField
-              hintText="Dog Profile Pic"
-              floatingLabelText="Dog Profile Pic"
-              value = {this.state.picLink}
-              onChange = {this.handleChange.bind(this, 'picLink')}
-              name = "picLink"
-              errorText = {this.state.errorText.picLink}
-            /><br />
+            <div className='row'>
+              <div className='col-sm-12'>
+                <label>Upload an image</label>
+                <form onSubmit={this.handleImgUpload} encType="multipart/form-data">
+                  <input type="file" onChange={this.handleFile} />
+                  <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+                  {processing}
+                </form>
+                {uploaded}
+              </div>
+            </div>
             <Toggle
             label="Rent-My-Dog"
             toggled = {this.state.rentDog}
@@ -250,6 +302,24 @@ class ProfileCreation extends React.Component {
   render() {
     const {finished, stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
+
+    // Process Image
+    // let processing;
+    // let uploaded;
+
+    // if (this.state.uploaded_uri) {
+    //   uploaded = (
+    //     <div>
+    //       <h4>Image uploaded!</h4>
+    //       <img className='image-preview' src={this.state.uploaded_uri} />
+    //       <pre className='image-link-box'>{this.state.uploaded_uri}</pre>
+    //     </div>
+    //   );
+    // }
+
+    // if (this.state.processing) {
+    //   processing = "Processing image, hang tight";
+    // }
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
