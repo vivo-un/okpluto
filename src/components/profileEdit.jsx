@@ -16,7 +16,8 @@ class ProfileEdit extends React.Component {
     super(props);
 
     this.state = {
-      switch: false
+      //switch: false
+      switch: this.props.profile.rentDog
     };
   }
 
@@ -35,6 +36,8 @@ class ProfileEdit extends React.Component {
 
   handleSwitchChange() {
     this.setState({switch: !this.state.switch});
+    //this.setState({this.props.profile.rentDog: !this.props.profile.rentDog });
+    //this.setState({switch:!this.props.profile.rentDog});
   };
 
 
@@ -108,8 +111,8 @@ class ProfileEdit extends React.Component {
           /><br />
           <Toggle
             label="Rent-My-Dog"
+            toggled = {this.props.profile.rentDog}
             onClick = {this.handleSwitchChange.bind(this)}
-            toggled = {this.state.switch}
             onToggle = {this.handleChange.bind(this, 'rentDog')}
             name = "rentDog"
             labelPosition="right"
