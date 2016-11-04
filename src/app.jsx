@@ -49,11 +49,8 @@ ReactDOM.render(
         <Route path="/users" component={UsersPage} onEnter={requireAuth} />
         <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
-<<<<<<< f44fc55cd0387dab82acbfdb51f264b571270f8b
         <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
-=======
         <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
->>>>>>> changes to rental page, info drawer, footer, and app
       </Route>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
