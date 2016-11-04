@@ -122,7 +122,7 @@ module.exports = function(app) {
 		})
 	});
 
-	//pre-populate database
+	//pre-populate database with data in config/data.js
 	app.get('/api/populate', (req, res) => {
 		preData.forEach(user => {
 			User.findOne({
