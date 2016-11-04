@@ -35,9 +35,9 @@ class UsersPage extends React.Component {
       var tracker = 0;
 
       //Don't display current user
-      users.users = users.users.filter((user) => {
-        return user._id !== this.props.userInfo._id;
-      });
+      // users.users = users.users.filter((user) => {
+      //   return user._id !== this.props.userInfo._id;
+      // });
 
       // Set searchable options
       var searchArray = [];
