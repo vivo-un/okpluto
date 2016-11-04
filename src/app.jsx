@@ -6,7 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import AuthService from './utils/AuthService.jsx';
-import { auth0 } from '../config/auth0.js';
 import $ from 'jquery';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 //components
@@ -22,7 +21,7 @@ import InfoDrawer from './components/infoDrawer.jsx'
 import DogRental from './components/rentalPage.jsx'
 
 // Setting up auth service
-const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
+const auth = new AuthService(process.env.AUTH0_CLIENT_ID, process.env.AUTH0_DOMAIN);
 
 
 // check for authenication in all protected routes
