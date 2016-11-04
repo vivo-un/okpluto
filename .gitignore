@@ -7,4 +7,5 @@ config/api.js
 
 ## NPM ##
 node_modules/
+data/
 

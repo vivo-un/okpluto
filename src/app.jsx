@@ -6,9 +6,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import AuthService from './utils/AuthService.jsx';
-import $ from 'jquery';
-import Home from './components/home.jsx';
 import { auth0 } from '../config/auth0.js';
+import $ from 'jquery';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+//components
+import Home from './components/home.jsx';
 import UsersPage from './components/usersPage.jsx'
 import Container from './components/container.jsx'
 import Profile from './components/profile.jsx'
@@ -16,8 +18,8 @@ import DogProfile from './components/dogProfile.jsx'
 import Events from './components/events.jsx'
 import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import InfoDrawer from './components/infoDrawer.jsx'
+import DogRental from './components/rentalPage.jsx'
 
 // Setting up auth service
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
@@ -48,6 +50,7 @@ ReactDOM.render(
         <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
         <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
+        <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
       </Route>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
