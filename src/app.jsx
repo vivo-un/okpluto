@@ -50,20 +50,22 @@ axios.get('/env')
     // and passes it as props to all direct child routes
     // "access_token" route is so auth0 login has a route that matches it
     // otherwise login will fail
-    ReactDOM.render(
-      <Router history={hashHistory}>
-        <Route path="/" component={Container} auth={auth}>
-          <IndexRoute component={Home} />
-          <Route component={InfoDrawer} >
-            <Route path="/users" component={UsersPage} onEnter={requireAuth} />
-            <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
-            <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
-          </Route>
-          <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
-          <Route path="access_token=:token" component={Loading} />
-        </Route>
-      </Router>, $('#app')[0]
-    );
+ReactDOM.render(
+  <Router history={hashHistory}>
+    <Route path="/" component={Container} auth={auth}>
+      <IndexRoute component={Home} />
+      <Route component={InfoDrawer} >
+        <Route path="/users" component={UsersPage} onEnter={requireAuth} />
+        <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
+        <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
+        <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
+        <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
+      </Route>
+      <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
+      <Route path="access_token=:token" component={Loading} />
+    </Route>
+  </Router>, $('#app')[0]
+);
 
   })
   .catch(function(err){
