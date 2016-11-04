@@ -17,6 +17,7 @@ import MyTheme from '../theme/theme.js';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
 import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
 
@@ -75,6 +76,8 @@ class ProfileCreation extends React.Component {
       dogBreed: "",
       dogAge: "",
       picLink:"",
+      rentDog: false,
+      switch: false,
       errorText: {}
     }
     this.handleNext = this.handleNext.bind(this);
@@ -97,6 +100,7 @@ class ProfileCreation extends React.Component {
         this.setState({"dogBreed": user.dogBreed || ""});
         this.setState({"dogAge": user.dogAge || ""});
         this.setState({"picLink": user.picLink || ""});
+        this.setState({"rentDog": user.rentDog || false});
       })
     }, 1000)
   }
@@ -104,9 +108,17 @@ class ProfileCreation extends React.Component {
 // Updates State to match user input
   handleChange(prop, event) {
     let change = {};
-    change[prop] = event.target.value
+    if(prop === 'rentDog'){
+      console.log(this.state.switch);
+      change[prop] = !this.state.switch;
+    } else {
+      change[prop] = event.target.value
+    }
     this.setState(change);
   }
+  handleSwitchChange() {
+    this.setState({switch: !this.state.switch});
+  };
 
 // Does error checking on form iput, and either displays error message,
 // or updates user in DB and redirects to users page after step 1 is complete
@@ -215,8 +227,19 @@ class ProfileCreation extends React.Component {
               name = "picLink"
               errorText = {this.state.errorText.picLink}
             /><br />
+            <Toggle
+            label="Rent-My-Dog"
+            toggled = {this.state.rentDog}
+            onClick = {this.handleSwitchChange.bind(this)}
+            onToggle = {this.handleChange.bind(this, 'rentDog')}
+            name = "rentDog"
+            labelPosition="right"
+            />
+            {this.state.switch ? 'On' : 'Off'}
           </form>
+
       )
+
       default:
         return '';
     }

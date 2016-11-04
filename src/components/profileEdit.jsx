@@ -7,19 +7,39 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
+import Toggle from 'material-ui/Toggle';
 import MyTheme from '../theme/theme.js';
 
 class ProfileEdit extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      //switch: false
+      switch: this.props.profile.rentDog
+    };
   }
 
 // Grabs value from form, updates state of profileEditDialog
   handleChange(prop, event) {
-    this.props.profile[prop] = event.target.value;
+    console.log('prop', prop);
+    console.log('onChange Value', this.props.profile);
+    if(prop === 'rentDog'){
+      this.props.profile[prop] = !this.state.switch;
+    } else {
+      this.props.profile[prop] = event.target.value;
+    }
+
     this.props.change(this.props.profile);
-  }
+  };
+
+  handleSwitchChange() {
+    this.setState({switch: !this.state.switch});
+    //this.setState({this.props.profile.rentDog: !this.props.profile.rentDog });
+    //this.setState({switch:!this.props.profile.rentDog});
+  };
+
 
   render () {
     return (
@@ -89,12 +109,23 @@ class ProfileEdit extends React.Component {
             name = "picLink"
             errorText = {this.props.error.picLink}
           /><br />
+          <Toggle
+            label="Rent-My-Dog"
+            toggled = {this.props.profile.rentDog}
+            onClick = {this.handleSwitchChange.bind(this)}
+            onToggle = {this.handleChange.bind(this, 'rentDog')}
+            name = "rentDog"
+            labelPosition="right"
+          />
+          {this.props.profile.rentDog ? 'On' : 'Off'}
         </div>
       </MuiThemeProvider>
     )
   }
 
 }
+
+//onClick = {this.handleSwitchChange.bind(this)}
 
 
 module.exports = ProfileEdit;
