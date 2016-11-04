@@ -1,5 +1,6 @@
 'use strict';
-
+require('dotenv').config({silent: false});
+var auth0ID = process.env.AUTH0_CLIENT_ID;
 var express = require('express');
 const morgan = require('morgan');
 var app = express();
@@ -15,10 +16,18 @@ var port = process.env.PORT || 8080;
 var db = require('./config/db');
 
 // serving static files
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// enable cors
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 //Route queries searches for db
 app.use((req, res, next) => {
   if (req.query.dbId) {

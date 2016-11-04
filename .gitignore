@@ -1,7 +1,9 @@
 .env
+*.env
 config/auth0.js
 config/api.js
 Gruntfile.js
+config/data.js
 
 ## Mac OSX ##
 .DS_Store

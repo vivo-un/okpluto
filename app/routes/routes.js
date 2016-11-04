@@ -15,8 +15,39 @@ var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
 	key: apiKeys
 });
+const aws = require('aws-sdk');
+const S3_BUCKET = 'okpluto';
 
 module.exports = function(app) {
+
+	//======== Picture upload to AWS =======//
+	app.get('/sign-s3', (req, res) => {
+		aws.config.region = 'us-east-2';
+  	aws.config.accessKeyId = process.env.ACCESS_Key_ID;
+  	aws.config.secretAccessKey = process.env.SECRET_ACCESS_Key;
+		const s3 = new aws.S3();
+		const fileName = req.query['file-name'];
+		const fileType = req.query['file-type'];
+		const s3Params = {
+			Bucket: S3_BUCKET,
+			Key: fileName,
+			Expires: 600,
+			ContentType: fileType,
+			ACL: 'public-read'
+		};
+		s3.getSignedUrl('putObject', s3Params, (err,data) => {
+			if(err) {
+				console.log('get signed url error:', err)
+				return res.end();
+			}
+			const returnData = {
+				signedRequest: data,
+				url: `https://s3.${aws.config.region}.amazonaws.com/${S3_BUCKET}/${fileName}`
+			};
+			res.status(200).send(JSON.stringify(returnData));
+		})
+
+	})
 
 	//======Location End Points=======//
 
@@ -122,7 +153,7 @@ module.exports = function(app) {
 		})
 	});
 
-	//pre-populate database
+	//pre-populate database with data in config/data.js
 	app.get('/api/populate', (req, res) => {
 		preData.forEach(user => {
 			User.findOne({
