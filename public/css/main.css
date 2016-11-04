@@ -20,7 +20,21 @@ body {
 .banner h1 {
   color: white;
   margin-top: 40px;
-  padding-right: 20px;
+  padding-right: 50px;
+  font-size: 4em;
+}
+
+.rentalBanner {
+  background: url('/assets/husky2.jpg') no-repeat 50% 39%;
+  background-size: cover;
+  height: 450px;
+  padding-top: 200px;
+}
+
+.rentalBanner h1 {
+  color: white;
+  margin-top: 40px;
+  padding-right: 50px;
   font-size: 4em;
 }
 
