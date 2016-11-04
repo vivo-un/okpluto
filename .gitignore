@@ -1,4 +1,5 @@
 .env
+*.env
 config/auth0.js
 config/api.js
 Gruntfile.js
