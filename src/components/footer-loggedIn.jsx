@@ -14,6 +14,7 @@ const FooterLoggedIn = (props) => (
       <ul>
         <li><a onClick={() => hashHistory.push('/users')}>Users</a></li>
         <li><a onClick={() => hashHistory.push('/events')}>Events</a></li>
+        <li><a onClick={() => hashHistory.push('/rental')}>Dog Rental</a></li>
         <li><a onClick={() => hashHistory.push('/profile')}>Profile</a></li>
       </ul>
     </nav>

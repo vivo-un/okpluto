@@ -19,7 +19,7 @@ import Events from './components/events.jsx'
 import ProfileCreation from './components/profileCreation.jsx'
 import Loading from './components/loading.jsx'
 import InfoDrawer from './components/infoDrawer.jsx'
-//import DogRental from './components/DogRental.jsx'
+import DogRental from './components/rentalPage.jsx'
 
 // Setting up auth service
 const auth = new AuthService(auth0.AUTH0_CLIENT_ID, auth0.AUTH0_DOMAIN);
@@ -49,7 +49,11 @@ ReactDOM.render(
         <Route path="/users" component={UsersPage} onEnter={requireAuth} />
         <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
+<<<<<<< f44fc55cd0387dab82acbfdb51f264b571270f8b
         <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
+=======
+        <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
+>>>>>>> changes to rental page, info drawer, footer, and app
       </Route>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />
