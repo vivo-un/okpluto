@@ -3,9 +3,9 @@
 */
 
 'use strict';
-
+var dbkeys = process.env.MONGODB_URI ||'mongodb://localhost/okplutodb';
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/okplutodb');
+mongoose.connect(dbkeys);
 
 var db = mongoose.connection;
 
