@@ -109,13 +109,17 @@ class MeetupDialog extends React.Component {
         onTouchTap={this.handleSubmit}
       />
     ];
-
+    console.log('from meetupDiaglog ', this.props.auth);
+    // var loginOrMeet = this.handleOpen;
+    // if(!this.props.isLoggedIn){
+    //   var loginOrMeet = this.props.auth.signup.bind(this);
+    // }
     //autoScrollBodyContent within Dialog is super important when you're wondering why all of your form fields are not showing up
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <div>
           <RaisedButton
-            onTouchTap={this.handleOpen}
+            onTouchTap={this.props.auth.signup.bind(this)}
             label="Let's Meetup!"
             primary={true}
           />

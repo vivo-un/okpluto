@@ -101,6 +101,11 @@ class UsersPage extends React.Component {
   }
 
   render () {
+    var title = 'All Users';
+    var isLoggedIn = this.props.auth.loggedIn();
+    if(isLoggedIn){
+      title = 'Local Users';
+    }
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
@@ -121,6 +126,7 @@ class UsersPage extends React.Component {
 
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
               <UserList
+                auth={this.props.auth}
                 users={this.state.displayedUsers}
                 userInfo={this.props.userInfo}
                 resetUserInfo={this.props.resetUserInfo}

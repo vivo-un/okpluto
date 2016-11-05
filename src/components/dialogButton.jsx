@@ -12,7 +12,9 @@ class DialogButton extends React.Component {
 
   render() {
     return (
-      <MeetupDialog userId={this.props.userId} lat={this.props.lat} lng={this.props.lng} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}
+      <MeetupDialog
+      auth={this.props.auth}
+      userId={this.props.userId} lat={this.props.lat} lng={this.props.lng} userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}
       />
     )
   }
