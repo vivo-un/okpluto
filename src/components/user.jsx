@@ -37,6 +37,7 @@ class UserDisplay extends React.Component {
 
           <CardActions>
             <DialogButton
+              auth = {this.props.auth}
               userId={this.props.user._id}
               lat={this.props.user.lat}
               lng={this.props.user.lng}

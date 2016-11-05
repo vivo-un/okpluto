@@ -126,6 +126,7 @@ class EventDisplay extends React.Component {
   }
 
   handleEventButtonClick() {
+    console.log('from eventDisplay auth ', this.props.auth);
     let self = this;
     if (this.props.event.creator === this.props.userInfo._id) {
       deleteEvent(this.props.event._id)
@@ -146,6 +147,10 @@ class EventDisplay extends React.Component {
   }
 
   render () {
+    var joinOrLogin = this.handleEventButtonClick;
+    if(!this.props.auth.loggedIn()){
+      joinOrLogin = this.props.auth.signup.bind(this);
+    }
     const date = new Date(this.props.event.date);
     const time = this.props.event.time.split(':');
     const hours = time[0] > 12 ? time[0] - 12 : time[0];
@@ -179,7 +184,7 @@ class EventDisplay extends React.Component {
           <CardActions>
             <FlatButton
               label={this.getTitle()}
-              onClick={this.handleEventButtonClick}
+              onClick={joinOrLogin}
             />
             <Snackbar
               bodyStyle={{background: Colors.blueGrey600}}

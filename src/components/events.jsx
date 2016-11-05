@@ -107,10 +107,14 @@ class Events extends React.Component {
   }
 
   render () {
+    var title = 'Local Events';
+    if(!this.props.auth.loggedIn()){
+      title = 'All Events';
+    }
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer} />
-        <Banner display={'Local Events'}/>
+        <Banner display={title}/>
         <div className="row">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={{marginLeft: '75%'}}
@@ -125,7 +129,7 @@ class Events extends React.Component {
           </MuiThemeProvider>
         </div>
         <div className="row" style={{marginBottom: 20}}>
-            <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
+            <EventList events={this.state.displayedEvents} auth={this.props.auth} userInfo={this.props.userInfo}/>
         </div>
         <FooterLoggedIn />
       </div>
