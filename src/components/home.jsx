@@ -74,7 +74,7 @@ class Home extends React.Component {
               url={Connect}
               display={'CONNECT'}
               info={'OkPluto instantly puts you in touch with other dog lovers from around the world'}
-              onTouchTap={this.props.auth.signup.bind(this)}
+              link={'localhost:8080/#/users'}
             />
             <IconItem
               url={MeetUp}
