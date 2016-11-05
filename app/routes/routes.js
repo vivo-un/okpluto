@@ -9,7 +9,7 @@ require('dotenv').config();
 var apiKeys = process.env.API_KEY;
 // import API keys
 // var authPath = require('../../config/auth0');
-var preData = require('../../config/data');
+// var preData = require('../../config/data');
 // var api = require('../../config/api.js');
 var Promise = require('bluebird');
 const googleMaps = require('@google/maps').createClient({
