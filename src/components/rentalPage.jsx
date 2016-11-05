@@ -1,6 +1,6 @@
 "use strict";
 
-import  UserList from './userList.jsx';
+import  RentalList from './rentalList.jsx';
 import { getUsers } from '../services/userServices.js'
 import NavLoggedIn from './nav-loggedIn.jsx';
 import React, { PropTypes as T } from 'react';
@@ -81,7 +81,6 @@ class RentalPage extends React.Component {
       //   let sortedUsers = usersDistInfo.concat(noDistInfo)
 
 //get users who have dog for rent
-
       let dogsForRent = users.users.filter((user) => {
         return user.rentDog === true;
       });
@@ -115,7 +114,7 @@ class RentalPage extends React.Component {
 
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
              <AutoComplete style={{marginLeft: '75%'}}
-               floatingLabelText="Search Users"
+               floatingLabelText="Find a Dog"
                filter={AutoComplete.fuzzyFilter}
                dataSource={this.state.searchSource}
                maxSearchResults={5}
@@ -126,7 +125,7 @@ class RentalPage extends React.Component {
           </MuiThemeProvider>
 
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
-              <UserList
+              <RentalList
                 users={this.state.displayedUsers}
                 userInfo={this.props.userInfo}
                 resetUserInfo={this.props.resetUserInfo}
