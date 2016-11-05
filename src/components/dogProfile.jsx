@@ -94,30 +94,32 @@ class Profile extends React.Component {
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
         <Banner display="Your Profile"/>
         <div className="container" style={{marginBottom: 20}}>
-          <div className="col-md-3 profile">
-            <DogProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
-          </div>
+
 
           <div className="col-md-9 profile-events">
             <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)} >
               <Tabs
                 style={{backgroundColor: 'whitesmoke', paddingBottom: '8px'}}
                 value={this.state.value} >
-                <Tab label="Upcoming Events~~testing" value='a' onActive={() => this.handleChange('a') }>
-                  <div>
-                    <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
+                <Tab label="Details" value='a' onActive={() => this.handleChange('a') }>
+                  <div className="dogwrapper">
+                    <div className="leftcolumn-dog-details">
+                      <div className="profile-image-dog-details">
+                        <img src={this.props.userInfo.picLink} alt="Pic"/>
+                      </div>
+                    </div>
+                    <div className="rightcolumn-dog-details">
+                      <h4><em>Name:</em> {this.props.userInfo.dogname}</h4>
+                      <h4><em>Breed:</em> {this.props.userInfo.dogBreed}</h4>
+                      <h4><em>Age:</em> {this.props.userInfo.dogAge}</h4>
+                      <br />
+                      <h4><em>Owner's Name:</em> {this.props.userInfo.firstname} {this.props.userInfo.lastname}</h4>
+                      <h4><em>Location:</em> {this.props.userInfo.loc}</h4>
+                    </div>
                   </div>
                 </Tab>
-                <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>
-                  <div>
-                    <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
-                  </div>
-                </Tab>
-                <Tab label="past Events" value='c' onActive={() => this.handleChange('c') }>
-                  <div>
-                    <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
-                  </div>
-                </Tab>
+
+
               </Tabs>
             </MuiThemeProvider>
           </div>
@@ -134,5 +136,22 @@ Profile.propTypes = {
   location: T.object,
   auth: T.instanceOf(AuthService)
 };
+
+
+//extra tab
+//<Tab label="~" value='b' onActive={() => this.handleChange('b') }>
+//                  <div>
+//                    <EventList type="profile" events={this.state.createdEvents} noEvents={this.state.noCreatedEvents} userInfo={this.props.userInfo}/>
+//                  </div>
+//                </Tab>
+// <Tab label="~" value='c' onActive={() => this.handleChange('c') }>
+//                  <div>
+//                    <EventList type="profile" events={this.state.pastEvents} noEvents={this.state.noPastEvents} userInfo={this.props.userInfo}/>
+//                 </div>
+//               </Tab>
+//sidebar profile not needed
+//<div className="col-md-3 profile">
+//            <DogProfileDisplay userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo}/>
+//</div>
 
 module.exports = Profile;
