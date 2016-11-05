@@ -156,6 +156,49 @@ img {
   height: 100%;
 }
 
+
+.dogwrapper {
+     width: 700px;
+     margin: 0 auto;
+}
+
+.renttitle {
+  font-size: 10px
+  font-weight: bold;
+}
+
+.leftcolumn-dog-details, .rightcolumn-dog-details {
+    /*border: 1px solid white;*/
+    float: left;
+    min-height: auto;
+   /* color: black;*/
+}
+
+.leftcolumn-dog-details {
+     width: 300px;
+}
+
+.rightcolumn-dog-details {
+     width: 400px;
+     padding-left: 50px;
+     padding-top: 50px;
+}
+
+.profile-image-dog-details {
+  display: inline-block;
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  position: relative;
+  /*border: 5px solid gainsboro*/
+}
+
+.profile-image-dog-details img {
+  width: 300px;
+  height: 300px;
+}
+
+
 .profile .profile-info {
   height: 100%;
   width: 220px;

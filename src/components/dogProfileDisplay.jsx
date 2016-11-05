@@ -32,6 +32,7 @@ class ProfileDisplay extends React.Component {
               <h4><em>Name:</em> {this.props.userInfo.dogname}</h4>
               <h4><em>Breed:</em> {this.props.userInfo.dogBreed}</h4>
               <h4><em>Age:</em> {this.props.userInfo.dogAge}</h4>
+
             </Paper> <br/>
             <div className="profile-image">
               <img src={this.props.userInfo.profilepic} alt="Pic"/>
