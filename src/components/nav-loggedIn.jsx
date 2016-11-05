@@ -25,13 +25,17 @@ class NavLoggedIn extends React.Component {
       fontWeight: 'bold',
       fontSize: 36
     }
+    var LoginOrOut = 'Logout';
+    if(!this.props.auth.loggedIn()){
+      LoginOrOut = 'HOME';
+    }
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
         <AppBar
           style={barStyle}
           secondary={true}
           title={<span style={titleStyle}>Ok Pluto</span>}
-          iconElementRight={<FlatButton label="Logout" />}
+          iconElementRight={<FlatButton label={LoginOrOut}/>}
           onLeftIconButtonTouchTap={this.props.toggleDrawer}
           onRightIconButtonTouchTap={this.props.auth.logout.bind(this)}
         />
