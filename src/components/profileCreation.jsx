@@ -23,6 +23,7 @@ import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
 import {bindAll} from 'lodash';
 import $ from 'jquery';
+import { Image } from 'material-ui-image';
 import axios from 'axios';
 
 const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
@@ -263,7 +264,7 @@ class ProfileCreation extends React.Component {
       uploaded = (
         <div>
           <h4>Image uploaded!</h4>
-          <img className='image-preview' src={this.state.picLink} />
+          <Image className='imagePreview' src={this.state.picLink} />
           <pre className='image-link-box'>{this.state.picLink}</pre>
         </div>
       );
@@ -349,12 +350,11 @@ class ProfileCreation extends React.Component {
         return(
         <div className='row'>
           <div className='col-sm-12'>
-            <label>Upload an image</label>
-            <form onSubmit={this.handleImgUpload.bind(this)} encType="multipart/form-data">
+            <p className='lead'>Upload your dog's picture</p>
+            <RaisedButton containerElement='label' >
               <input type="file" onChange={this.handleFile.bind(this)} />
-              <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
-              <div>{processing}</div>
-            </form>
+            </RaisedButton>
+            <div>{processing}</div>
             <div>{uploaded}</div>
           </div>
         </div>

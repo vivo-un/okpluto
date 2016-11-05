@@ -9,6 +9,9 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import MyTheme from '../theme/theme.js';
+import axios from 'axios';
+import Dropzone from 'react-dropzone';
+import { Image } from 'material-ui-image';
 
 class ProfileEdit extends React.Component {
 
@@ -17,16 +20,22 @@ class ProfileEdit extends React.Component {
 
     this.state = {
       //switch: false
-      switch: this.props.profile.rentDog
+      switch: this.props.profile.rentDog,
+      profilepic: null,
+      newProfilePic: false,
+      picLink: null,
+      newDogPic: false
     };
   }
 
 // Grabs value from form, updates state of profileEditDialog
   handleChange(prop, event) {
-    console.log('prop', prop);
+    console.log('prop:', prop);
     console.log('onChange Value', this.props.profile);
     if(prop === 'rentDog'){
       this.props.profile[prop] = !this.state.switch;
+    } else if(prop === 'picLink' || prop === 'profilepic') {
+      this.props.profile[prop] = this.state[prop];
     } else {
       this.props.profile[prop] = event.target.value;
     }
@@ -40,8 +49,76 @@ class ProfileEdit extends React.Component {
     //this.setState({switch:!this.props.profile.rentDog});
   };
 
+  onDropProfile(files) {
+    var that = this;
+    var file = files[0];
+    console.log('file:',file);
+    var signedUrl, picture;
+    axios.get(`/sign-s3?file-name=${file.name}&file-type=${file.type}`)
+    .then(function (result) {
+      console.log('signedRequest', result.data.signedRequest);
+      signedUrl = result.data.signedRequest;
+      picture =  result.data.url;
+      var options = {
+        headers: {
+          'Content-Type': file.type
+        }
+      };
+      return axios.put(signedUrl, file, options);
+    })
+    .then(function (result) {
+      console.log(result);
+     that.setState({
+      profilepic: picture,
+      newProfilePic: true
+     })
+     that.handleChange('profilepic');
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
+
+  onDropDogPic(files) {
+    var that = this;
+    var file = files[0];
+    console.log('file:',file);
+    var signedUrl, picture;
+    axios.get(`/sign-s3?file-name=${file.name}&file-type=${file.type}`)
+    .then(function (result) {
+      console.log('signedRequest', result.data.signedRequest);
+      signedUrl = result.data.signedRequest;
+      picture =  result.data.url;
+      var options = {
+        headers: {
+          'Content-Type': file.type
+        }
+      };
+      return axios.put(signedUrl, file, options);
+    })
+    .then(function (result) {
+      console.log(result);
+     that.setState({
+      picLink: picture,
+      newDogPic: true
+     })
+     that.handleChange('picLink');
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
 
   render () {
+    const style = {
+          borderWidth: 2,
+          borderColor: 'black',
+          borderStyle: 'dashed',
+          borderRadius: 4,
+          margin: 30,
+          padding: 30,
+          height: 30
+    }
     return (
         <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
           <div>
@@ -69,14 +146,22 @@ class ProfileEdit extends React.Component {
             name = "loc"
             errorText = {this.props.error.loc}
           /><br />
-          <TextField
-            hintText="Your Profile Pic"
-            floatingLabelText="Your Profile Pic"
-            value = {this.props.profile.profilepic}
-            onChange = {this.handleChange.bind(this, 'profilepic')}
-            name = "profilepic"
-            errorText = {this.props.error.picLink}
-          /><br />
+          <div style = {{marginLeft: '1em'}}>
+            {(!this.state.newProfilePic) ? (
+              <Dropzone onDrop={ this.onDropProfile.bind(this) }
+                        style = { style }
+                        multiple={ false }
+                        accept='image/*'>
+                Drop a profile picture here
+              </Dropzone>
+              ) : (
+              <img className='imagePreview'
+                     src={ this.state.profilepic }
+                     />
+            )
+            }
+          </div>
+          <br />
           <TextField
             hintText="Dog Name"
             floatingLabelText="Dog Name"
@@ -101,14 +186,22 @@ class ProfileEdit extends React.Component {
             name = "dogAge"
             errorText = {this.props.error.dogAge}
           /><br />
-          <TextField
-            hintText="Dog Profile Pic"
-            floatingLabelText="Dog Profile Pic"
-            value = {this.props.profile.picLink}
-            onChange = {this.handleChange.bind(this, 'picLink')}
-            name = "picLink"
-            errorText = {this.props.error.picLink}
-          /><br />
+          <div style = {{marginLeft: '1em'}}>
+            {(!this.state.newDogPic) ? (
+              <Dropzone onDrop={ this.onDropDogPic.bind(this) }
+                        style = { style }
+                        multiple={ false }
+                        accept='image/*'>
+                Drop your pup's picture here
+              </Dropzone>
+              ) : (
+              <img className='imagePreview'
+                     src={ this.state.picLink }
+                     />
+            )
+            }
+          </div>
+          <br />
           <Toggle
             label="Rent-My-Dog"
             toggled = {this.props.profile.rentDog}
