@@ -11,6 +11,7 @@ const Daisy = '/assets/daisy.png';
 const Kat = '/assets/kat.png';
 const Jarrett = '/assets/jarrett.png';
 const Ivey = '/assets/ivey.png';
+const rent = '/assets/rent.png';
 
 // Stateless Components
 
@@ -89,10 +90,10 @@ class Home extends React.Component {
               link={'https://www.petfinder.com/animal-shelters-and-rescues/search'}
             />
             <IconItem
-              url={House}
-              display={'ADOPT A DOG'}
-              info={'Don\'t have a dog? No worries! Adopt your new best friend at a shelter near you!'}
-              link={'https://www.petfinder.com/animal-shelters-and-rescues/search'}
+              url={rent}
+              display={'RENT A DOG'}
+              info={'Too busy to own your own dog? Check out some local dogs available for rent!'}
+              link={'http://localhost:8080/#/rental'}
             />
           </div>
         </div>
