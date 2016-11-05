@@ -107,10 +107,14 @@ class Events extends React.Component {
   }
 
   render () {
+    var title = 'Local Events';
+    if(!this.props.auth.loggedIn()){
+      title = 'All Events';
+    }
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer} />
-        <Banner display={'Local Events'}/>
+        <Banner display={title}/>
         <div className="row">
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
                <AutoComplete style={{marginLeft: '75%'}}
