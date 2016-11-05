@@ -109,6 +109,7 @@ class Profile extends React.Component {
                       </div>
                     </div>
                     <div className="rightcolumn-dog-details">
+                      <h4 className="renttitle">Rent Me for $10</h4>
                       <h4><em>Name:</em> {this.props.userInfo.dogname}</h4>
                       <h4><em>Breed:</em> {this.props.userInfo.dogBreed}</h4>
                       <h4><em>Age:</em> {this.props.userInfo.dogAge}</h4>

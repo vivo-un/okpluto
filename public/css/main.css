@@ -156,9 +156,15 @@ img {
   height: 100%;
 }
 
+
 .dogwrapper {
      width: 700px;
      margin: 0 auto;
+}
+
+.renttitle {
+  font-size: 10px
+  font-weight: bold;
 }
 
 .leftcolumn-dog-details, .rightcolumn-dog-details {
