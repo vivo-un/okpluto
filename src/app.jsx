@@ -79,7 +79,7 @@ ReactDOM.render(
         <Route path="/events" component={Events} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
         <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
-        <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
+        <Route path="/rental" component={DogRental} creation={false}/>
       </Route>
       <Route path="/creation" component={ProfileCreation} onEnter={requireAuth} creation={true}/>
       <Route path="access_token=:token" component={Loading} />

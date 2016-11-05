@@ -21,7 +21,7 @@ class IconItem extends React.Component {
   };
   render() {
     return (
-      <div className='col-md-4'>
+      <div className='col-md-3'>
         <a href={this.props.link} onClick={this.props.onTouchTap}>
           <img src={this.props.url} className='img-circle'/>
         </a>
@@ -81,6 +81,12 @@ class Home extends React.Component {
               display={'MEET UP'}
               info={'We make it easy for you to set up walks and dog park meet ups with other local dog owners'}
               link={'http://localhost:8080/#/events'}
+            />
+            <IconItem
+              url={House}
+              display={'ADOPT A DOG'}
+              info={'Don\'t have a dog? No worries! Adopt your new best friend at a shelter near you!'}
+              link={'https://www.petfinder.com/animal-shelters-and-rescues/search'}
             />
             <IconItem
               url={House}
