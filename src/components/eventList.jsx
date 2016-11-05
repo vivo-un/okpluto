@@ -13,7 +13,7 @@ const Row = (props) => (
     {
       props.row.map((event) => (
         <div className={props.class}>
-          <EventDisplay event={event} type='user' userInfo={props.userInfo}/>
+          <EventDisplay auth={props.auth} event={event} type='user' userInfo={props.userInfo}/>
         </div>
       ))
     }
@@ -50,7 +50,7 @@ class EventList extends React.Component {
         <div className = "container userList">
           {
             rows.map(row => (
-              <Row row={row} userInfo={this.props.userInfo} class={className}/>
+              <Row auth={this.props.auth} row={row} userInfo={this.props.userInfo} class={className}/>
             ))
           }
       </div>

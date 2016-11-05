@@ -125,7 +125,7 @@ class Events extends React.Component {
           </MuiThemeProvider>
         </div>
         <div className="row" style={{marginBottom: 20}}>
-            <EventList events={this.state.displayedEvents} userInfo={this.props.userInfo}/>
+            <EventList events={this.state.displayedEvents} auth={this.props.auth} userInfo={this.props.userInfo}/>
         </div>
         <FooterLoggedIn />
       </div>

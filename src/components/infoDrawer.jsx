@@ -32,7 +32,7 @@ class InfoDrawer extends React.Component {
 
   componentWillMount() {
     var self = this;
-    console.log('from infoDrawer ', this.props.auth.loggedIn());
+    console.log('from infoDrawer, you are logged in', this.props.auth.loggedIn());
     if(this.props.auth.loggedIn()){
       findUser()
       .then(user => {
