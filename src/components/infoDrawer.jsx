@@ -15,7 +15,7 @@ import EventNote from 'material-ui/svg-icons/notification/event-note';
 import UserEvent from 'material-ui/svg-icons/social/group';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
-import { hashHistory } from 'react-router'
+import { hashHistory } from 'react-router';
 
 class InfoDrawer extends React.Component {
 
@@ -23,7 +23,8 @@ class InfoDrawer extends React.Component {
     super(props);
     this.state = {
       open: false,
-      profileOpen: false
+      profileOpen: false,
+      info:true
     }
     this.toggleDrawer = this.toggleDrawer.bind(this)
     this.resetUserInfo = this.resetUserInfo.bind(this)
@@ -31,11 +32,14 @@ class InfoDrawer extends React.Component {
 
   componentWillMount() {
     var self = this;
-    findUser()
-    .then(user => {
-      if (!user) self.resetUserInfo();
-      self.setState({info: user});
-    })
+    console.log('from infoDrawer ', this.props.auth.loggedIn());
+    if(this.props.auth.loggedIn()){
+      findUser()
+      .then(user => {
+        if (!user) self.resetUserInfo();
+        self.setState({info: user});
+      })
+    }
   }
 
   // Reset user info with changes

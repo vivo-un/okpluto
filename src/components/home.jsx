@@ -11,6 +11,7 @@ const Daisy = '/assets/daisy.png';
 const Kat = '/assets/kat.png';
 const Jarrett = '/assets/jarrett.png';
 const Ivey = '/assets/ivey.png';
+const rent = '/assets/rent.png';
 
 // Stateless Components
 
@@ -21,7 +22,7 @@ class IconItem extends React.Component {
   };
   render() {
     return (
-      <div className='col-md-4'>
+      <div className='col-md-3'>
         <a href={this.props.link} onClick={this.props.onTouchTap}>
           <img src={this.props.url} className='img-circle'/>
         </a>
@@ -74,19 +75,25 @@ class Home extends React.Component {
               url={Connect}
               display={'CONNECT'}
               info={'OkPluto instantly puts you in touch with other dog lovers from around the world'}
-              onTouchTap={this.props.auth.signup.bind(this)}
+              link={'http://localhost:8080/#/users'}
             />
             <IconItem
               url={MeetUp}
               display={'MEET UP'}
               info={'We make it easy for you to set up walks and dog park meet ups with other local dog owners'}
-              onTouchTap={this.props.auth.signup.bind(this)}
+              link={'http://localhost:8080/#/events'}
             />
             <IconItem
               url={House}
               display={'ADOPT A DOG'}
               info={'Don\'t have a dog? No worries! Adopt your new best friend at a shelter near you!'}
               link={'https://www.petfinder.com/animal-shelters-and-rescues/search'}
+            />
+            <IconItem
+              url={rent}
+              display={'RENT A DOG'}
+              info={'Too busy to own your own dog? Check out some local dogs available for rent!'}
+              link={'http://localhost:8080/#/rental'}
             />
           </div>
         </div>
