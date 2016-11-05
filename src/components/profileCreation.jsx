@@ -5,6 +5,7 @@
 // to get user's profile info
 
 
+
 import React from 'react';
 import {
   Step,
@@ -20,6 +21,9 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import { findUser, updateUser } from '../services/userServices.js';
 import { hashHistory } from 'react-router';
+import {bindAll} from 'lodash';
+import $ from 'jquery';
+import axios from 'axios';
 
 const rValidImage = /^((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i
 
@@ -33,7 +37,7 @@ const isValidImage = function(url) {
 const validate = (values, step) => {
   const errors = {};
   var requiredFields = [];
-  const fields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge', 'picLink' ];
+  const fields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge' ]; //removed picLink for image uploader
   if (step === 0) {
     requiredFields = fields.slice(0, 3);
     requiredFields.forEach(field => {
@@ -51,9 +55,10 @@ const validate = (values, step) => {
     if (isNaN(parseInt(values.dogAge.value))) {
       errors.dogAge = 'Please enter a number'
     }
-    if (!isValidImage(values.picLink.value)) {
-      errors.picLink = 'Invalid Url'
-    }
+    //not need with image upload
+    // if (!isValidImage(values.picLink.value)) {
+    //   errors.picLink = 'Invalid Url'
+    // }
   }
 
   return errors
@@ -78,7 +83,13 @@ class ProfileCreation extends React.Component {
       picLink:"",
       rentDog: false,
       switch: false,
-      errorText: {}
+      errorText: {},
+      data_uri:null,
+      processing:false,
+      filename:'',
+      filetype:'',
+      signedRequest: '',
+
     }
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
@@ -99,7 +110,8 @@ class ProfileCreation extends React.Component {
         this.setState({"dogname": user.dogname || ""});
         this.setState({"dogBreed": user.dogBreed || ""});
         this.setState({"dogAge": user.dogAge || ""});
-        this.setState({"picLink": user.picLink || ""});
+        //removed for image uploader
+        //this.setState({"picLink": user.picLink || ""});
         this.setState({"rentDog": user.rentDog || false});
       })
     }, 1000)
@@ -126,12 +138,12 @@ class ProfileCreation extends React.Component {
     var errors = {};
     if (this.state.stepIndex === 1) {
       errors = validate(dogProfile, 1);
-    } else {
+    } else if(this.state.stepIndex === 0) {
       errors = validate(ownerProfile, 0);
     }
     if (Object.keys(errors).length === 0) {
       this.handleNext();
-      if (this.state.stepIndex === 1) {
+      if (this.state.stepIndex === 2) {
 
         updateUser(this.state)
           .then(function (user) {
@@ -148,7 +160,7 @@ class ProfileCreation extends React.Component {
     var self = this;
     this.setState({
       stepIndex: self.state.stepIndex + 1,
-      finished: self.state.stepIndex >= 1,
+      finished: self.state.stepIndex >= 2, // changed 1 to 2 added 3 view
     });
   }
 
@@ -160,8 +172,111 @@ class ProfileCreation extends React.Component {
     }
   }
 
+
+  handleImgUpload(file) {
+    //event.preventDefault();
+    const _this = this;
+
+    this.setState({
+      processing: true
+    });
+    console.log('filename', this.state.filename);
+    console.log('filetype', this.state.filetype);
+    const promise = $.ajax({
+      url: '/sign-s3',
+      type: "GET",
+      data: {
+        'file-name': file.name,
+        'file-type': file.type
+      },
+      dataType: 'json'
+    });
+    promise.done(function(data){
+      console.log('response data',data);
+      let formData = new FormData();
+      formData.append('file', file);
+
+      var options = {
+        headers: {
+          'Content-Type': file.type
+        }
+      };
+
+      axios.put(data.signedRequest, file, options)
+      .then(function(){
+        _this.setState({
+          processing: false,
+          uploaded_uri: data.uri,
+          picLink: data.url,
+          signedRequest: data.signedRequest
+        });
+      });
+
+      // const promise2 = $.ajax({
+      //   url: data.signedRequest,
+      //   type: "PUT",
+      //   data: file,
+      //   dataType: 'binary/octet-stream'
+      // });
+
+      // promise2.done(function(data){
+      //   _this.setState({
+      //     processing: false,
+      //     uploaded_uri: data.uri,
+      //     picLink: data.url,
+      //     signedRequest: data.signedRequest
+      //   });
+      // });
+
+    });
+  }
+  handleFile(event) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    console.log('file',file);
+    console.log('filename',file.name);
+    this.setState({
+        filename: file.name,
+        filetype: file.type
+    });
+    // reader.onload = (upload) => {
+    //   this.setState({
+    //     data_uri: upload.target.result,
+    //     filename: file.name,
+    //     filetype: file.type
+    //   });
+    // };
+    // This will format the data for S3 very important!!!!!!!!!!
+    reader.readAsDataURL(file);
+    this.handleImgUpload(file);
+
+  }
+
+
 // Material ui - info for step form with 2 steps (user info and dog info)
   getStepContent(stepIndex) {
+    //Process Image
+    let processing = '';
+    let uploaded = '';
+
+    if (this.state.picLink) {
+      uploaded = (
+        <div>
+          <h4>Image uploaded!</h4>
+          <img className='image-preview' src={this.state.picLink} />
+          <pre className='image-link-box'>{this.state.picLink}</pre>
+        </div>
+      );
+    } else {
+      uploaded = '';
+    }
+
+    if (this.state.processing) {
+      processing = "Processing image, hang tight";
+    } else {
+      processing = '';
+    }
+
     switch (stepIndex) {
       case 0:
         return (
@@ -219,14 +334,6 @@ class ProfileCreation extends React.Component {
               name = "dogAge"
               errorText = {this.state.errorText.dogAge}
             /><br />
-            <TextField
-              hintText="Dog Profile Pic"
-              floatingLabelText="Dog Profile Pic"
-              value = {this.state.picLink}
-              onChange = {this.handleChange.bind(this, 'picLink')}
-              name = "picLink"
-              errorText = {this.state.errorText.picLink}
-            /><br />
             <Toggle
             label="Rent-My-Dog"
             toggled = {this.state.rentDog}
@@ -237,8 +344,21 @@ class ProfileCreation extends React.Component {
             />
             {this.state.switch ? 'On' : 'Off'}
           </form>
-
-      )
+        )
+      case 2:
+        return(
+        <div className='row'>
+          <div className='col-sm-12'>
+            <label>Upload an image</label>
+            <form onSubmit={this.handleImgUpload.bind(this)} encType="multipart/form-data">
+              <input type="file" onChange={this.handleFile.bind(this)} />
+              <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload" />
+              <div>{processing}</div>
+            </form>
+            <div>{uploaded}</div>
+          </div>
+        </div>
+        )
 
       default:
         return '';
@@ -250,6 +370,8 @@ class ProfileCreation extends React.Component {
   render() {
     const {finished, stepIndex} = this.state;
     const contentStyle = {margin: '0 16px'};
+
+
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
@@ -274,7 +396,7 @@ class ProfileCreation extends React.Component {
                   style={{marginRight: 12}}
                 />
                 <RaisedButton
-                  label={stepIndex === 2 ? 'Finish' : 'Next'}
+                  label={stepIndex === 2 ? 'Finish' : 'Next'}  // 2 to 3 for 3rd view
                   secondary={true}
                   onTouchTap={()=>{
                     this.handleSubmit();
