@@ -28,7 +28,7 @@ const isValidImage = function(url) {
 // Validates user info
 const validate = values => {
   const errors = {}
-  const requiredFields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge', 'picLink' ]
+  const requiredFields = [ 'firstname', 'lastname', 'loc', 'dogname', 'dogBreed', 'dogAge' ]
   requiredFields.forEach(field => {
     if (!values[field].value) {
       errors[field] = 'Required'
@@ -37,9 +37,7 @@ const validate = values => {
   if (isNaN(parseInt(values.dogAge.value))) {
     errors.dogAge = 'Please enter a number'
   }
-  if (!isValidImage(values.picLink.value)) {
-    errors.picLink = 'Invalid Url'
-  }
+
   return errors
 }
 

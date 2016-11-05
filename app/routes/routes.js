@@ -26,6 +26,7 @@ module.exports = function(app) {
   	aws.config.accessKeyId = process.env.ACCESS_Key_ID;
   	aws.config.secretAccessKey = process.env.SECRET_ACCESS_Key;
 		const s3 = new aws.S3();
+		console.log('query: ', req.query);
 		const fileName = req.query['file-name'];
 		const fileType = req.query['file-type'];
 		const s3Params = {
