@@ -152,7 +152,7 @@ class MeetupDialog extends React.Component {
             onRequestClose={this.handleSnackbarClose}
           />
         </div>
-
+      </MuiThemeProvider>
     )
   }
 }
