@@ -1,10 +1,16 @@
 "use strict";
 
 import React from 'react';
-import RentalButton from './rentalButton.jsx'
+//import RentalButton from './rentalButton.jsx'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Avatar from 'material-ui/Avatar';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MyTheme from '../theme/theme.js';
+import RaisedButton from 'material-ui/RaisedButton';
+import { hashHistory } from 'react-router';
+
 
 class RentalDisplay extends React.Component {
 
@@ -36,15 +42,15 @@ class RentalDisplay extends React.Component {
           </CardText>
 
           <CardActions>
-            <RentalButton
-              userId={this.props.user._id}
-              lat={this.props.user.lat}
-              lng={this.props.user.lng}
-              type={this.props.type}
-              userInfo={this.props.userInfo}
-              resetUserInfo={this.props.resetUserInfo}
-              toggleDrawer={this.props.toggleDrawer}
-            />
+            <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
+              <div>
+          <RaisedButton
+            onTouchTap={() => hashHistory.push('/dogprofile')}
+            label="Rent Me!"
+            primary={true}
+          />
+          </div>
+          </MuiThemeProvider>
           </CardActions>
         </Card>
       </div>

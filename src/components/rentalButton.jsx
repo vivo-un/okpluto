@@ -1,4 +1,5 @@
 /*
+  CURRENTLY NOT USED BUTTON
   This file contains the component for the RentalButton! Used within rental.jsx
 */
 

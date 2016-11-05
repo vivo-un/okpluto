@@ -1,4 +1,5 @@
 /*
+CURRENTLY NOT USED
   This file contains the MeetupDialog component! This all starts at the "Rent Me!" button found on the Users page. This renders the button, the dialog that pops over the screen, and fills it with the MeetupCreation component. It also contains a lot of the functionality that will be passed to MeetupCreation such as the validate function.
 */
 
@@ -151,7 +152,7 @@ class MeetupDialog extends React.Component {
             onRequestClose={this.handleSnackbarClose}
           />
         </div>
-      </MuiThemeProvider>
+
     )
   }
 }
