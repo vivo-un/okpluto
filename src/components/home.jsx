@@ -74,13 +74,13 @@ class Home extends React.Component {
               url={Connect}
               display={'CONNECT'}
               info={'OkPluto instantly puts you in touch with other dog lovers from around the world'}
-              link={'localhost:8080/#/users'}
+              link={'http://localhost:8080/#/users'}
             />
             <IconItem
               url={MeetUp}
               display={'MEET UP'}
               info={'We make it easy for you to set up walks and dog park meet ups with other local dog owners'}
-              onTouchTap={this.props.auth.signup.bind(this)}
+              link={'http://localhost:8080/#/events'}
             />
             <IconItem
               url={House}

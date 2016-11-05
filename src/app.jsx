@@ -39,7 +39,6 @@ axios.get('/env')
     // check for authenication in all protected routes
     const requireAuth = (nextState, replace) => {
       if (!auth.loggedIn()) {
-        loggedIn = false;
         replace ({ pathname: '/'})
       }
     }
@@ -75,10 +74,9 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={Container} auth={auth}>
       <IndexRoute component={Home} />
-      // <Route path="/notloggedin" component={NotLoggedInUsers} />
       <Route component={InfoDrawer}>
         <Route path="/users" component={UsersPage}/>
-        <Route path="/events" component={Events} onEnter={requireAuth} creation={false}/>
+        <Route path="/events" component={Events} creation={false}/>
         <Route path="/profile" component={Profile} onEnter={requireAuth} creation={false}/>
         <Route path="/dogprofile" component={DogProfile} onEnter={requireAuth} creation={false}/>
         <Route path="/rental" component={DogRental} onEnter={requireAuth} creation={false}/>
