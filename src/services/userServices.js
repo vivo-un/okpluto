@@ -84,6 +84,17 @@ const findUser = function(dbId) {
   });
 }
 
+const findUserByUsername = function(username) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: `api/username?username=${username}`,
+      type: 'GET',
+      success: resolve,
+      error: reject
+    });
+  });
+}
+
 // Delete a user
 const deleteUser = function(dbId) {
   dbId = dbId || localStorage.getItem('mongoUserId');
@@ -104,6 +115,7 @@ module.exports = {
   getUsers: getUsers,
   saveUser: saveUser,
   findUser: findUser,
+  findUserByUsername: findUserByUsername,
   updateUser: updateUser,
   deleteUser: deleteUser
 }

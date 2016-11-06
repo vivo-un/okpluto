@@ -111,6 +111,18 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/username', (req, res) => {
+		User.findOne({username: req.query.username})
+		.exec((err, user) => {
+			if (err) {
+				console.log(err);
+				res.status(404).send('Database error, no users found')
+			}
+			console.log('user:', user);
+			res.status(200).send({user: user});
+		});
+	});
+
 	app.post('/signin', (req, res) => {
 		//Auth0 user ID
 		var id = req.body.id;
