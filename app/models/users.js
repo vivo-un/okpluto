@@ -21,7 +21,9 @@ var userSchema = mongoose.Schema({
   dogBreed: String,
   dogAge: Number,
   events: [String],
-  rentDog: Boolean
+  rentDog: Boolean,
+  email: String,
+  phone: String
 });
 
 var User = mongoose.model('User', userSchema);

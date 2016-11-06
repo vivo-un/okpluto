@@ -29,7 +29,8 @@ class DogProfile extends React.Component {
         picLink: '',
         firstname: '',
         lastname: '',
-        loc: ''
+        loc: '',
+        email:''
       }
     }
   }
@@ -81,10 +82,10 @@ class DogProfile extends React.Component {
                       <br />
                       <h4><em>Owner's Name:</em> {this.state.user.firstname} {this.state.user.lastname}</h4>
                       <h4><em>Location:</em> {this.state.user.loc}</h4>
+                      <h4><em>Contact:</em> {this.state.user.email}</h4>
                     </div>
                   </div>
                 </Tab>
-
 
               </Tabs>
             </MuiThemeProvider>

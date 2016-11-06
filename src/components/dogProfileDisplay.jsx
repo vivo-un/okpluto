@@ -41,6 +41,8 @@ class ProfileDisplay extends React.Component {
               <div className={"profile-header"}><h3> Owner's Info </h3></div>
               <h4><em>Name:</em> {this.props.userInfo.firstname} {this.props.userInfo.lastname}</h4>
               <h4><em>Location:</em> {this.props.userInfo.loc}</h4>
+              <h4><em>Contact:</em> {this.props.userInfo.email}</h4>
+
             </Paper> <br/>
             <ProfileEditDialog userInfo={this.props.userInfo} resetUserInfo={this.props.resetUserInfo} />
           </div>

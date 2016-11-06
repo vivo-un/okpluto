@@ -189,7 +189,9 @@ module.exports = function(app) {
 					  dogBreed: user.dogBreed,
 					  dogAge: user.dogAge,
 					  events: user.events,
-					  rentDog: user.rentDog
+					  rentDog: user.rentDog,
+					  email: user.email,
+					  phone: user.phone
 					}).save((err, user) => {
 						if (err) console.log(err);
 						console.log('user saved:',user);

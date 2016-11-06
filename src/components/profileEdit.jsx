@@ -24,7 +24,7 @@ class ProfileEdit extends React.Component {
       profilepic: null,
       newProfilePic: false,
       picLink: null,
-      newDogPic: false
+      newDogPic: false,
     };
   }
 
@@ -145,6 +145,14 @@ class ProfileEdit extends React.Component {
             onChange = {this.handleChange.bind(this, 'loc')}
             name = "loc"
             errorText = {this.props.error.loc}
+          /><br />
+          <TextField
+              hintText="Email"
+              floatingLabelText="Email"
+              value = {this.props.profile.email}
+              onChange = {this.handleChange.bind(this, 'email')}
+              name = "email"
+              errorText = {this.props.error.email}
           /><br />
           <div style = {{marginLeft: '1em'}}>
             {(!this.state.newProfilePic) ? (
