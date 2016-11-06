@@ -45,7 +45,7 @@ class RentalDisplay extends React.Component {
             <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
               <div>
           <RaisedButton
-            onTouchTap={() => hashHistory.push('/dogprofile')}
+            onTouchTap={() => hashHistory.push(`/dogprofile/${this.props.user.username}`)}
             label="Rent Me!"
             primary={true}
           />
