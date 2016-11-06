@@ -90,6 +90,8 @@ class ProfileCreation extends React.Component {
       filename:'',
       filetype:'',
       signedRequest: '',
+      email: '',
+      phone: ''
 
     }
     this.handleNext = this.handleNext.bind(this);
@@ -114,6 +116,8 @@ class ProfileCreation extends React.Component {
         //removed for image uploader
         //this.setState({"picLink": user.picLink || ""});
         this.setState({"rentDog": user.rentDog || false});
+        this.setState({"email": user.email || ""});
+        this.setState({"phone": user.phone || ""});
       })
     }, 1000)
   }
@@ -305,6 +309,14 @@ class ProfileCreation extends React.Component {
               onChange = {this.handleChange.bind(this, 'loc')}
               name = "loc"
               errorText = {this.state.errorText.loc}
+            /><br />
+            <TextField
+              hintText="Email"
+              floatingLabelText="Email"
+              value = {this.state.email}
+              onChange = {this.handleChange.bind(this, 'email')}
+              name = "email"
+              errorText = {this.state.errorText.email}
             /><br />
           </form>
         )
