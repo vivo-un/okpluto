@@ -11,6 +11,7 @@ import IconButton from 'material-ui/IconButton'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import MenuItem from 'material-ui/MenuItem';
 import Person from 'material-ui/svg-icons/social/person';
+import Heart from 'material-ui/svg-icons/action/favorite';
 import EventNote from 'material-ui/svg-icons/notification/event-note';
 import UserEvent from 'material-ui/svg-icons/social/group';
 import Avatar from 'material-ui/Avatar';
@@ -100,7 +101,7 @@ class InfoDrawer extends React.Component {
 
               <MenuItem onTouchTap={() => this.reRoute('/events')} rightIcon={<EventNote color='#488985' />}> View Events </MenuItem>
               <MenuItem onTouchTap={() => this.reRoute('/users')} rightIcon={<Person color='#488985'/>}> View Users </MenuItem>
-              <MenuItem onTouchTap={() => this.reRoute('/rental')} rightIcon={<Person color='#488985'/>}> Dog Rental </MenuItem>
+              <MenuItem onTouchTap={() => this.reRoute('/rental')} rightIcon={<Heart color='#488985'/>}> Dog Rental </MenuItem>
               <Divider />
 
               <MenuItem onTouchTap={() => this.reRoute('/profile')} rightIcon={<Avatar src={this.state.info.profilepic} size={30}/>}> Your Profile </MenuItem>
