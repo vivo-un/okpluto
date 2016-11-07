@@ -75,13 +75,13 @@ class Home extends React.Component {
               url={Connect}
               display={'CONNECT'}
               info={'OkPluto instantly puts you in touch with other dog lovers from around the world'}
-              link={'http://localhost:8080/#/users'}
+              link={'https://evening-bayou-76161.herokuapp.com/#/users'}
             />
             <IconItem
               url={MeetUp}
               display={'MEET UP'}
               info={'We make it easy for you to set up walks and dog park meet ups with other local dog owners'}
-              link={'http://localhost:8080/#/events'}
+              link={'https://evening-bayou-76161.herokuapp.com/#/events'}
             />
             <IconItem
               url={House}
@@ -93,7 +93,7 @@ class Home extends React.Component {
               url={rent}
               display={'RENT A DOG'}
               info={'Too busy to own your own dog? Check out some local dogs available for rent!'}
-              link={'http://localhost:8080/#/rental'}
+              link={'https://evening-bayou-76161.herokuapp.com/#/rental'}
             />
           </div>
         </div>
