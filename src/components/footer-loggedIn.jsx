@@ -12,6 +12,7 @@ const FooterLoggedIn = (props) => (
     <small>&copy; Ok Pluto</small>
     <nav className="nav">
       <ul>
+        <li><a onClick={() => hashHistory.push('/')}>Home</a></li>
         <li><a onClick={() => hashHistory.push('/users')}>Users</a></li>
         <li><a onClick={() => hashHistory.push('/events')}>Events</a></li>
         <li><a onClick={() => hashHistory.push('/rental')}>Dog Rental</a></li>

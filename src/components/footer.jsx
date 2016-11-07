@@ -11,7 +11,6 @@ const Footer = (props) => (
     <small>&copy; Ok Pluto</small>
     <nav className="nav">
       <ul>
-        <li><a href="#">Home</a></li>
         <li><a href="https://github.com/okpluto/okpluto/blob/master/_PRESS-RELEASE.md">Why choose OK Pluto</a></li>
         <li><a href="https://github.com/okpluto/okpluto/blob/master/README.md">About Us</a></li>
       </ul>

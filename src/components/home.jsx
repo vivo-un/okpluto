@@ -97,35 +97,6 @@ class Home extends React.Component {
             />
           </div>
         </div>
-
-        <div className='row section-heading alt'>
-          <p>Our Development Team</p>
-        </div>
-
-        <div className='team'>
-          <div className='row'>
-            <TeamIcon
-              url={Daisy}
-              display={'Daisy Good'}
-              link={'https://www.linkedin.com/in/daisy-good-49a2a46a'}
-            />
-            <TeamIcon
-              url={Kat}
-              display={'Kat Gurdak'}
-              link={'https://www.linkedin.com/in/katgurdak'}
-            />
-            <TeamIcon
-              url={Jarrett}
-              display={'Jarrett Kennedy'}
-              link={'https://www.linkedin.com/in/jarrettk'}
-            />
-            <TeamIcon
-              url={Ivey}
-              display={'Ivey Topaz'}
-              link={'https://www.linkedin.com/in/ivey-topaz-765a85124'}
-            />
-          </div>
-        </div>
         <Footer />
       </div>
     );
