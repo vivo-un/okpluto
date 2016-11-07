@@ -105,7 +105,7 @@ class Profile extends React.Component {
                 value={this.state.value} >
                 <Tab label="Upcoming Events" value='a' onActive={() => this.handleChange('a') }>
                   <div>
-                    <EventList type="profile" events={this.state.upcomingEvents} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
+                    <EventList type="profile" events={this.state.upcomingEvents} auth={this.props.auth} noEvents={this.state.noUpcomingEvents} userInfo={this.props.userInfo}/>
                   </div>
                 </Tab>
                 <Tab label="Created by Me" value='b' onActive={() => this.handleChange('b') }>

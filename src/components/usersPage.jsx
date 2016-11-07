@@ -109,7 +109,7 @@ class UsersPage extends React.Component {
     return (
       <div>
         <NavLoggedIn auth={this.props.auth} toggleDrawer={this.props.toggleDrawer}/>
-        <Banner display={'Local Users'} />
+        <Banner display={title} />
         <div style={{marginBottom: 20}}>
 
           <MuiThemeProvider muiTheme={getMuiTheme(MyTheme)}>
